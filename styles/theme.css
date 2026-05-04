@@ -1,7 +1,7 @@
 @theme {
     /* FONT FAMILY */
-    --font-body: var(--font-inter, "Inter"), -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
-    --font-display: var(--font-inter, "Inter"), -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-body: "Nexa", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-display: "Nexa", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     --font-mono: ui-monospace, "Roboto Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
     /* FONT SIZE */
@@ -106,17 +106,114 @@
     --color-alpha-white: rgb(255 255 255);
     --color-alpha-black: rgb(0 0 0);
 
-    --color-brand-50: rgb(249 245 255);
-    --color-brand-100: rgb(244 235 255);
-    --color-brand-200: rgb(233 215 254);
-    --color-brand-300: rgb(214 187 251);
-    --color-brand-400: rgb(182 146 246);
-    --color-brand-500: rgb(158 119 237);
-    --color-brand-600: rgb(127 86 217);
-    --color-brand-700: rgb(105 65 198);
-    --color-brand-800: rgb(83 56 158);
-    --color-brand-900: rgb(66 48 125);
-    --color-brand-950: rgb(44 28 95);
+    --color-brand-50: #F6F3FC;
+    --color-brand-100: #E7DEF7;
+    --color-brand-200: #C9B3EE;
+    --color-brand-300: #AA87E5;
+    --color-brand-400: #8B5ADF;
+    --color-brand-500: #6C2BD9;
+    --color-brand-600: #571FB5;
+    --color-brand-700: #42178C;
+    --color-brand-800: #2E0F63;
+    --color-brand-900: #1A0839;
+    --color-brand-950: #100524;
+
+    --color-secondary-50: #FEF9F1;
+    --color-secondary-100: #FCF0DA;
+    --color-secondary-200: #F9DFAC;
+    --color-secondary-300: #F8CE7C;
+    --color-secondary-400: #F9BE4A;
+    --color-secondary-500: #FBAE17;
+    --color-secondary-600: #DB9204;
+    --color-secondary-700: #A87003;
+    --color-secondary-800: #754E02;
+    --color-secondary-900: #422C01;
+    --color-secondary-950: #281B01;
+
+    --color-neutral-50: #FAFAFA;
+    --color-neutral-100: #E1E1E2;
+    --color-neutral-200: #B1B2B4;
+    --color-neutral-300: #83848B;
+    --color-neutral-400: #5C5D63;
+    --color-neutral-500: #3E3F44;
+    --color-neutral-600: #35363B;
+    --color-neutral-700: #292A30;
+    --color-neutral-800: #1C1D22;
+    --color-neutral-900: #101013;
+    --color-neutral-950: #09090B;
+    
+    --color-success-50: #ECFDF5;
+    --color-success-100: #D1FAE5;
+    --color-success-200: #A7F3D0;
+    --color-success-300: #6EE7B7;
+    --color-success-400: #34D399;
+    --color-success-500: #10B981;
+    --color-success-600: #059669;
+    --color-success-700: #047857;
+    --color-success-800: #065F46;
+    --color-success-900: #064E3B;
+    --color-success-950: #022C22;
+
+    --color-error-50: #FEF2F2;
+    --color-error-100: #FEE2E2;
+    --color-error-200: #FECACA;
+    --color-error-300: #FCA5A5;
+    --color-error-400: #F87171;
+    --color-error-500: #EF4444;
+    --color-error-600: #DC2626;
+    --color-error-700: #B91C1C;
+    --color-error-800: #991B1B;
+    --color-error-900: #7F1D1D;
+    --color-error-950: #450A0A;
+
+    --color-warning-50: #FFFBEB;
+    --color-warning-100: #FEF3C7;
+    --color-warning-200: #FDE68A;
+    --color-warning-300: #FCD34D;
+    --color-warning-400: #FBBF24;
+    --color-warning-500: #F59E0B;
+    --color-warning-600: #D97706;
+    --color-warning-700: #B45309;
+    --color-warning-800: #92400E;
+    --color-warning-900: #78350F;
+    --color-warning-950: #451A03;
+
+    /* ALIASES FOR COMPATIBILITY */
+    --color-green-50: var(--color-success-50);
+    --color-green-100: var(--color-success-100);
+    --color-green-200: var(--color-success-200);
+    --color-green-300: var(--color-success-300);
+    --color-green-400: var(--color-success-400);
+    --color-green-500: var(--color-success-500);
+    --color-green-600: var(--color-success-600);
+    --color-green-700: var(--color-success-700);
+    --color-green-800: var(--color-success-800);
+    --color-green-900: var(--color-success-900);
+    --color-green-950: var(--color-success-950);
+
+    --color-red-50: var(--color-error-50);
+    --color-red-100: var(--color-error-100);
+    --color-red-200: var(--color-error-200);
+    --color-red-300: var(--color-error-300);
+    --color-red-400: var(--color-error-400);
+    --color-red-500: var(--color-error-500);
+    --color-red-600: var(--color-error-600);
+    --color-red-700: var(--color-error-700);
+    --color-red-800: var(--color-error-800);
+    --color-red-900: var(--color-error-900);
+    --color-red-950: var(--color-error-950);
+
+    --color-yellow-50: var(--color-warning-50);
+    --color-yellow-100: var(--color-warning-100);
+    --color-yellow-200: var(--color-warning-200);
+    --color-yellow-300: var(--color-warning-300);
+    --color-yellow-400: var(--color-warning-400);
+    --color-yellow-500: var(--color-warning-500);
+    --color-yellow-600: var(--color-warning-600);
+    --color-yellow-700: var(--color-warning-700);
+    --color-yellow-800: var(--color-warning-800);
+    --color-yellow-900: var(--color-warning-900);
+    --color-yellow-950: var(--color-warning-950);
 
     /* LIGHT MODE VARIABLES */
 
@@ -476,10 +573,60 @@
     --outline-color-brand-solid_hover: var(--color-bg-brand-solid_hover);
 }
 
+@font-face {
+    font-family: 'Nexa';
+    src: url('../Nexa/Nexa-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Nexa';
+    src: url('../Nexa/Nexa-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Nexa';
+    src: url('../Nexa/Nexa-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Nexa';
+    src: url('../Nexa/Nexa-Bold.woff2') format('woff2');
+    font-weight: bold;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Nexa';
+    src: url('../Nexa/Nexa-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Nexa';
+    src: url('../Nexa/Nexa-Book.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Nexa';
+    src: url('../Nexa/Nexa-Heavy.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Nexa';
+    src: url('../Nexa/Nexa-XBold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+
 @layer base {
     /* DARK MODE VARIABLES */
 
-    .dark-mode {
+    .dark {
         --color-alpha-white: rgb(12 14 18);
         --color-alpha-black: rgb(255 255 255);
 

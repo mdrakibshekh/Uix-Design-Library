@@ -25,7 +25,7 @@ export const Label = ({ isInvalid, isRequired, tooltip, tooltipDescription, clas
             // <Input label="Visible only on mobile" className="lg:label:hidden" />
             data-label="true"
             {...props}
-            className={cx("flex cursor-default items-center gap-0.5 text-sm font-medium text-secondary", className)}
+            className={cx("flex cursor-default items-center gap-1 text-sm font-bold text-slate-700", className)}
         >
             {props.children}
 

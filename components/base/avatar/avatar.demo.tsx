@@ -7,27 +7,27 @@ import { AvatarProfilePhoto } from "@/components/base/avatar/avatar-profile-phot
 import { AvatarAddButton, AvatarCompanyIcon } from "@/components/base/avatar/base-components";
 import { AvatarCount } from "./base-components/avatar-count";
 
-export const DefaultDemo = () => {
+export const DefaultDemo = ({ isCompact = false }: { isCompact?: boolean }) => {
     return (
         <AvatarLabelGroup
             size="md"
-            src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+            src="https://i.pravatar.cc/150?u=olivia"
             alt="Olivia Rhye"
             title="Olivia Rhye"
-            subtitle="olivia@untitledui.com"
+            subtitle={isCompact ? undefined : "olivia@uix.design"}
         />
     );
 };
 
 export const BaseDemo = () => {
-    return <Avatar size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" />;
+    return <Avatar size="md" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" />;
 };
 
 export const StatusIndicatorDemo = () => {
     return (
         <div className="flex gap-8">
-            <Avatar status="online" size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" />
-            <Avatar status="offline" size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" />
+            <Avatar status="online" size="md" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" />
+            <Avatar status="offline" size="md" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" />
         </div>
     );
 };
@@ -36,15 +36,15 @@ export const CompanyLogoDemo = () => {
     return (
         <Avatar
             size="md"
-            src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+            src="https://i.pravatar.cc/150?u=olivia"
             alt="Olivia Rhye"
-            badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
+            badge={<AvatarCompanyIcon src="https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=200&auto=format&fit=crop" alt="Layers Inc." size="md" />}
         />
     );
 };
 
 export const VerifiedDemo = () => {
-    return <Avatar verified size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" />;
+    return <Avatar verified size="md" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" />;
 };
 
 export const PlaceholderDemo = () => {
@@ -59,10 +59,10 @@ export const LabelGroupDemo = () => {
     return (
         <AvatarLabelGroup
             size="md"
-            src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+            src="https://i.pravatar.cc/150?u=olivia"
             alt="Olivia Rhye"
             title="Olivia Rhye"
-            subtitle="olivia@untitledui.com"
+            subtitle="olivia@uix.design"
         />
     );
 };
@@ -74,61 +74,61 @@ export const GroupDemo = () => {
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/phoenix-baker?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=phoenix-baker"
                     alt="Phoenix Baker"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/lana-steiner?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=lana-steiner"
                     alt="Lana Steiner"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/demi-wilkinson?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=demi-wilkinson"
                     alt="Demi Wilkinson"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/candice-wu?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=candice-wu"
                     alt="Candice Wu"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/natali-craig?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=natali-craig"
                     alt="Natali Craig"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/drew-cano?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=drew-cano"
                     alt="Drew Cano"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/orlando-diggs?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=orlando-diggs"
                     alt="Orlando Diggs"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/andi-lane?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=andi-lane"
                     alt="Andi Lane"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/kate-morrison?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=kate-morrison"
                     alt="Kate Morrison"
                 />
                 <Avatar
@@ -145,7 +145,7 @@ export const GroupDemo = () => {
 export const ProfilePhotoDemo = () => {
     return (
         <div className="flex gap-8">
-            <AvatarProfilePhoto verified size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" />
+            <AvatarProfilePhoto verified size="md" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" />
             <AvatarProfilePhoto verified size="md" alt="Olivia Rhye" placeholderIcon={User01} />
             <AvatarProfilePhoto verified size="md" alt="Olivia Rhye" initials="OR" />
         </div>
@@ -159,37 +159,37 @@ export const Group = () => (
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="xs"
-                    src="https://www.untitledui.com/images/avatars/sienna-hewitt?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=sienna-hewitt"
                     alt="Sienna Hewitt"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="xs"
-                    src="https://www.untitledui.com/images/avatars/ammar-foley?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=ammar-foley"
                     alt="Ammar Foley"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="xs"
-                    src="https://www.untitledui.com/images/avatars/pippa-wilkinson?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=pippa-wilkinson"
                     alt="Pippa Wilkinson"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="xs"
-                    src="https://www.untitledui.com/images/avatars/olly-schroeder?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olly-schroeder"
                     alt="Olly Schroeder"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="xs"
-                    src="https://www.untitledui.com/images/avatars/mathilde-lewis?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=mathilde-lewis"
                     alt="Mathilde Lewis"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="xs"
-                    src="https://www.untitledui.com/images/avatars/julius-vaughan?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=julius-vaughan"
                     alt="Julius Vaughan"
                 />
                 <Avatar
@@ -205,37 +205,37 @@ export const Group = () => (
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/sienna-hewitt?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=sienna-hewitt"
                     alt="Olivia Rhye"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/ammar-foley?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=ammar-foley"
                     alt="Phoenix Baker"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/pippa-wilkinson?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=pippa-wilkinson"
                     alt="Lana Steiner"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/olly-schroeder?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olly-schroeder"
                     alt="Demi Wilkinson"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/mathilde-lewis?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=mathilde-lewis"
                     alt="Candice Wu"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/julius-vaughan?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=julius-vaughan"
                     alt="Natali Craig"
                 />
                 <Avatar
@@ -251,37 +251,37 @@ export const Group = () => (
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="md"
-                    src="https://www.untitledui.com/images/avatars/sienna-hewitt?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=sienna-hewitt"
                     alt="Olivia Rhye"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="md"
-                    src="https://www.untitledui.com/images/avatars/ammar-foley?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=ammar-foley"
                     alt="Phoenix Baker"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="md"
-                    src="https://www.untitledui.com/images/avatars/pippa-wilkinson?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=pippa-wilkinson"
                     alt="Lana Steiner"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="md"
-                    src="https://www.untitledui.com/images/avatars/olly-schroeder?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olly-schroeder"
                     alt="Demi Wilkinson"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="md"
-                    src="https://www.untitledui.com/images/avatars/mathilde-lewis?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=mathilde-lewis"
                     alt="Candice Wu"
                 />
                 <Avatar
                     className="ring-[1.5px] ring-bg-primary"
                     size="md"
-                    src="https://www.untitledui.com/images/avatars/julius-vaughan?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=julius-vaughan"
                     alt="Natali Craig"
                 />
                 <Avatar
@@ -299,22 +299,22 @@ export const Default = () => (
     <div className="flex flex-col gap-4">
         <div className="flex items-start gap-8">
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar size="xs" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar size="xs" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar size="sm" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar size="sm" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar size="md" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar size="lg" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar size="lg" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar size="xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar size="xl" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar size="2xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar size="2xl" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
         </div>
 
@@ -322,7 +322,7 @@ export const Default = () => (
             <a href="#" className="group inline-flex focus:outline-hidden">
                 <Avatar
                     size="xs"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -331,7 +331,7 @@ export const Default = () => (
             <a href="#" className="group inline-flex focus:outline-hidden">
                 <Avatar
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -340,7 +340,7 @@ export const Default = () => (
             <a href="#" className="group inline-flex focus:outline-hidden">
                 <Avatar
                     size="md"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -349,7 +349,7 @@ export const Default = () => (
             <a href="#" className="group inline-flex focus:outline-hidden">
                 <Avatar
                     size="lg"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -358,7 +358,7 @@ export const Default = () => (
             <a href="#" className="group inline-flex focus:outline-hidden">
                 <Avatar
                     size="xl"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -367,7 +367,7 @@ export const Default = () => (
             <a href="#" className="group inline-flex focus:outline-hidden">
                 <Avatar
                     size="2xl"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -377,22 +377,22 @@ export const Default = () => (
 
         <div className="flex items-start gap-8">
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="xs" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar size="xs" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="sm" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar size="sm" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar size="md" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="lg" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar size="lg" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar size="xl" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="2xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar size="2xl" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
         </div>
 
@@ -400,77 +400,77 @@ export const Default = () => (
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     size="xs"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="xs" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="xs" />}
                 />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="sm" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="sm" />}
                 />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     size="md"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
                 />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     size="lg"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="lg" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="lg" />}
                 />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     size="xl"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="xl" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="xl" />}
                 />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     size="2xl"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="2xl" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="2xl" />}
                 />
             </a>
         </div>
 
         <div className="flex items-start gap-8">
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="xs" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar size="xs" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="sm" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar size="sm" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar size="md" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="lg" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar size="lg" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar size="xl" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar size="2xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar size="2xl" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
         </div>
     </div>
@@ -480,22 +480,22 @@ export const WithBorder = () => (
     <div className="flex flex-col gap-4">
         <div className="flex items-start gap-8">
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar border size="xs" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar border size="xs" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar border size="sm" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar border size="sm" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar border size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar border size="md" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar border size="lg" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar border size="lg" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar border size="xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar border size="xl" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
             <a href="#" className="group inline-flex focus:outline-hidden">
-                <Avatar border size="2xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" focusable />
+                <Avatar border size="2xl" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" focusable />
             </a>
         </div>
 
@@ -504,7 +504,7 @@ export const WithBorder = () => (
                 <Avatar
                     border
                     size="xs"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -514,7 +514,7 @@ export const WithBorder = () => (
                 <Avatar
                     border
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -524,7 +524,7 @@ export const WithBorder = () => (
                 <Avatar
                     border
                     size="md"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -534,7 +534,7 @@ export const WithBorder = () => (
                 <Avatar
                     border
                     size="lg"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -544,7 +544,7 @@ export const WithBorder = () => (
                 <Avatar
                     border
                     size="xl"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -554,7 +554,7 @@ export const WithBorder = () => (
                 <Avatar
                     border
                     size="2xl"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     alt="Olivia Rhye"
                     focusable
                     badge={<AvatarCount count={5} />}
@@ -564,25 +564,25 @@ export const WithBorder = () => (
 
         <div className="flex items-start gap-8">
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="xs" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar border size="xs" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="sm" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar border size="sm" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar border size="md" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="lg" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar border size="lg" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" status="online" />
+                <Avatar border size="xl" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" status="online" />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     border
                     size="2xl"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
                     status="online"
@@ -595,82 +595,82 @@ export const WithBorder = () => (
                 <Avatar
                     border
                     size="xs"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="xs" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="xs" />}
                 />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     border
                     size="sm"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="sm" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="sm" />}
                 />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     border
                     size="md"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
                 />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     border
                     size="lg"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="lg" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="lg" />}
                 />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     border
                     size="xl"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="xl" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="xl" />}
                 />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
                 <Avatar
                     border
                     size="2xl"
-                    src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                    src="https://i.pravatar.cc/150?u=olivia"
                     focusable
                     alt="Olivia Rhye"
-                    badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="2xl" />}
+                    badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="2xl" />}
                 />
             </a>
         </div>
 
         <div className="flex items-start gap-8">
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="xs" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar border size="xs" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="sm" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar border size="sm" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar border size="md" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="lg" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar border size="lg" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar border size="xl" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
             <a href="#" className="group relative inline-flex focus:outline-hidden">
-                <Avatar border size="2xl" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" focusable alt="Olivia Rhye" verified />
+                <Avatar border size="2xl" src="https://i.pravatar.cc/150?u=olivia" focusable alt="Olivia Rhye" verified />
             </a>
         </div>
     </div>
@@ -699,32 +699,32 @@ export const Placeholder = () => (
         <div className="flex items-start gap-8">
             <Avatar
                 size="xs"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="xs" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="xs" />}
                 placeholderIcon={User01}
             />
             <Avatar
                 size="sm"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="sm" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="sm" />}
                 placeholderIcon={User01}
             />
             <Avatar
                 size="md"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
                 placeholderIcon={User01}
             />
             <Avatar
                 size="lg"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="lg" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="lg" />}
                 placeholderIcon={User01}
             />
             <Avatar
                 size="xl"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="xl" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="xl" />}
                 placeholderIcon={User01}
             />
             <Avatar
                 size="2xl"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="2xl" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="2xl" />}
                 placeholderIcon={User01}
             />
         </div>
@@ -754,32 +754,32 @@ export const Initials = () => (
         <div className="flex items-start gap-8">
             <Avatar
                 size="xs"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="xs" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="xs" />}
                 initials="OR"
             />
             <Avatar
                 size="sm"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="sm" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="sm" />}
                 initials="OR"
             />
             <Avatar
                 size="md"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
                 initials="OR"
             />
             <Avatar
                 size="lg"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="lg" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="lg" />}
                 initials="OR"
             />
             <Avatar
                 size="xl"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="xl" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="xl" />}
                 initials="OR"
             />
             <Avatar
                 size="2xl"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="2xl" />}
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="2xl" />}
                 initials="OR"
             />
         </div>
@@ -791,50 +791,50 @@ export const LabelGroup = () => (
         <div className="flex items-start gap-8">
             <AvatarLabelGroup
                 size="sm"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
+                subtitle="olivia@uix.design"
             />
             <AvatarLabelGroup
                 size="md"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
+                subtitle="olivia@uix.design"
             />
             <AvatarLabelGroup
                 size="lg"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
+                subtitle="olivia@uix.design"
             />
         </div>
 
         <div className="flex items-start gap-8">
             <AvatarLabelGroup
                 size="sm"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
+                subtitle="olivia@uix.design"
                 status="online"
             />
             <AvatarLabelGroup
                 size="md"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
+                subtitle="olivia@uix.design"
                 status="online"
             />
             <AvatarLabelGroup
                 size="lg"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
+                subtitle="olivia@uix.design"
                 status="online"
             />
         </div>
@@ -842,53 +842,53 @@ export const LabelGroup = () => (
         <div className="flex items-start gap-8">
             <AvatarLabelGroup
                 size="sm"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="sm" />}
+                subtitle="olivia@uix.design"
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="sm" />}
             />
             <AvatarLabelGroup
                 size="md"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
+                subtitle="olivia@uix.design"
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="md" />}
             />
             <AvatarLabelGroup
                 size="lg"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
-                badge={<AvatarCompanyIcon src="https://www.untitledui.com/logos/images/Layers.jpg" alt="Layers Inc." size="lg" />}
+                subtitle="olivia@uix.design"
+                badge={<AvatarCompanyIcon src="https://www.uix.design/logos/images/Layers.jpg" alt="Layers Inc." size="lg" />}
             />
         </div>
 
         <div className="flex items-start gap-8">
             <AvatarLabelGroup
                 size="sm"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
+                subtitle="olivia@uix.design"
                 verified
             />
             <AvatarLabelGroup
                 size="md"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
+                subtitle="olivia@uix.design"
                 verified
             />
             <AvatarLabelGroup
                 size="lg"
-                src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                src="https://i.pravatar.cc/150?u=olivia"
                 alt="Olivia Rhye"
                 title="Olivia Rhye"
-                subtitle="olivia@untitledui.com"
+                subtitle="olivia@uix.design"
                 verified
             />
         </div>
@@ -898,9 +898,9 @@ export const LabelGroup = () => (
 export const ProfilePhoto = () => (
     <div className="flex flex-col gap-16">
         <div className="flex gap-8">
-            <AvatarProfilePhoto verified size="sm" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" />
-            <AvatarProfilePhoto verified size="md" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" />
-            <AvatarProfilePhoto verified size="lg" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" alt="Olivia Rhye" />
+            <AvatarProfilePhoto verified size="sm" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" />
+            <AvatarProfilePhoto verified size="md" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" />
+            <AvatarProfilePhoto verified size="lg" src="https://i.pravatar.cc/150?u=olivia" alt="Olivia Rhye" />
         </div>
 
         <div className="flex gap-8">

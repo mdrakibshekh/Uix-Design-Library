@@ -22,7 +22,7 @@ export const DropdownAccountCardSM = () => {
                     )
                 }
             >
-                <Avatar border size="sm" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" status="online" />
+                <Avatar border size="sm" src="https://i.pravatar.cc/150?u=olivia" status="online" />
 
                 <p className="text-sm font-semibold text-primary">Olivia Rhye</p>
 
@@ -34,7 +34,7 @@ export const DropdownAccountCardSM = () => {
             <Dropdown.Popover className="w-60">
                 <div className="flex flex-col border-b border-secondary px-4 py-3">
                     <p className="text-sm font-semibold text-primary">PRO account</p>
-                    <p className="text-sm text-tertiary">olivia@untitledui.com</p>
+                    <p className="text-sm text-tertiary">olivia@uix.design</p>
                 </div>
                 <Dropdown.Menu>
                     <Dropdown.Item icon={User01} addon="⌘K->P">
@@ -68,10 +68,10 @@ export const DropdownAccountCardSM = () => {
                             Switch Account
                         </Dropdown.SectionHeader>
 
-                        <Dropdown.Item id="olivia" avatarUrl="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" selectionIndicator="radio">
+                        <Dropdown.Item id="olivia" avatarUrl="https://i.pravatar.cc/150?u=olivia" selectionIndicator="radio">
                             Olivia Rhye
                         </Dropdown.Item>
-                        <Dropdown.Item id="sienna" avatarUrl="https://www.untitledui.com/images/avatars/sienna-hewitt?fm=webp&q=80" selectionIndicator="radio">
+                        <Dropdown.Item id="sienna" avatarUrl="https://i.pravatar.cc/150?u=sienna-hewitt" selectionIndicator="radio">
                             Sienna Hewitt
                         </Dropdown.Item>
                     </Dropdown.Section>
@@ -92,7 +92,7 @@ export const DropdownAccountCardSM = () => {
                     </SubmenuTrigger>
                 </Dropdown.Menu>
                 <div className="flex justify-between border-t border-secondary px-4 py-3">
-                    <span className="truncate text-sm text-quaternary">&copy; Untitled UI</span>
+                    <span className="truncate text-sm text-quaternary">&copy; UIX Design Library</span>
                     <span className="text-sm text-quaternary">v12.6.8</span>
                 </div>
             </Dropdown.Popover>

@@ -15,41 +15,41 @@ const items: SelectItemType[] = [
         label: "Phoenix Baker",
         id: "@phoenix",
         supportingText: "@phoenix",
-        avatarUrl: "https://www.untitledui.com/images/avatars/phoenix-baker?fm=webp&q=80",
+        avatarUrl: "https://i.pravatar.cc/150?u=phoenix-baker",
     },
-    { label: "Olivia Rhye", id: "@olivia", supportingText: "@olivia", avatarUrl: "https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" },
+    { label: "Olivia Rhye", id: "@olivia", supportingText: "@olivia", avatarUrl: "https://i.pravatar.cc/150?u=olivia" },
     {
         label: "Lana Steiner",
         id: "@lana",
         supportingText: "@lana",
 
-        avatarUrl: "https://www.untitledui.com/images/avatars/lana-steiner?fm=webp&q=80",
+        avatarUrl: "https://i.pravatar.cc/150?u=lana-steiner",
     },
     {
         label: "Demi Wilkinson",
         id: "@demi",
         supportingText: "@demi",
-        avatarUrl: "https://www.untitledui.com/images/avatars/demi-wilkinson?fm=webp&q=80",
+        avatarUrl: "https://i.pravatar.cc/150?u=demi-wilkinson",
     },
-    { label: "Candice Wu", id: "@candice", supportingText: "@candice", avatarUrl: "https://www.untitledui.com/images/avatars/candice-wu?fm=webp&q=80" },
-    { label: "Natali Craig", id: "@natali", supportingText: "@natali", avatarUrl: "https://www.untitledui.com/images/avatars/natali-craig?fm=webp&q=80" },
-    { label: "Abraham Baker", id: "@abraham", supportingText: "@abraham", avatarUrl: "https://www.untitledui.com/images/avatars/abraham-baker?fm=webp&q=80" },
-    { label: "Adem Lane", id: "@adem", supportingText: "@adem", avatarUrl: "https://www.untitledui.com/images/avatars/adem-lane?fm=webp&q=80" },
+    { label: "Candice Wu", id: "@candice", supportingText: "@candice", avatarUrl: "https://i.pravatar.cc/150?u=candice-wu" },
+    { label: "Natali Craig", id: "@natali", supportingText: "@natali", avatarUrl: "https://i.pravatar.cc/150?u=natali-craig" },
+    { label: "Abraham Baker", id: "@abraham", supportingText: "@abraham", avatarUrl: "https://i.pravatar.cc/150?u=abraham-baker" },
+    { label: "Adem Lane", id: "@adem", supportingText: "@adem", avatarUrl: "https://i.pravatar.cc/150?u=adem-lane" },
     {
         label: "Jackson Reed",
         id: "@jackson",
         supportingText: "@jackson",
-        avatarUrl: "https://www.untitledui.com/images/avatars/jackson-reed?fm=webp&q=80",
+        avatarUrl: "https://i.pravatar.cc/150?u=jackson-reed",
     },
     {
         label: "Jessie Meyton",
         id: "@jessie",
         supportingText: "@jessie",
-        avatarUrl: "https://www.untitledui.com/images/avatars/jessie-meyton?fm=webp&q=80",
+        avatarUrl: "https://i.pravatar.cc/150?u=jessie-meyton",
     },
 ];
 
-export const DefaultDemo = () => {
+export const DefaultDemo = ({ isCompact = false }: { isCompact?: boolean }) => {
     const items = [
         { label: "Phoenix Baker", id: "@phoenix", supportingText: "@phoenix" },
         { label: "Olivia Rhye", id: "@olivia", supportingText: "@olivia" },
@@ -67,10 +67,10 @@ export const DefaultDemo = () => {
         <Select
             isRequired
             label="Team member"
-            tooltip="This is a tooltip"
-            hint="This is a hint text to help user."
+            tooltip={isCompact ? undefined : "This is a tooltip"}
+            hint={isCompact ? undefined : "This is a hint text to help user."}
             placeholder="Select team member"
-            items={items}
+            items={isCompact ? items.slice(0, 3) : items}
         >
             {(item) => (
                 <Select.Item id={item.id} supportingText={item.supportingText} isDisabled={item.isDisabled} icon={item.icon} avatarUrl={item.avatarUrl}>
@@ -206,57 +206,57 @@ export const AvatarLeadingDemo = () => {
             label: "Phoenix Baker",
             id: "@phoenix",
             supportingText: "@phoenix",
-            avatarUrl: "https://www.untitledui.com/images/avatars/phoenix-baker?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=phoenix-baker",
         },
         {
             label: "Olivia Rhye",
             id: "@olivia",
             supportingText: "@olivia",
-            avatarUrl: "https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=olivia",
         },
         {
             label: "Lana Steiner",
             id: "@lana",
             supportingText: "@lana",
 
-            avatarUrl: "https://www.untitledui.com/images/avatars/lana-steiner?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=lana-steiner",
         },
         {
             label: "Demi Wilkinson",
             id: "@demi",
             supportingText: "@demi",
-            avatarUrl: "https://www.untitledui.com/images/avatars/demi-wilkinson?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=demi-wilkinson",
         },
         {
             label: "Candice Wu",
             id: "@candice",
             supportingText: "@candice",
-            avatarUrl: "https://www.untitledui.com/images/avatars/candice-wu?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=candice-wu",
         },
         {
             label: "Natali Craig",
             id: "@natali",
             supportingText: "@natali",
-            avatarUrl: "https://www.untitledui.com/images/avatars/natali-craig?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=natali-craig",
         },
         {
             label: "Abraham Baker",
             id: "@abraham",
             supportingText: "@abraham",
-            avatarUrl: "https://www.untitledui.com/images/avatars/abraham-baker?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=abraham-baker",
         },
-        { label: "Adem Lane", id: "@adem", supportingText: "@adem", avatarUrl: "https://www.untitledui.com/images/avatars/adem-lane?fm=webp&q=80" },
+        { label: "Adem Lane", id: "@adem", supportingText: "@adem", avatarUrl: "https://i.pravatar.cc/150?u=adem-lane" },
         {
             label: "Jackson Reed",
             id: "@jackson",
             supportingText: "@jackson",
-            avatarUrl: "https://www.untitledui.com/images/avatars/jackson-reed?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=jackson-reed",
         },
         {
             label: "Jessie Meyton",
             id: "@jessie",
             supportingText: "@jessie",
-            avatarUrl: "https://www.untitledui.com/images/avatars/jessie-meyton?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=jessie-meyton",
         },
     ];
 
@@ -397,28 +397,28 @@ export const TagsDemo = () => {
             label: "Phoenix Baker",
             id: "@phoenix",
             supportingText: "@phoenix",
-            avatarUrl: "https://www.untitledui.com/images/avatars/phoenix-baker?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=phoenix-baker",
         },
-        { label: "Olivia Rhye", id: "@olivia", supportingText: "@olivia", avatarUrl: "https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" },
+        { label: "Olivia Rhye", id: "@olivia", supportingText: "@olivia", avatarUrl: "https://i.pravatar.cc/150?u=olivia" },
         {
             label: "Lana Steiner",
             id: "@lana",
             supportingText: "@lana",
             disabled: true,
-            avatarUrl: "https://www.untitledui.com/images/avatars/lana-steiner?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=lana-steiner",
         },
-        { label: "Demi Wilkinson", id: "@demi", supportingText: "@demi", avatarUrl: "https://www.untitledui.com/images/avatars/demi-wilkinson?fm=webp&q=80" },
-        { label: "Candice Wu", id: "@candice", supportingText: "@candice", avatarUrl: "https://www.untitledui.com/images/avatars/candice-wu?fm=webp&q=80" },
-        { label: "Natali Craig", id: "@natali", supportingText: "@natali", avatarUrl: "https://www.untitledui.com/images/avatars/natali-craig?fm=webp&q=80" },
+        { label: "Demi Wilkinson", id: "@demi", supportingText: "@demi", avatarUrl: "https://i.pravatar.cc/150?u=demi-wilkinson" },
+        { label: "Candice Wu", id: "@candice", supportingText: "@candice", avatarUrl: "https://i.pravatar.cc/150?u=candice-wu" },
+        { label: "Natali Craig", id: "@natali", supportingText: "@natali", avatarUrl: "https://i.pravatar.cc/150?u=natali-craig" },
         {
             label: "Abraham Baker",
             id: "@abraham",
             supportingText: "@abraham",
-            avatarUrl: "https://www.untitledui.com/images/avatars/abraham-baker?fm=webp&q=80",
+            avatarUrl: "https://i.pravatar.cc/150?u=abraham-baker",
         },
-        { label: "Adem Lane", id: "@adem", supportingText: "@adem", avatarUrl: "https://www.untitledui.com/images/avatars/adem-lane?fm=webp&q=80" },
-        { label: "Jackson Reed", id: "@jackson", supportingText: "@jackson", avatarUrl: "https://www.untitledui.com/images/avatars/jackson-reed?fm=webp&q=80" },
-        { label: "Jessie Meyton", id: "@jessie", supportingText: "@jessie", avatarUrl: "https://www.untitledui.com/images/avatars/jessie-meyton?fm=webp&q=80" },
+        { label: "Adem Lane", id: "@adem", supportingText: "@adem", avatarUrl: "https://i.pravatar.cc/150?u=adem-lane" },
+        { label: "Jackson Reed", id: "@jackson", supportingText: "@jackson", avatarUrl: "https://i.pravatar.cc/150?u=jackson-reed" },
+        { label: "Jessie Meyton", id: "@jessie", supportingText: "@jessie", avatarUrl: "https://i.pravatar.cc/150?u=jessie-meyton" },
     ];
 
     return (

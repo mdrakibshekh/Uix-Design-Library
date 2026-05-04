@@ -4,7 +4,14 @@ import { ArrowRight, ArrowUp, Plus } from "@untitledui/icons";
 import type { BadgeColors } from "@/components/base/badges/badge-types";
 import { Badge, BadgeIcon, BadgeWithButton, BadgeWithDot, BadgeWithFlag, BadgeWithIcon, BadgeWithImage, filledColors } from "@/components/base/badges/badges";
 
-export const Default = () => {
+export const Default = ({ isCompact = false }: { isCompact?: boolean }) => {
+    if (isCompact) {
+        return (
+            <div className="flex gap-2">
+                <BadgeWithDot type="pill-color" color="brand">Label</BadgeWithDot>
+            </div>
+        );
+    }
     return (
         <div className="flex flex-col items-start gap-4">
             <div className="flex items-start gap-4">
@@ -203,13 +210,13 @@ export const WithAvatar = () => {
         <div className="flex flex-col items-start gap-4">
             {(Object.keys(filledColors) as BadgeColors[]).map((color) => (
                 <div key={color} className="flex items-start gap-4">
-                    <BadgeWithImage color={color} size="sm" imgSrc="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80">
+                    <BadgeWithImage color={color} size="sm" imgSrc="https://i.pravatar.cc/150?u=olivia">
                         Label
                     </BadgeWithImage>
-                    <BadgeWithImage color={color} size="md" imgSrc="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80">
+                    <BadgeWithImage color={color} size="md" imgSrc="https://i.pravatar.cc/150?u=olivia">
                         Label
                     </BadgeWithImage>
-                    <BadgeWithImage color={color} size="lg" imgSrc="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80">
+                    <BadgeWithImage color={color} size="lg" imgSrc="https://i.pravatar.cc/150?u=olivia">
                         Label
                     </BadgeWithImage>
                 </div>
@@ -223,13 +230,13 @@ export const WithAvatarBadgeColor = () => {
         <div className="flex flex-col items-start gap-4">
             {(Object.keys(filledColors) as BadgeColors[]).map((color) => (
                 <div key={color} className="flex items-start gap-4">
-                    <BadgeWithImage color={color} size="sm" imgSrc="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" type="color">
+                    <BadgeWithImage color={color} size="sm" imgSrc="https://i.pravatar.cc/150?u=olivia" type="color">
                         Label
                     </BadgeWithImage>
-                    <BadgeWithImage color={color} size="md" imgSrc="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" type="color">
+                    <BadgeWithImage color={color} size="md" imgSrc="https://i.pravatar.cc/150?u=olivia" type="color">
                         Label
                     </BadgeWithImage>
-                    <BadgeWithImage color={color} size="lg" imgSrc="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" type="color">
+                    <BadgeWithImage color={color} size="lg" imgSrc="https://i.pravatar.cc/150?u=olivia" type="color">
                         Label
                     </BadgeWithImage>
                 </div>
@@ -242,13 +249,13 @@ export const WithAvatarBadgeModern = () => {
     return (
         <div className="flex flex-col items-start gap-4">
             <div className="flex items-start gap-4">
-                <BadgeWithImage color="gray" size="sm" imgSrc="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" type="modern">
+                <BadgeWithImage color="gray" size="sm" imgSrc="https://i.pravatar.cc/150?u=olivia" type="modern">
                     Label
                 </BadgeWithImage>
-                <BadgeWithImage color="gray" size="md" imgSrc="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" type="modern">
+                <BadgeWithImage color="gray" size="md" imgSrc="https://i.pravatar.cc/150?u=olivia" type="modern">
                     Label
                 </BadgeWithImage>
-                <BadgeWithImage color="gray" size="lg" imgSrc="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" type="modern">
+                <BadgeWithImage color="gray" size="lg" imgSrc="https://i.pravatar.cc/150?u=olivia" type="modern">
                     Label
                 </BadgeWithImage>
             </div>

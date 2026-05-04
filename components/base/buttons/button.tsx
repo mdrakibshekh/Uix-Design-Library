@@ -10,123 +10,74 @@ import { isReactComponent } from "@/utils/is-react-component";
 export const styles = sortCx({
     common: {
         root: [
-            "group relative inline-flex h-max cursor-pointer items-center justify-center whitespace-nowrap outline-brand transition duration-100 ease-linear before:absolute focus-visible:outline-2 focus-visible:outline-offset-2",
-            // When button is used within `InputGroup`
-            "in-data-input-wrapper:shadow-xs in-data-input-wrapper:focus:!z-50 in-data-input-wrapper:in-data-leading:-mr-px in-data-input-wrapper:in-data-leading:rounded-r-none in-data-input-wrapper:in-data-leading:before:rounded-r-none in-data-input-wrapper:in-data-trailing:-ml-px in-data-input-wrapper:in-data-trailing:rounded-l-none in-data-input-wrapper:in-data-trailing:before:rounded-l-none",
+            "group relative inline-flex h-max cursor-pointer items-center justify-center whitespace-nowrap outline-none transition-all duration-200 ease-in-out before:absolute focus-visible:ring-2 focus-visible:ring-offset-2",
             // Disabled styles
-            "disabled:cursor-not-allowed disabled:opacity-50 in-data-input-wrapper:disabled:opacity-100",
-            // Same as `icon` but for SSR icons that cannot be passed to the client as functions.
+            "disabled:cursor-not-allowed disabled:opacity-50",
             "*:data-icon:pointer-events-none *:data-icon:size-5 *:data-icon:shrink-0 *:data-icon:transition-inherit-all",
         ].join(" "),
         icon: "pointer-events-none size-5 shrink-0 transition-inherit-all",
     },
     sizes: {
-        xs: {
-            root: [
-                "gap-1 rounded-lg px-2.5 py-1.5 text-sm font-semibold before:rounded-[7px] data-icon-only:p-2",
-                "in-data-input-wrapper:px-3.5 in-data-input-wrapper:py-2.5 in-data-input-wrapper:data-icon-only:p-2.5",
-                "*:data-icon:size-4 *:data-icon:stroke-[2.25px]",
-            ].join(" "),
-            linkRoot: "gap-1 *:data-text:underline-offset-3",
-        },
         sm: {
-            root: [
-                "gap-1 rounded-lg px-3 py-2 text-sm font-semibold before:rounded-[7px] data-icon-only:p-2",
-                "in-data-input-wrapper:px-3.5 in-data-input-wrapper:py-2.5 in-data-input-wrapper:data-icon-only:p-2.5",
-            ].join(" "),
-            linkRoot: "gap-1 *:data-text:underline-offset-3",
+            root: "gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold",
         },
         md: {
-            root: [
-                "gap-1 rounded-lg px-3.5 py-2.5 text-sm font-semibold before:rounded-[7px] data-icon-only:p-2.5",
-                "in-data-input-wrapper:gap-1.5 in-data-input-wrapper:px-4 in-data-input-wrapper:text-md in-data-input-wrapper:data-icon-only:p-3",
-            ].join(" "),
-            linkRoot: "gap-1 *:data-text:underline-offset-4",
+            root: "gap-2 rounded-lg px-4 py-2 text-sm font-semibold",
         },
         lg: {
-            root: "gap-1.5 rounded-lg px-4 py-2.5 text-md font-semibold before:rounded-[7px] data-icon-only:p-3",
-            linkRoot: "gap-1.5 *:data-text:underline-offset-4",
-        },
-        xl: {
-            root: "gap-1.5 rounded-lg px-4.5 py-3 text-md font-semibold before:rounded-[7px] data-icon-only:p-3.5",
-            linkRoot: "gap-1.5 *:data-text:underline-offset-4",
+            root: "gap-2.5 rounded-xl px-5 py-2.5 text-md font-semibold",
         },
     },
 
-    colors: {
-        primary: {
-            root: [
-                "bg-brand-solid text-white shadow-xs-skeuomorphic ring-1 ring-transparent ring-inset hover:bg-brand-solid_hover data-loading:bg-brand-solid_hover",
-                // Inner border gradient
-                "before:absolute before:inset-px before:border before:border-white/12 before:mask-b-from-0%",
-                // Icon styles
-                "*:data-icon:text-white/60 hover:*:data-icon:text-white/70",
-            ].join(" "),
+    variants: {
+        solid: {
+            dark: "bg-slate-900 text-white hover:bg-slate-800 focus-visible:ring-slate-900",
+            gray: "bg-slate-100 text-slate-900 hover:bg-slate-200 focus-visible:ring-slate-200",
+            blue: "bg-brand-500 text-white hover:bg-brand-600 focus-visible:ring-brand-500",
+            green: "bg-success-500 text-white hover:bg-success-600 focus-visible:ring-success-500",
+            red: "bg-error-500 text-white hover:bg-error-600 focus-visible:ring-error-500",
+            yellow: "bg-warning-500 text-white hover:bg-warning-600 focus-visible:ring-warning-500",
+            light: "bg-white text-slate-900 hover:bg-slate-50 border border-slate-200 focus-visible:ring-slate-200",
+            success: "bg-success-500 text-white hover:bg-success-600 focus-visible:ring-success-500",
+            destructive: "bg-error-500 text-white hover:bg-error-600 focus-visible:ring-error-500",
+            warning: "bg-warning-500 text-white hover:bg-warning-600 focus-visible:ring-warning-500",
         },
-        secondary: {
-            root: [
-                "bg-primary text-secondary shadow-xs-skeuomorphic ring-1 ring-primary ring-inset hover:bg-primary_hover hover:text-secondary_hover data-loading:bg-primary_hover",
-                // Icon styles
-                "*:data-icon:text-fg-quaternary hover:*:data-icon:text-fg-quaternary_hover",
-            ].join(" "),
+        outlined: {
+            dark: "border border-slate-900 text-slate-900 hover:bg-slate-50 focus-visible:ring-slate-900",
+            gray: "border border-slate-200 text-slate-600 hover:bg-slate-50 focus-visible:ring-slate-200",
+            blue: "border border-brand-300 text-brand-500 hover:bg-brand-50 focus-visible:ring-brand-500",
+            green: "border border-success-500 text-success-500 hover:bg-success-50 focus-visible:ring-success-500",
+            red: "border border-error-500 text-error-500 hover:bg-error-50 focus-visible:ring-error-500",
+            yellow: "border border-warning-500 text-warning-500 hover:bg-warning-50 focus-visible:ring-warning-500",
+            light: "border border-white/20 text-white hover:bg-white/10 focus-visible:ring-white",
+            success: "border border-success-500 text-success-500 hover:bg-success-50 focus-visible:ring-success-500",
+            destructive: "border border-error-500 text-error-500 hover:bg-error-50 focus-visible:ring-error-500",
+            warning: "border border-warning-500 text-warning-500 hover:bg-warning-50 focus-visible:ring-warning-500",
         },
-        tertiary: {
-            root: [
-                "text-tertiary hover:bg-primary_hover hover:text-tertiary_hover data-loading:bg-primary_hover",
-                // Icon styles
-                "*:data-icon:text-fg-quaternary hover:*:data-icon:text-fg-quaternary_hover",
-            ].join(" "),
+        ghost: {
+            dark: "text-slate-900 hover:bg-slate-100",
+            gray: "text-slate-600 hover:bg-slate-50",
+            blue: "text-brand-600 hover:bg-brand-50",
+            green: "text-success-600 hover:bg-success-50",
+            red: "text-error-600 hover:bg-error-50",
+            yellow: "text-warning-600 hover:bg-warning-50",
+            light: "text-white hover:bg-white/10",
+            success: "text-success-600 hover:bg-success-50",
+            destructive: "text-error-600 hover:bg-error-50",
+            warning: "text-warning-600 hover:bg-warning-50",
         },
-        "link-color": {
-            root: [
-                "justify-normal rounded p-0! text-brand-secondary hover:text-brand-secondary_hover",
-                // Inner text underline
-                "*:data-text:underline *:data-text:decoration-transparent hover:*:data-text:decoration-fg-brand-secondary_alt",
-                // Icon styles
-                "*:data-icon:text-fg-brand-secondary_alt hover:*:data-icon:text-fg-brand-secondary_hover",
-            ].join(" "),
-        },
-        "link-gray": {
-            root: [
-                "justify-normal rounded p-0! text-tertiary hover:text-tertiary_hover",
-                // Inner text underline
-                "*:data-text:underline *:data-text:decoration-transparent hover:*:data-text:decoration-fg-quaternary",
-                // Icon styles
-                "*:data-icon:text-fg-quaternary hover:*:data-icon:text-fg-quaternary_hover",
-            ].join(" "),
-        },
-        "primary-destructive": {
-            root: [
-                "bg-error-solid text-white shadow-xs-skeuomorphic ring-1 ring-transparent outline-error ring-inset hover:bg-error-solid_hover data-loading:bg-error-solid_hover",
-                // Inner border gradient
-                "before:absolute before:inset-px before:border before:border-white/12 before:mask-b-from-0%",
-                // Icon styles
-                "*:data-icon:text-white/60 hover:*:data-icon:text-white/70",
-            ].join(" "),
-        },
-        "secondary-destructive": {
-            root: [
-                "bg-primary text-error-primary shadow-xs-skeuomorphic ring-1 ring-error_subtle outline-error ring-inset hover:bg-error-primary hover:text-error-primary_hover data-loading:bg-error-primary",
-                // Icon styles
-                "*:data-icon:text-fg-error-secondary hover:*:data-icon:text-fg-error-primary",
-            ].join(" "),
-        },
-        "tertiary-destructive": {
-            root: [
-                "text-error-primary outline-error hover:bg-error-primary hover:text-error-primary_hover data-loading:bg-error-primary",
-                // Icon styles
-                "*:data-icon:text-fg-error-secondary hover:*:data-icon:text-fg-error-primary",
-            ].join(" "),
-        },
-        "link-destructive": {
-            root: [
-                "justify-normal rounded p-0! text-error-primary outline-error hover:text-error-primary_hover",
-                // Inner text underline
-                "*:data-text:underline *:data-text:decoration-transparent *:data-text:underline-offset-2 hover:*:data-text:decoration-current",
-                // Icon styles
-                "*:data-icon:text-fg-error-secondary hover:*:data-icon:text-fg-error-primary",
-            ].join(" "),
-        },
+        soft: {
+            dark: "bg-slate-100 text-slate-900 hover:bg-slate-200",
+            gray: "bg-slate-50 text-slate-600 hover:bg-slate-100",
+            blue: "bg-brand-50 text-brand-700 hover:bg-brand-100",
+            green: "bg-success-50 text-success-700 hover:bg-success-100",
+            red: "bg-error-50 text-error-700 hover:bg-error-100",
+            yellow: "bg-warning-50 text-warning-700 hover:bg-warning-100",
+            light: "bg-white/10 text-white hover:bg-white/20",
+            success: "bg-success-50 text-success-700 hover:bg-success-100",
+            destructive: "bg-error-50 text-error-700 hover:bg-error-100",
+            warning: "bg-warning-50 text-warning-700 hover:bg-warning-100",
+        }
     },
 });
 
@@ -140,8 +91,10 @@ export interface CommonProps {
     isLoading?: boolean;
     /** The size variant of the button */
     size?: keyof typeof styles.sizes;
+    /** The style variant of the button */
+    variant?: keyof typeof styles.variants;
     /** The color variant of the button */
-    color?: keyof typeof styles.colors;
+    color?: "dark" | "gray" | "blue" | "green" | "red" | "yellow" | "light" | "success" | "destructive" | "warning";
     /** Icon component or element to show before the text */
     iconLeading?: FC<{ className?: string }> | ReactNode;
     /** Icon component or element to show after the text */
@@ -172,8 +125,9 @@ interface LinkProps extends CommonProps, DetailedHTMLProps<Omit<AnchorHTMLAttrib
 export type Props = ButtonProps | LinkProps;
 
 export const Button = ({
-    size = "sm",
-    color = "primary",
+    size = "md",
+    variant = "solid",
+    color = "blue",
     children,
     className,
     noTextPadding,
@@ -188,9 +142,6 @@ export const Button = ({
     const Component = href ? AriaLink : AriaButton;
 
     const isIcon = (IconLeading || IconTrailing) && !children;
-    const isLinkType = ["link-gray", "link-color", "link-destructive"].includes(color);
-
-    noTextPadding = isLinkType || noTextPadding;
 
     let props = {};
 
@@ -218,8 +169,7 @@ export const Button = ({
             className={cx(
                 styles.common.root,
                 styles.sizes[size].root,
-                styles.colors[color].root,
-                isLinkType && styles.sizes[size].linkRoot,
+                styles.variants[variant][color as keyof typeof styles.variants.solid],
                 (loading || (href && (disabled || loading))) && "pointer-events-none",
                 // If in `loading` state, hide everything except the loading icon (and text if `showTextWhileLoading` is true).
                 loading && (showTextWhileLoading ? "[&>*:not([data-icon=loading]):not([data-text])]:hidden" : "[&>*:not([data-icon=loading])]:invisible"),

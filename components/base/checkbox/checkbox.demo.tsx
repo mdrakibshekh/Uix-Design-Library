@@ -2,7 +2,10 @@
 
 import { Checkbox } from "@/components/base/checkbox/checkbox";
 
-export const DefaultDemo = () => <Checkbox label="Remember me" hint="Save my login details for next time." size="sm" />;
+export const DefaultDemo = ({ isCompact = false }: { isCompact?: boolean }) => {
+    if (isCompact) return <Checkbox label="Remember me" size="sm" />;
+    return <Checkbox label="Remember me" hint="Save my login details for next time." size="sm" />;
+};
 
 export const BaseDemo = () => <Checkbox size="sm" />;
 

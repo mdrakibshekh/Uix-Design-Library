@@ -23,17 +23,17 @@ export const DropdownAvatar = () => {
                     )
                 }
             >
-                <Avatar alt="Olivia Rhye" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" size="sm" />
+                <Avatar alt="Olivia Rhye" src="https://i.pravatar.cc/150?u=olivia" size="sm" />
             </AriaButton>
 
             <Dropdown.Popover className="w-60">
                 <div className="flex gap-3 border-b border-secondary p-3">
                     <AvatarLabelGroup
                         size="md"
-                        src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                        src="https://i.pravatar.cc/150?u=olivia"
                         status="online"
                         title="Olivia Rhye"
-                        subtitle="olivia@untitledui.com"
+                        subtitle="olivia@uix.design"
                     />
                 </div>
                 <Dropdown.Menu>

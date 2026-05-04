@@ -2,7 +2,10 @@
 
 import { Toggle } from "@/components/base/toggle/toggle";
 
-export const DefaultDemo = () => <Toggle label="Remember me" hint="Save my login details for next time." size="sm" />;
+export const DefaultDemo = ({ isCompact = false }: { isCompact?: boolean }) => {
+    if (isCompact) return <Toggle label="Remember me" size="sm" />;
+    return <Toggle label="Remember me" hint="Save my login details for next time." size="sm" />;
+};
 
 export const BaseDemo = () => <Toggle size="sm" />;
 

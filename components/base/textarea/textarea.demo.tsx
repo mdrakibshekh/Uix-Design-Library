@@ -2,7 +2,10 @@
 
 import { TextArea } from "@/components/base/textarea/textarea";
 
-export const DefaultDemo = () => {
+export const DefaultDemo = ({ isCompact = false }: { isCompact?: boolean }) => {
+    if (isCompact) {
+        return <TextArea label="Description" placeholder="This is a placeholder." rows={2} />;
+    }
     return <TextArea isRequired placeholder="This is a placeholder." label="Description" hint="This is a hint text to help user." rows={5} />;
 };
 

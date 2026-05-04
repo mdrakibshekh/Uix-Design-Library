@@ -31,35 +31,35 @@ export const DropdownSearchAdvanced = () => {
                     <Dropdown.Menu selectionMode="multiple" selectedKeys={selectedUsers} onSelectionChange={setSelectedUsers}>
                         <SubmenuTrigger>
                             <Dropdown.Item id="untitledui" textValue="Olivia Rhye" selectionIndicator="checkbox">
-                                Untitled UI
+                                UIX Design Library
                             </Dropdown.Item>
                             <Dropdown.Popover placement="right top" offset={-6} className="w-50">
                                 <Dropdown.Menu selectionMode="multiple">
                                     <Dropdown.Item
                                         id="olivia"
                                         selectionIndicator="checkbox"
-                                        avatarUrl="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                                        avatarUrl="https://i.pravatar.cc/150?u=olivia"
                                     >
                                         Olivia Rhye
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         id="phoenix"
                                         selectionIndicator="checkbox"
-                                        avatarUrl="https://www.untitledui.com/images/avatars/phoenix-baker?fm=webp&q=80"
+                                        avatarUrl="https://i.pravatar.cc/150?u=phoenix-baker"
                                     >
                                         Phoenix Baker
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         id="lana"
                                         selectionIndicator="checkbox"
-                                        avatarUrl="https://www.untitledui.com/images/avatars/lana-steiner?fm=webp&q=80"
+                                        avatarUrl="https://i.pravatar.cc/150?u=lana-steiner"
                                     >
                                         Lana Steiner
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         id="demi"
                                         selectionIndicator="checkbox"
-                                        avatarUrl="https://www.untitledui.com/images/avatars/demi-wilkinson?fm=webp&q=80"
+                                        avatarUrl="https://i.pravatar.cc/150?u=demi-wilkinson"
                                     >
                                         Demi Wilkinson
                                     </Dropdown.Item>

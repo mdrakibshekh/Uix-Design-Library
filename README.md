@@ -1,44 +1,46 @@
-[![Untitled UI React](https://www.untitledui.com/react/untitled-ui-react-open-graph.jpg)](https://www.untitledui.com/react)
+[![UIX Design Library React](https://www.uix.design/react/untitled-ui-react-open-graph.jpg)](https://www.sigmastudioo.com)
 
-# Untitled UI React
+[![UIX Design Library React](https://www.uix.design/react/untitled-ui-react-open-graph.jpg)](https://library.sigmastudioo.com)
 
-[Untitled UI React](https://www.untitledui.com/react) is the world’s largest collection of open-source React components built with Tailwind CSS and React Aria. Everything you need to design and develop modern, beautiful interfaces—fast. Just copy, paste, and build.
+# UIX Design Library
 
-Built with React 19.2, Tailwind CSS v4.2, TypeScript 5.9, and React Aria, Untitled UI React components deliver modern performance, type safety, and maintainability.
+[UIX Design Library](https://library.sigmastudioo.com) is a premium collection of open-source React components built with Tailwind CSS and React Aria. Everything you need to design and develop modern, beautiful interfaces—fast. Just copy, paste, and build.
 
-[Learn more](https://www.untitledui.com/react) • [Documentation](https://www.untitledui.com/react/docs/introduction) • [Figma](https://www.untitledui.com/figma) • [FAQs](https://www.untitledui.com/faqs)
+Built with React 19.2, Tailwind CSS v4.2, TypeScript 5.9, and React Aria, UIX Design Library components deliver modern performance, type safety, and maintainability.
+
+[Learn more](https://library.sigmastudioo.com) • [Documentation](https://library.sigmastudioo.com/docs/introduction) • [Figma](https://www.figma.com/design/nXGEkSQVO9BKCiVXGPyN75/Sigma-Studio-Design-System-V2.0) • [FAQs](https://library.sigmastudioo.com/faqs)
 
 ## Documentation
 
-Check out our documentation here → [untitledui.com/react/docs](https://www.untitledui.com/react/docs/introduction)
+Check out our documentation here → [library.sigmastudioo.com/docs/introduction](https://library.sigmastudioo.com/docs/introduction)
 
 ## Installation
 
-Check out our installation guide here → [untitledui.com/react/docs/installation](https://www.untitledui.com/react/docs/installation)
+Check out our installation guide here → [library.sigmastudioo.com/docs/installation](https://library.sigmastudioo.com/docs/installation)
 
 ## Resources
 
-Untitled UI React is built on top of [Untitled UI Figma](https://www.untitledui.com/figma), the world's largest and most popular Figma UI kit and design system. Explore more:
+UIX Design Library is built on top of the Sigma Studio Design System, a comprehensive Figma UI kit and design system. Explore more:
 
-**[Untitled UI Figma:](https://www.untitledui.com/figma)** The world's largest Figma UI kit and design system.
+**[Sigma Studio Figma:](https://www.figma.com/design/nXGEkSQVO9BKCiVXGPyN75/Sigma-Studio-Design-System-V2.0)** The world's largest Figma UI kit and design system.
 <br/>
-**[Untitled UI Icons:](https://www.untitledui.com/icons)** A clean, consistent, and neutral icon library crafted specifically for modern UI design.
+**[UIX Icons:](https://uixdesign.library/icons)** A clean, consistent, and neutral icon library crafted specifically for modern UI design.
 <br/>
-**[Untitled UI file icons:](https://www.untitledui.com/resources/file-icons)** Free file format icons, designed specifically for modern web and UI design.
+**[UIX file icons:](https://uixdesign.library/resources/file-icons)** Free file format icons, designed specifically for modern web and UI design.
 <br/>
-**[Untitled UI flag icons:](https://www.untitledui.com/resources/flag-icons)** Free country flag icons, designed specifically for modern web and UI design.
+**[UIX flag icons:](https://uixdesign.library/resources/flag-icons)** Free country flag icons, designed specifically for modern web and UI design.
 <br/>
-**[Untitled UI avatars:](https://www.untitledui.com/resources/avatars)** Free placeholder user avatars and profile pictures to use in your projects.
+**[UIX avatars:](https://uixdesign.library/resources/avatars)** Free placeholder user avatars and profile pictures to use in your projects.
 <br/>
-**[Untitled UI logos:](https://www.untitledui.com/resources/logos)** Free fictional company logos to use in your projects.
+**[UIX logos:](https://uixdesign.library/resources/logos)** Free fictional company logos to use in your projects.
 
 ## License
 
-Untitled UI React open-source components are licensed under the MIT license, which means you can use them for free in unlimited commercial projects.
+UIX Design Library open-source components are licensed under the MIT license, which means you can use them for free in unlimited commercial projects.
 
 > [!NOTE]
-> This license applies only to the components included in this open-source repository. [Untitled UI React PRO](https://www.untitledui.com/react) includes hundreds more advanced UI components and page examples and is subject to a separate [license agreement](https://www.untitledui.com/license).
+> This license applies only to the components included in this open-source repository. [UIX Design Library PRO](https://uixdesign.library/pro) includes hundreds more advanced UI components and page examples and is subject to a separate [license agreement](https://uixdesign.library/license).
 
-[Untitled UI license agreement →](https://www.untitledui.com/license)
+[UIX Design Library license agreement →](https://uixdesign.library/license)
 
-[Frequently asked questions →](https://www.untitledui.com/faqs)
+[Frequently asked questions →](https://uixdesign.library/faqs)

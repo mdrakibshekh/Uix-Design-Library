@@ -12,15 +12,15 @@ const accounts = [
     {
         id: "caitlyn",
         name: "Caitlyn King",
-        email: "caitlyn@untitledui.com",
-        avatar: "https://www.untitledui.com/images/avatars/caitlyn-king?fm=webp&q=80",
+        email: "caitlyn@uix.design",
+        avatar: "https://i.pravatar.cc/150?u=caitlyn-king",
         status: "online",
     },
     {
         id: "sienna",
         name: "Sienna Hewitt",
-        email: "sienna@untitledui.com",
-        avatar: "https://www.untitledui.com/images/avatars/transparent/sienna-hewitt?bg=%23E0E0E0",
+        email: "sienna@uix.design",
+        avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sienna",
         status: "online",
     },
 ];

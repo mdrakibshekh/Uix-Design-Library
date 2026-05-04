@@ -7,11 +7,11 @@ contact_links:
       url: https://github.com/untitleduico/react/discussions
       about: Ask questions, share ideas, and discuss with the community
     - name: 📖 Documentation
-      url: https://www.untitledui.com/react/components
+      url: https://www.uix.design/react/components
       about: View the full component documentation and examples
     - name: 🎨 Design Files
-      url: https://www.untitledui.com/figma
+      url: https://www.uix.design/figma
       about: Access Figma design files and component specifications
     - name: 🔒 Security Vulnerabilities
-      url: mailto:support@untitledui.com?subject=Security%20Vulnerability
+      url: mailto:support@uix.design?subject=Security%20Vulnerability
       about: Report security vulnerabilities privately

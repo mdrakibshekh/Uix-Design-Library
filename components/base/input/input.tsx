@@ -97,21 +97,15 @@ export const InputBase = ({
             ref={groupRef}
             className={({ isFocusWithin, isDisabled, isInvalid }) =>
                 cx(
-                    "group/input relative flex w-full flex-row place-content-center place-items-center rounded-lg bg-primary shadow-xs ring-1 ring-primary transition-shadow duration-100 ease-linear ring-inset",
+                    "group/input relative flex w-full flex-row place-content-center place-items-center rounded-xl bg-slate-50 border border-slate-200 transition-all duration-200",
 
-                    isFocusWithin && !isDisabled && "ring-2 ring-brand",
+                    isFocusWithin && !isDisabled && "bg-white border-violet-500 ring-4 ring-violet-500/10 shadow-sm",
 
                     // Disabled state styles
-                    isDisabled && "cursor-not-allowed opacity-50",
-                    "group-disabled:cursor-not-allowed group-disabled:opacity-50",
+                    isDisabled && "cursor-not-allowed opacity-50 bg-slate-100",
 
                     // Invalid state styles
-                    isInvalid && "ring-error_subtle",
-                    "group-invalid:ring-error_subtle",
-
-                    // Invalid state with focus-within styles
-                    isInvalid && isFocusWithin && "ring-2 ring-error",
-                    isFocusWithin && "group-invalid:ring-2 group-invalid:ring-error",
+                    isInvalid && "border-red-500 ring-red-500/10",
 
                     context?.wrapperClassName,
                     wrapperClassName,
@@ -131,7 +125,7 @@ export const InputBase = ({
                 type={type === "password" && isPasswordVisible ? "text" : type}
                 placeholder={placeholder}
                 className={cx(
-                    "m-0 w-full bg-transparent text-primary ring-0 outline-hidden placeholder:text-placeholder autofill:rounded-lg autofill:text-primary disabled:cursor-not-allowed",
+                    "m-0 w-full bg-transparent text-slate-900 font-medium placeholder:text-slate-400 focus:outline-none disabled:cursor-not-allowed",
                     sizes[inputSize].root,
                     context?.inputClassName,
                     inputClassName,

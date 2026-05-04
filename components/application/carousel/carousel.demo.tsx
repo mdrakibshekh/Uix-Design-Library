@@ -48,7 +48,7 @@ export const CarouselMd = () => {
 
             <Carousel.Content className="gap-2">
                 <Carousel.Item className="overflow-hidden rounded-xl">
-                    <img alt="Image by Unsplash" src="https://www.untitledui.com/application/plants.webp" className="size-full object-cover" />
+                    <img alt="Image by Unsplash" src="https://www.uix.design/application/plants.webp" className="size-full object-cover" />
                 </Carousel.Item>
                 <Carousel.Item className="overflow-hidden rounded-xl">
                     <img
@@ -85,7 +85,7 @@ export const CarouselLg = () => {
 
             <Carousel.Content className="gap-2">
                 <Carousel.Item className="overflow-hidden rounded-xl">
-                    <img alt="Image by Unsplash" src="https://www.untitledui.com/application/plants.webp" className="size-full object-cover" />
+                    <img alt="Image by Unsplash" src="https://www.uix.design/application/plants.webp" className="size-full object-cover" />
                 </Carousel.Item>
                 <Carousel.Item className="overflow-hidden rounded-xl">
                     <img

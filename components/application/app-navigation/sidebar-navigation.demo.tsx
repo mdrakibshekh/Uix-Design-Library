@@ -203,7 +203,7 @@ const navItemsWithDividers: (NavItemType | NavItemDividerType)[] = [
     },
     {
         label: "Open in browser",
-        href: "https://www.untitledui.com/",
+        href: "https://www.uix.design/",
         icon: LayoutAlt01,
     },
 ];
@@ -235,7 +235,7 @@ const navItemsWithSectionsSubheadings: Array<{ label: string; items: NavItemType
         ],
     },
     {
-        label: "Untitled UI",
+        label: "UIX Design Library",
         items: [
             {
                 label: "Reporting",
@@ -265,7 +265,7 @@ const navItemsWithSectionsSubheadings: Array<{ label: string; items: NavItemType
             {
                 label: "Catalog",
                 href: "#",
-                icon: () => <Avatar src="https://www.untitledui.com/logos/images/Catalog.jpg" className="mr-2 size-5" />,
+                icon: () => <Avatar src="https://www.uix.design/logos/images/Catalog.jpg" className="mr-2 size-5" />,
                 badge: (
                     <div className="flex items-center gap-3">
                         <Badge size="sm" type="modern">
@@ -278,7 +278,7 @@ const navItemsWithSectionsSubheadings: Array<{ label: string; items: NavItemType
             {
                 label: "Warpspeed",
                 href: "#",
-                icon: () => <Avatar src="https://www.untitledui.com/logos/images/Warpspeed.jpg" className="mr-2 size-5" />,
+                icon: () => <Avatar src="https://www.uix.design/logos/images/Warpspeed.jpg" className="mr-2 size-5" />,
                 badge: (
                     <div className="flex items-center gap-3">
                         <Badge size="sm" type="modern">
@@ -291,7 +291,7 @@ const navItemsWithSectionsSubheadings: Array<{ label: string; items: NavItemType
             {
                 label: "Boltshift",
                 href: "#",
-                icon: () => <Avatar src="https://www.untitledui.com/logos/images/Boltshift.jpg" className="mr-2 size-5" />,
+                icon: () => <Avatar src="https://www.uix.design/logos/images/Boltshift.jpg" className="mr-2 size-5" />,
                 badge: (
                     <div className="flex items-center gap-3">
                         <Badge size="sm" type="modern">
@@ -304,7 +304,7 @@ const navItemsWithSectionsSubheadings: Array<{ label: string; items: NavItemType
             {
                 label: "Sisyphus",
                 href: "#",
-                icon: () => <Avatar src="https://www.untitledui.com/logos/images/Sisyphus.jpg" className="mr-2 size-5" />,
+                icon: () => <Avatar src="https://www.uix.design/logos/images/Sisyphus.jpg" className="mr-2 size-5" />,
                 badge: (
                     <div className="flex items-center gap-3">
                         <Badge size="sm" type="modern">
@@ -339,7 +339,7 @@ export const SidebarNavigationSimpleDemo = () => (
             },
             {
                 label: "Open in browser",
-                href: "https://www.untitledui.com/",
+                href: "https://www.uix.design/",
                 icon: LayoutAlt01,
             },
         ]}

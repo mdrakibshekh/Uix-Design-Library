@@ -1,6 +1,6 @@
 ## Project Overview
 
-This is an **Untitled UI React** component library project built with:
+This is an **UIX Design Library React** component library project built with:
 
 - **React 19** with TypeScript
 - **Tailwind CSS v4.2** for styling
@@ -409,7 +409,7 @@ import { InputGroup } from "@/components/base/input/input-group";
 
 ```typescript
 // Basic input with label
-<Input label="Email" placeholder="olivia@untitledui.com" />
+<Input label="Email" placeholder="olivia@uix.design" />
 
 // With icon and validation
 <Input
@@ -422,7 +422,7 @@ import { InputGroup } from "@/components/base/input/input-group";
 
 // Input group with button
 <InputGroup label="Website" trailingAddon={<Button>Copy</Button>}>
-  <InputBase placeholder="www.untitledui.com" />
+  <InputBase placeholder="www.uix.design" />
 </InputGroup>
 ```
 
@@ -586,7 +586,7 @@ import { AvatarLabelGroup } from "@/components/base/avatar/avatar-label-group";
 <AvatarLabelGroup
   src="/avatar.jpg"
   title="Olivia Rhye"
-  subtitle="olivia@untitledui.com"
+  subtitle="olivia@uix.design"
   size="md"
 />
 ```

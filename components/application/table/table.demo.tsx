@@ -410,31 +410,31 @@ export const Table02DividerLine = () => {
                                     <Avatar
                                         className="ring-[1.5px] ring-bg-primary"
                                         size="xs"
-                                        src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80"
+                                        src="https://i.pravatar.cc/150?u=olivia"
                                         alt="Olivia Rhye"
                                     />
                                     <Avatar
                                         className="ring-[1.5px] ring-bg-primary"
                                         size="xs"
-                                        src="https://www.untitledui.com/images/avatars/phoenix-baker?fm=webp&q=80"
+                                        src="https://i.pravatar.cc/150?u=phoenix-baker"
                                         alt="Phoenix Baker"
                                     />
                                     <Avatar
                                         className="ring-[1.5px] ring-bg-primary"
                                         size="xs"
-                                        src="https://www.untitledui.com/images/avatars/lana-steiner?fm=webp&q=80"
+                                        src="https://i.pravatar.cc/150?u=lana-steiner"
                                         alt="Lana Steiner"
                                     />
                                     <Avatar
                                         className="ring-[1.5px] ring-bg-primary"
                                         size="xs"
-                                        src="https://www.untitledui.com/images/avatars/demi-wilkinson?fm=webp&q=80"
+                                        src="https://i.pravatar.cc/150?u=demi-wilkinson"
                                         alt="Demi Wilkinson"
                                     />
                                     <Avatar
                                         className="ring-[1.5px] ring-bg-primary"
                                         size="xs"
-                                        src="https://www.untitledui.com/images/avatars/candice-wu?fm=webp&q=80"
+                                        src="https://i.pravatar.cc/150?u=candice-wu"
                                         alt="Candice Wu"
                                     />
                                     <Avatar
@@ -535,31 +535,31 @@ export const Table02AlternatingFills = () => {
                                     <Avatar
                                         className="ring-[1.5px] ring-bg-primary"
                                         size="xs"
-                                        src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80&w=100"
+                                        src="https://i.pravatar.cc/150?u=olivia&w=100"
                                         alt="Olivia Rhye"
                                     />
                                     <Avatar
                                         className="ring-[1.5px] ring-bg-primary"
                                         size="xs"
-                                        src="https://www.untitledui.com/images/avatars/phoenix-baker?fm=webp&q=80&w=100"
+                                        src="https://i.pravatar.cc/150?u=phoenix-baker&w=100"
                                         alt="Phoenix Baker"
                                     />
                                     <Avatar
                                         className="ring-[1.5px] ring-bg-primary"
                                         size="xs"
-                                        src="https://www.untitledui.com/images/avatars/lana-steiner?fm=webp&q=80&w=100"
+                                        src="https://i.pravatar.cc/150?u=lana-steiner&w=100"
                                         alt="Lana Steiner"
                                     />
                                     <Avatar
                                         className="ring-[1.5px] ring-bg-primary"
                                         size="xs"
-                                        src="https://www.untitledui.com/images/avatars/demi-wilkinson?fm=webp&q=80&w=100"
+                                        src="https://i.pravatar.cc/150?u=demi-wilkinson&w=100"
                                         alt="Demi Wilkinson"
                                     />
                                     <Avatar
                                         className="ring-[1.5px] ring-bg-primary"
                                         size="xs"
-                                        src="https://www.untitledui.com/images/avatars/candice-wu?fm=webp&q=80&w=100"
+                                        src="https://i.pravatar.cc/150?u=candice-wu&w=100"
                                         alt="Candice Wu"
                                     />
                                     <Avatar
@@ -1011,15 +1011,15 @@ export const TableSomethingWentWrong = () => {
 };
 
 const avatarRadiusData = [
-    { src: "https://www.untitledui.com/images/avatars/sienna-hewitt?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/ammar-foley?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/mathilde-lewis?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/caitlyn-king?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/lily-rose-chedjou?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/olly-schroeder?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/fleur-cook?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/julius-vaughan?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/amelie-laurent?fm=webp&q=80" },
+    { src: "https://i.pravatar.cc/150?u=sienna-hewitt" },
+    { src: "https://i.pravatar.cc/150?u=ammar-foley" },
+    { src: "https://i.pravatar.cc/150?u=mathilde-lewis" },
+    { src: "https://i.pravatar.cc/150?u=caitlyn-king" },
+    { src: "https://i.pravatar.cc/150?u=lily-rose-chedjou" },
+    { src: "https://i.pravatar.cc/150?u=olly-schroeder" },
+    { src: "https://i.pravatar.cc/150?u=fleur-cook" },
+    { src: "https://i.pravatar.cc/150?u=julius-vaughan" },
+    { src: "https://i.pravatar.cc/150?u=amelie-laurent" },
 ];
 
 export const TableNoUsersFound = () => {
@@ -1087,30 +1087,30 @@ export const TableNoUsersFound = () => {
 };
 
 const avatarGridData = [
-    { src: "https://www.untitledui.com/logos/images/Boltshift.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Catalog.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Layers.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Sisyphus.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Ephemeral.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Watchtower.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Leapyear.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Warpspeed.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Boltshift.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Catalog.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Layers.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Sisyphus.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Ephemeral.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Watchtower.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Leapyear.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Warpspeed.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Boltshift.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Catalog.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Layers.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Sisyphus.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Ephemeral.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Watchtower.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Leapyear.jpg" },
-    { src: "https://www.untitledui.com/logos/images/Warpspeed.jpg" },
+    { src: "https://www.uix.design/logos/images/Boltshift.jpg" },
+    { src: "https://www.uix.design/logos/images/Catalog.jpg" },
+    { src: "https://www.uix.design/logos/images/Layers.jpg" },
+    { src: "https://www.uix.design/logos/images/Sisyphus.jpg" },
+    { src: "https://www.uix.design/logos/images/Ephemeral.jpg" },
+    { src: "https://www.uix.design/logos/images/Watchtower.jpg" },
+    { src: "https://www.uix.design/logos/images/Leapyear.jpg" },
+    { src: "https://www.uix.design/logos/images/Warpspeed.jpg" },
+    { src: "https://www.uix.design/logos/images/Boltshift.jpg" },
+    { src: "https://www.uix.design/logos/images/Catalog.jpg" },
+    { src: "https://www.uix.design/logos/images/Layers.jpg" },
+    { src: "https://www.uix.design/logos/images/Sisyphus.jpg" },
+    { src: "https://www.uix.design/logos/images/Ephemeral.jpg" },
+    { src: "https://www.uix.design/logos/images/Watchtower.jpg" },
+    { src: "https://www.uix.design/logos/images/Leapyear.jpg" },
+    { src: "https://www.uix.design/logos/images/Warpspeed.jpg" },
+    { src: "https://www.uix.design/logos/images/Boltshift.jpg" },
+    { src: "https://www.uix.design/logos/images/Catalog.jpg" },
+    { src: "https://www.uix.design/logos/images/Layers.jpg" },
+    { src: "https://www.uix.design/logos/images/Sisyphus.jpg" },
+    { src: "https://www.uix.design/logos/images/Ephemeral.jpg" },
+    { src: "https://www.uix.design/logos/images/Watchtower.jpg" },
+    { src: "https://www.uix.design/logos/images/Leapyear.jpg" },
+    { src: "https://www.uix.design/logos/images/Warpspeed.jpg" },
 ];
 
 export const TableAddFirstIntegration = () => {
@@ -1151,14 +1151,14 @@ export const TableAddFirstIntegration = () => {
 };
 
 const avatarRowData = [
-    { src: "https://www.untitledui.com/images/avatars/marco-kelly?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/lily-rose-chedjou?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/ammar-foley?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/sienna-hewitt?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/caitlyn-king?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/mathilde-lewis?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/zahra-christensen?fm=webp&q=80" },
-    { src: "https://www.untitledui.com/images/avatars/olly-schroeder?fm=webp&q=80" },
+    { src: "https://i.pravatar.cc/150?u=marco-kelly" },
+    { src: "https://i.pravatar.cc/150?u=lily-rose-chedjou" },
+    { src: "https://i.pravatar.cc/150?u=ammar-foley" },
+    { src: "https://i.pravatar.cc/150?u=sienna-hewitt" },
+    { src: "https://i.pravatar.cc/150?u=caitlyn-king" },
+    { src: "https://i.pravatar.cc/150?u=mathilde-lewis" },
+    { src: "https://i.pravatar.cc/150?u=zahra-christensen" },
+    { src: "https://i.pravatar.cc/150?u=olly-schroeder" },
 ];
 
 export const TableInviteFirstUser = () => {

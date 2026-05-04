@@ -42,7 +42,15 @@ export const DisabledIndividualItemDemo = () => {
     );
 };
 
-export const RadioButtons = () => {
+export const RadioButtons = ({ isCompact = false }: { isCompact?: boolean }) => {
+    if (isCompact) {
+        return (
+            <RadioGroup aria-label="Pricing plans" defaultValue="basic" className="flex flex-col gap-2">
+                <RadioButton label="Basic" value="basic" />
+                <RadioButton label="Business" value="business" />
+            </RadioGroup>
+        );
+    }
     return (
         <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
             <RadioGroup aria-label="Pricing plans" defaultValue="basic">

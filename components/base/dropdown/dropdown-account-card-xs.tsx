@@ -22,7 +22,7 @@ export const DropdownAccountCardXS = () => {
                     )
                 }
             >
-                <Avatar size="xs" src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" className="size-5" />
+                <Avatar size="xs" src="https://i.pravatar.cc/150?u=olivia" className="size-5" />
 
                 <p className="text-sm font-semibold text-primary">Olivia Rhye</p>
 
@@ -49,10 +49,10 @@ export const DropdownAccountCardXS = () => {
                             Switch Account
                         </Dropdown.SectionHeader>
 
-                        <Dropdown.Item id="olivia" avatarUrl="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" selectionIndicator="radio">
+                        <Dropdown.Item id="olivia" avatarUrl="https://i.pravatar.cc/150?u=olivia" selectionIndicator="radio">
                             Olivia Rhye
                         </Dropdown.Item>
-                        <Dropdown.Item id="sienna" avatarUrl="https://www.untitledui.com/images/avatars/sienna-hewitt?fm=webp&q=80" selectionIndicator="radio">
+                        <Dropdown.Item id="sienna" avatarUrl="https://i.pravatar.cc/150?u=sienna-hewitt" selectionIndicator="radio">
                             Sienna Hewitt
                         </Dropdown.Item>
                     </Dropdown.Section>
