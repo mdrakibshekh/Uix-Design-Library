@@ -44,6 +44,7 @@ export interface TagItem {
     dotClassName?: string;
     isDisabled?: boolean;
     onClose?: (id: string) => void;
+    color?: "gray" | "brand" | "error" | "warning" | "success" | "indigo" | "purple" | "blue-light" | "pink" | "orange";
 }
 
 const TagGroupContext = createContext<{
@@ -123,13 +124,40 @@ export const Tag = ({
     className,
     children,
     onClose,
+    color = "gray",
 }: PropsWithChildren<TagProps>) => {
     const context = useContext(TagGroupContext);
+
+    const colorStyles = {
+        gray: "bg-primary text-secondary ring-primary",
+        brand: "bg-utility-brand-50 text-utility-brand-700 ring-utility-brand-200 dark:bg-utility-brand-900/30 dark:text-utility-brand-300 dark:ring-utility-brand-800",
+        error: "bg-utility-error-50 text-utility-error-700 ring-utility-error-200 dark:bg-utility-error-900/30 dark:text-utility-error-300 dark:ring-utility-error-800",
+        warning: "bg-utility-warning-50 text-utility-warning-700 ring-utility-warning-200 dark:bg-utility-warning-900/30 dark:text-utility-warning-300 dark:ring-utility-warning-800",
+        success: "bg-utility-success-50 text-utility-success-700 ring-utility-success-200 dark:bg-utility-success-900/30 dark:text-utility-success-300 dark:ring-utility-success-800",
+        indigo: "bg-utility-indigo-50 text-utility-indigo-700 ring-utility-indigo-200 dark:bg-utility-indigo-900/30 dark:text-utility-indigo-300 dark:ring-utility-indigo-800",
+        purple: "bg-utility-purple-50 text-utility-purple-700 ring-utility-purple-200 dark:bg-utility-purple-900/30 dark:text-utility-purple-300 dark:ring-utility-purple-800",
+        "blue-light": "bg-utility-blue-light-50 text-utility-blue-light-700 ring-utility-blue-light-200 dark:bg-utility-blue-light-900/30 dark:text-utility-blue-light-300 dark:ring-utility-blue-light-800",
+        pink: "bg-utility-pink-50 text-utility-pink-700 ring-utility-pink-200 dark:bg-utility-pink-900/30 dark:text-utility-pink-300 dark:ring-utility-pink-800",
+        orange: "bg-utility-orange-50 text-utility-orange-700 ring-utility-orange-200 dark:bg-utility-orange-900/30 dark:text-utility-orange-300 dark:ring-utility-orange-800",
+    };
+
+    const dotColors = {
+        gray: "text-fg-quaternary",
+        brand: "text-utility-brand-500",
+        error: "text-utility-error-500",
+        warning: "text-utility-warning-500",
+        success: "text-utility-success-500",
+        indigo: "text-utility-indigo-500",
+        purple: "text-utility-purple-500",
+        "blue-light": "text-utility-blue-light-500",
+        pink: "text-utility-pink-500",
+        orange: "text-utility-orange-500",
+    };
 
     const leadingContent = avatarSrc ? (
         <TagAvatar src={avatarSrc} alt="Avatar" contrastBorder={avatarContrastBorder} />
     ) : dot ? (
-        <Dot className={cx("text-fg-success-secondary", dotClassName)} size="sm" />
+        <Dot className={cx(dotColors[color], dotClassName)} size="sm" />
     ) : null;
 
     return (
@@ -139,7 +167,8 @@ export const Tag = ({
             textValue={typeof children === "string" ? children : undefined}
             className={(state) =>
                 cx(
-                    "flex cursor-default items-center gap-0.75 rounded-md bg-primary text-secondary ring-1 ring-primary outline-focus-ring transition duration-50 ease-linear ring-inset focus-visible:outline-2 focus-visible:outline-offset-2",
+                    "flex cursor-default items-center gap-0.75 rounded-md outline-focus-ring transition duration-50 ease-linear ring-1 ring-inset focus-visible:outline-2 focus-visible:outline-offset-2",
+                    colorStyles[color],
                     styles[context.size].root.base,
 
                     // With avatar

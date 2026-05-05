@@ -9,11 +9,7 @@
             "teams": [
                 { "name": "Design", "color": "purple" },
                 { "name": "Product", "color": "sky" },
-                { "name": "Marketing", "color": "indigo" },
-                { "name": "Sales", "color": "error" },
-                { "name": "Support", "color": "success" },
-                { "name": "Engineering", "color": "warning" },
-                { "name": "Finance", "color": "orange" }
+                { "name": "Marketing", "color": "indigo" }
             ],
             "avatarUrl": "https://i.pravatar.cc/150?u=olivia&w=100"
         },
@@ -25,12 +21,7 @@
             "email": "phoenix@uix.design",
             "teams": [
                 { "name": "Design", "color": "purple" },
-                { "name": "Product", "color": "sky" },
-                { "name": "Marketing", "color": "indigo" },
-                { "name": "Sales", "color": "error" },
-                { "name": "Support", "color": "success" },
-                { "name": "Engineering", "color": "warning" },
-                { "name": "Finance", "color": "orange" }
+                { "name": "Product", "color": "sky" }
             ],
             "avatarUrl": "https://i.pravatar.cc/150?u=phoenix-baker&w=100"
         },
@@ -42,10 +33,7 @@
             "email": "lana@uix.design",
             "teams": [
                 { "name": "Design", "color": "purple" },
-                { "name": "Product", "color": "sky" },
-                { "name": "Marketing", "color": "indigo" },
-                { "name": "Sales", "color": "error" },
-                { "name": "Support", "color": "success" }
+                { "name": "Product", "color": "sky" }
             ],
             "avatarUrl": "https://i.pravatar.cc/150?u=lana-steiner&w=100"
         },
@@ -56,10 +44,8 @@
             "role": "Backend Developer",
             "email": "demi@uix.design",
             "teams": [
-                { "name": "Design", "color": "purple" },
-                { "name": "Product", "color": "sky" },
-                { "name": "Marketing", "color": "indigo" },
-                { "name": "Support", "color": "success" }
+                { "name": "Engineering", "color": "warning" },
+                { "name": "Product", "color": "sky" }
             ],
             "avatarUrl": "https://i.pravatar.cc/150?u=demi-wilkinson&w=100"
         },
@@ -70,13 +56,10 @@
             "role": "Fullstack Developer",
             "email": "candice@uix.design",
             "teams": [
-                { "name": "Design", "color": "purple" },
-                { "name": "Product", "color": "sky" },
-                { "name": "Marketing", "color": "indigo" },
-                { "name": "Sales", "color": "error" },
-                { "name": "Support", "color": "success" }
+                { "name": "Engineering", "color": "warning" },
+                { "name": "Design", "color": "purple" }
             ],
-            "avatarUrl": "https://www.uix.design/images/avatars/candice-wu"
+            "avatarUrl": "https://i.pravatar.cc/150?u=candice-wu&w=100"
         },
         {
             "name": "Natali Craig",
@@ -86,10 +69,7 @@
             "email": "natali@uix.design",
             "teams": [
                 { "name": "Design", "color": "purple" },
-                { "name": "Product", "color": "sky" },
-                { "name": "Marketing", "color": "indigo" },
-                { "name": "Sales", "color": "error" },
-                { "name": "Support", "color": "success" }
+                { "name": "Marketing", "color": "indigo" }
             ],
             "avatarUrl": "https://i.pravatar.cc/150?u=natali-craig&w=100"
         },
@@ -100,15 +80,9 @@
             "role": "UX Copywriter",
             "email": "drew@uix.design",
             "teams": [
-                { "name": "Design", "color": "purple" },
-                { "name": "Product", "color": "sky" },
-                { "name": "Marketing", "color": "indigo" },
-                { "name": "Sales", "color": "error" },
-                { "name": "Support", "color": "success" },
-                { "name": "Engineering", "color": "warning" },
-                { "name": "Finance", "color": "orange" }
+                { "name": "Marketing", "color": "indigo" }
             ],
-            "avatarUrl": "https://www.uix.design/images/avatars/drew-cano"
+            "avatarUrl": "https://i.pravatar.cc/150?u=drew-cano&w=100"
         },
         {
             "name": "Orlando Diggs",
@@ -117,13 +91,7 @@
             "role": "UI Designer",
             "email": "orlando@uix.design",
             "teams": [
-                { "name": "Design", "color": "purple" },
-                { "name": "Product", "color": "sky" },
-                { "name": "Marketing", "color": "indigo" },
-                { "name": "Sales", "color": "error" },
-                { "name": "Support", "color": "success" },
-                { "name": "Engineering", "color": "warning" },
-                { "name": "Finance", "color": "orange" }
+                { "name": "Design", "color": "purple" }
             ],
             "avatarUrl": "https://i.pravatar.cc/150?u=orlando-diggs&w=100"
         },
@@ -134,13 +102,7 @@
             "role": "Product Manager",
             "email": "andi@uix.design",
             "teams": [
-                { "name": "Design", "color": "purple" },
-                { "name": "Product", "color": "sky" },
-                { "name": "Marketing", "color": "indigo" },
-                { "name": "Sales", "color": "error" },
-                { "name": "Support", "color": "success" },
-                { "name": "Engineering", "color": "warning" },
-                { "name": "Finance", "color": "orange" }
+                { "name": "Product", "color": "sky" }
             ],
             "avatarUrl": "https://i.pravatar.cc/150?u=andi-lane&w=100"
         },
@@ -151,11 +113,7 @@
             "role": "QA Engineer",
             "email": "kate@uix.design",
             "teams": [
-                { "name": "Design", "color": "purple" },
-                { "name": "Product", "color": "sky" },
-                { "name": "Marketing", "color": "indigo" },
-                { "name": "Sales", "color": "error" },
-                { "name": "Support", "color": "success" }
+                { "name": "Engineering", "color": "warning" }
             ],
             "avatarUrl": "https://i.pravatar.cc/150?u=kate-morrison&w=100"
         }

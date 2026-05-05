@@ -1,22 +1,22 @@
-[![UIX Design Library React](https://www.uix.design/react/untitled-ui-react-open-graph.jpg)](https://www.sigmastudioo.com)
+[![UIX Design Library React](https://www.uix.design/react/untitled-ui-react-open-graph.jpg)](https://www.uix.design)
 
-[![UIX Design Library React](https://www.uix.design/react/untitled-ui-react-open-graph.jpg)](https://library.sigmastudioo.com)
+[![UIX Design Library React](https://www.uix.design/react/untitled-ui-react-open-graph.jpg)](https://library.uix.design)
 
 # UIX Design Library
 
-[UIX Design Library](https://library.sigmastudioo.com) is a premium collection of open-source React components built with Tailwind CSS and React Aria. Everything you need to design and develop modern, beautiful interfaces—fast. Just copy, paste, and build.
+[UIX Design Library](https://library.uix.design) is a premium collection of open-source React components built with Tailwind CSS and React Aria. Everything you need to design and develop modern, beautiful interfaces—fast. Just copy, paste, and build.
 
 Built with React 19.2, Tailwind CSS v4.2, TypeScript 5.9, and React Aria, UIX Design Library components deliver modern performance, type safety, and maintainability.
 
-[Learn more](https://library.sigmastudioo.com) • [Documentation](https://library.sigmastudioo.com/docs/introduction) • [Figma](https://www.figma.com/design/nXGEkSQVO9BKCiVXGPyN75/Sigma-Studio-Design-System-V2.0) • [FAQs](https://library.sigmastudioo.com/faqs)
+[Learn more](https://library.uix.design) • [Documentation](https://library.uix.design/docs/introduction) • [Figma](https://www.figma.com/design/nXGEkSQVO9BKCiVXGPyN75/Sigma-Studio-Design-System-V2.0) • [FAQs](https://library.uix.design/faqs)
 
 ## Documentation
 
-Check out our documentation here → [library.sigmastudioo.com/docs/introduction](https://library.sigmastudioo.com/docs/introduction)
+Check out our documentation here → [library.uix.design/docs/introduction](https://library.uix.design/docs/introduction)
 
 ## Installation
 
-Check out our installation guide here → [library.sigmastudioo.com/docs/installation](https://library.sigmastudioo.com/docs/installation)
+Check out our installation guide here → [library.uix.design/docs/installation](https://library.uix.design/docs/installation)
 
 ## Resources
 

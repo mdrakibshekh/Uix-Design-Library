@@ -166,6 +166,30 @@ export const SizesDemo = () => {
     );
 };
 
+export const ColorsDemo = () => {
+    const colors = ["gray", "brand", "error", "warning", "success", "indigo", "purple", "blue-light", "pink", "orange"] as const;
+    
+    return (
+        <div className="flex flex-col gap-8">
+            <div className="flex flex-wrap gap-4">
+                {colors.map(color => (
+                    <Tag key={color} color={color}>{color.charAt(0).toUpperCase() + color.slice(1)}</Tag>
+                ))}
+            </div>
+            <div className="flex flex-wrap gap-4">
+                {colors.map(color => (
+                    <Tag key={color} color={color} dot={true}>{color.charAt(0).toUpperCase() + color.slice(1)}</Tag>
+                ))}
+            </div>
+            <div className="flex flex-wrap gap-4">
+                {colors.map(color => (
+                    <Tag key={color} color={color} count={5}>{color.charAt(0).toUpperCase() + color.slice(1)}</Tag>
+                ))}
+            </div>
+        </div>
+    );
+};
+
 export const Default = () => {
     const tags: TagItem[] = [
         { id: "tag-01", label: "Label" },

@@ -350,8 +350,8 @@ export const SidebarNavigationSimpleDemo = () => (
                 confirmLabel="Upgrade plan"
                 progress={80}
                 className="hidden md:flex"
-                onDismiss={() => {}}
-                onConfirm={() => {}}
+                onDismiss={() => { }}
+                onConfirm={() => { }}
             />
         }
     />
@@ -379,8 +379,8 @@ export const SidebarNavigationDualTierDemo = () => (
                 confirmLabel="Upgrade plan"
                 progress={80}
                 className="hidden lg:flex"
-                onDismiss={() => {}}
-                onConfirm={() => {}}
+                onDismiss={() => { }}
+                onConfirm={() => { }}
             />
         }
     />

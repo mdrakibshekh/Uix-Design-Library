@@ -86,13 +86,16 @@ const withPillTypes = {
     },
     [badgeTypes.badgeModern]: {
         common: "size-max flex items-center whitespace-nowrap rounded-md ring-1 ring-inset shadow-xs",
-        styles: {
-            gray: {
-                root: "bg-primary text-secondary ring-primary",
-                addon: "text-neutral-500",
-                addonButton: "hover:bg-utility-neutral-100 text-utility-neutral-400 hover:text-utility-neutral-500",
-            },
-        },
+        styles: Object.fromEntries(
+            Object.entries(filledColors).map(([key, value]) => [
+                key,
+                {
+                    root: "bg-primary text-secondary ring-primary",
+                    addon: value.addon,
+                    addonButton: value.addonButton,
+                }
+            ])
+        ) as Record<BadgeColors, { root: string; addon: string; addonButton: string }>,
     },
 };
 

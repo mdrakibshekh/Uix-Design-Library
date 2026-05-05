@@ -17,15 +17,32 @@ import { ProgressBarDefault, ProgressBarTextRight, CircleProgressBar, CircleProg
 import { CalendarDemo, CalendarCardDemo, DatePickerDemo, DatePickerControlledDemo } from "./components/application/date-picker/date-picker.demo";
 import { ButtonBrandHorizontalDemo, ButtonBrandVerticalDemo, ButtonGrayHorizontalDemo } from "./components/application/tabs/tabs.demo";
 import { PaginationPageDefault, PaginationPageMinimalCenter, PaginationCardDefault, PaginationCardMinimalCenterAligned } from "./components/application/pagination/pagination.demo";
-import { Table01DividerLine, Table01AlternatingFills } from "./components/application/table/table.demo";
+import { Table01DividerLine, Table01AlternatingFills, Table02DividerLine, Table03DividerLine, Table04DividerLine, Table05ProjectManagement, TablePreview } from "./components/application/table/table.demo";
 import { ImagesOnlyDemo, MaxSizeLimitDemo } from "./components/application/file-upload/file-upload.demo";
 import { CarouselMd, CarouselLg } from "./components/application/carousel/carousel.demo";
-import { BarChart } from "./components/application/charts/bar-charts.demo";
+import { BarChart, BarChart02, BarChart03 } from "./components/application/charts/bar-charts.demo";
+import { LineChart01, LineChart02, LineChart03, LineChart04 } from "./components/application/charts/line-charts.demo";
+import { PieChartMd, PieChartLg } from "./components/application/charts/pie-charts.demo";
+import { RadarChart } from "./components/application/charts/radar-charts.demo";
+import { ActivityGaugeMd } from "./components/application/charts/activity-gauges.demo";
+import { ProgressCircleMd } from "./components/application/charts/progress-circles.demo";
+import { ComposedChart01, ComposedChartPreview } from "./components/application/charts/composed-charts.demo";
+import { ScatterChart01, ScatterChartPreview } from "./components/application/charts/scatter-charts.demo";
 import { DefaultDemo as LoadingDefaultDemo, LineSimpleWithLabelDemo, LineSpinnerWithLabelDemo, DotCircleWithLabelDemo } from "./components/application/loading-indicator/loading-indicator.demo";
-import { HeaderNavigationSimpleDemo, HeaderNavigationDualTierDemo } from "./components/application/app-navigation/header-navigation.demo";
+import { HeaderNavigationSimpleDemo, HeaderNavigationDualTierDemo, HeaderNavigationPreview } from "./components/application/app-navigation/header-navigation.demo";
 import { DefaultDemo as FeaturedIconDefaultDemo, LightDemo as FeaturedIconLightDemo, GradientDemo as FeaturedIconGradientDemo } from "./components/foundations/featured-icon/featured-icon.demo";
 import { LucideIconsDemo, TablerIconsDemo, UntitledIconsDemo, IconsPreview } from "./components/foundations/icons/icons.demo";
 import { DocumentationIntroDemo, DocumentationDesignDemo } from "./components/foundations/documentation/documentation.demo";
+import { SocialButtonPreview, SocialButtonGroupBrandDemo, SocialButtonGroupColorDemo, SocialButtonGroupGrayDemo, SocialButtonGroupsMD, SocialButtonGroupsLG } from "./components/base/buttons/social-buttons.demo";
+import { MobileAppButtonsPreview, MobileAppButtonsBlackDemo, MobileAppButtonsWhiteDemo, MobileAppButtonsGlassDemo, MobileAppButtonsOutlineDemo } from "./components/application/mobile-app-buttons/mobile-app-buttons.demo";
+import { CreditCardPreview, CreditCardBrandDemo, CreditCardGradientDemo, CreditCardGlassDemo, CreditCardDarkLightDemo } from "./components/application/credit-card/credit-card.demo";
+import { BrandedQRCodePreview, BrandedQRCodeBrandDemo, BrandedQRCodeDarkDemo, BrandedQRCodeLightDemo } from "./components/application/qr-code/qr-code.demo";
+import { UtilityButtonsPreview, UtilityButtonsStandardDemo, UtilityButtonsTertiaryDemo, UtilityButtonsXSDemo } from "./components/base/buttons/utility-buttons.demo";
+import { TextEditorPreview, TextEditorFullDemo, TextEditorCompactDemo } from "./components/base/text-editor/text-editor.demo";
+import { ColorsDemo as TagsColorsDemo } from "./components/base/tags/tags.demo";
+import { MultiSelectChipsDemo } from "./components/base/select/select.demo";
+import { ProfileDropdownDemo, MegaMenuDemo } from "./components/base/dropdown/dropdown.demo";
+
 
 type ComponentPage = {
   id: string;
@@ -62,6 +79,13 @@ const componentNameMap: Record<string, string> = {
   "app-navigation": "HeaderNavigation",
   "featured-icons": "FeaturedIcon",
   "icons": "Icon",
+  "social-buttons": "SocialButton",
+  "mobile-app-buttons": "StoreBadge",
+  "credit-cards": "CreditCard",
+  "qr-codes": "BrandedQRCode",
+  "utility-buttons": "ButtonUtility",
+  "text-editors": "TextEditor",
+  "dropdowns": "Dropdown",
 };
 
 const DemoCard = ({ demo, pageId }: { demo: { label: string; Demo: React.ComponentType<any> }; pageId: string }) => {
@@ -95,17 +119,18 @@ const DemoCard = ({ demo, pageId }: { demo: { label: string; Demo: React.Compone
   };
 
   return (
-    <article className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-sm transition-all hover:shadow-xl hover:shadow-slate-200/50 group">
-      <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/30 px-6 py-4">
+    <article className="overflow-hidden rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm transition-all hover:shadow-xl hover:shadow-slate-200/50 dark:hover:shadow-black/50 group">
+      <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/50 px-6 py-4">
         <div className="flex items-center gap-3">
-          <div className="size-2 rounded-full bg-violet-500 shadow-sm shadow-violet-500/50" />
-          <h3 className="text-sm font-bold text-slate-900 tracking-tight">{demo.label}</h3>
+          <div className="size-2 rounded-full bg-brand-500 shadow-sm shadow-brand-500/50" />
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-tight">{demo.label}</h3>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setThemeMode(themeMode === "light" ? "dark" : "light")}
-            className="flex size-9 items-center justify-center rounded-xl text-slate-400 hover:bg-white hover:text-slate-900 hover:shadow-sm border border-transparent hover:border-slate-100 transition-all"
+            className="flex size-9 items-center justify-center rounded-xl text-slate-400 hover:bg-white dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white hover:shadow-sm border border-transparent hover:border-slate-100 dark:hover:border-slate-700 transition-all"
             title="Toggle preview theme"
+            aria-label="Toggle preview theme"
           >
             {themeMode === "light" ? <Moon className="size-4" /> : <Sun className="size-4" />}
           </button>
@@ -114,21 +139,21 @@ const DemoCard = ({ demo, pageId }: { demo: { label: string; Demo: React.Compone
 
       <div className={`relative min-h-[300px] transition-colors duration-500 ${themeMode === "dark" ? "bg-slate-950" : "bg-white"}`}>
         <div className="flex min-h-[300px] items-center justify-center p-12">
-          <div className={`${themeMode === "dark" ? "dark" : ""} w-full flex justify-center`}>
+          <div className={`${themeMode === "dark" ? "dark" : ""} w-full flex justify-center font-inter`}>
             <demo.Demo />
           </div>
         </div>
       </div>
 
       {/* Code & Framework Selection Footer */}
-      <div className="border-t border-slate-100 p-5 bg-slate-50/50">
+      <div className="border-t border-slate-100 dark:border-slate-800 p-5 bg-slate-50/50 dark:bg-slate-900/50">
         <div className="flex items-center justify-between mb-4">
-          <div className="w-full flex items-center gap-2 p-2 bg-slate-200/40 rounded-xl border border-slate-200/50 overflow-x-auto scrollbar-hide flex-nowrap">
+          <div className="w-full flex items-center gap-2 p-2 bg-slate-200/40 dark:bg-slate-800/40 rounded-xl border border-slate-200/50 dark:border-slate-700/50 overflow-x-auto scrollbar-hide flex-nowrap">
             {['React', 'Web', 'Vue', 'Svelte'].map(tab => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
-                className={`flex-1 px-4 py-3 text-[12px] border-2 border-slate-100 font-bold leading-none rounded-lg transition-all whitespace-nowrap ${activeTab === tab ? 'bg-violet-100 border-2 border-violet-600 text-slate-900' : 'text-slate-500 hover:text-slate-900'}`}
+                className={`flex-1 px-4 py-3 text-[12px] border-2 font-bold leading-none rounded-lg transition-all whitespace-nowrap ${activeTab === tab ? 'bg-brand-50 dark:bg-brand-900/20 border-brand-600 text-brand-700 dark:text-brand-400' : 'text-slate-500 border-transparent hover:text-slate-900 dark:hover:text-white'}`}
               >
                 {tab}
               </button>
@@ -136,10 +161,10 @@ const DemoCard = ({ demo, pageId }: { demo: { label: string; Demo: React.Compone
           </div>
         </div>
         <div className="flex items-center justify-between mt-4 mb-4">
-          <div className="text-[12px] font-bold text-slate-400 uppercase tracking-widest">Source Implementation</div>
+          <div className="text-[12px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Source Implementation</div>
           <button
             onClick={handleCopy}
-            className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-200 rounded-xl text-[9px] font-bold text-slate-600 hover:text-violet-600 hover:border-violet-600 transition-all shadow-sm active:scale-95 uppercase tracking-wider"
+            className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-[9px] font-bold text-slate-600 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 hover:border-brand-600 dark:hover:border-brand-400 transition-all shadow-sm active:scale-95 uppercase tracking-wider"
           >
             {copied ? <Check className="size-3 text-emerald-600" /> : <Copy className="size-3" />}
             {copied ? 'COPIED!' : 'COPY CODE'}
@@ -147,10 +172,10 @@ const DemoCard = ({ demo, pageId }: { demo: { label: string; Demo: React.Compone
         </div>
 
         <div className="relative group">
-          <pre className="overflow-x-auto rounded-2xl bg-slate-800 p-6 text-[10px] font-mono text-slate-300 leading-relaxed shadow-inner max-h-48 scrollbar-hide">
+          <pre className="overflow-x-auto rounded-2xl bg-slate-900 p-6 text-[10px] font-mono text-slate-300 leading-relaxed shadow-inner max-h-48 scrollbar-hide border border-slate-800">
             <code>{getCodeSnippet(activeTab)}</code>
           </pre>
-          <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t rounded-2xl from-slate-800 to-transparent pointer-events-none opacity-50" />
+          <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t rounded-2xl from-slate-900 to-transparent pointer-events-none opacity-50" />
         </div>
       </div>
     </article>
@@ -165,7 +190,7 @@ const componentPages: ComponentPage[] = [
     title: "Introduction",
     category: "Foundations",
     description: "A professional-grade React design system built for speed, accessibility, and modern SaaS aesthetics.",
-    keyFeatures: ["React 19 & Vite", "Tailwind CSS v4", "React Aria Components", "Nexa Font"],
+    keyFeatures: ["React 19 & Vite", "Tailwind CSS v4", "React Aria Components", "Inter Font"],
     demoBlocks: [
       { label: "Getting Started", Demo: DocumentationIntroDemo },
       { label: "Design System V2.0", Demo: DocumentationDesignDemo },
@@ -250,11 +275,23 @@ const componentPages: ComponentPage[] = [
     description: "Dropdown and searchable selectors with item previews, avatars, and disabled states.",
     keyFeatures: ["Searchable dropdowns", "Item avatars", "Disabled selects"],
     demoBlocks: [
-      { label: "Default select", Demo: SelectDefaultDemo },
-      { label: "Disabled select", Demo: SelectDisabledDemo },
-      { label: "Size variants", Demo: SelectSizesDemo },
-    ],
-  },
+            { label: "Default select", Demo: SelectDefaultDemo },
+            { label: "Multi-select chips", Demo: MultiSelectChipsDemo },
+            { label: "Disabled select", Demo: SelectDisabledDemo },
+            { label: "Size variants", Demo: SelectSizesDemo },
+        ],
+    },
+    {
+        id: "dropdowns",
+        title: "Dropdowns",
+        category: "Base",
+        description: "Modern, accessible dropdown menus with support for multiple sections, icons, and complex layouts.",
+        keyFeatures: ["Accessible", "Multi-section", "Icons & Avatars", "Mega menu support"],
+        demoBlocks: [
+            { label: "Account profile", Demo: ProfileDropdownDemo },
+            { label: "Mega menu", Demo: MegaMenuDemo },
+        ],
+    },
   {
     id: "avatars",
     title: "Avatars",
@@ -286,10 +323,92 @@ const componentPages: ComponentPage[] = [
     description: "Flexible tag groups with removable items, counters, and avatar support.",
     keyFeatures: ["Selectable tags", "Closable tags", "Size variants"],
     demoBlocks: [
-      { label: "Default tags", Demo: TagsDefaultDemo },
-      { label: "Closable tags", Demo: TagsCloseXDemo },
-    ],
-  },
+            { label: "Default tags", Demo: TagsDefaultDemo },
+            { label: "Closable tags", Demo: TagsCloseXDemo },
+            { label: "Tag colors", Demo: TagsColorsDemo },
+        ],
+    },
+    {
+        id: "social-buttons",
+        title: "Social Buttons",
+        category: "Base",
+        description: "Branded authentication buttons for all major social platforms with consistent UIX styling.",
+        keyFeatures: ["Theme aware", "Brand colors", "Icon only support", "All platforms"],
+        demoBlocks: [
+            { label: "Dashboard preview", Demo: SocialButtonPreview },
+            { label: "Vertical group (Brand)", Demo: SocialButtonGroupBrandDemo },
+            { label: "Vertical group (Color)", Demo: SocialButtonGroupColorDemo },
+            { label: "Vertical group (Gray)", Demo: SocialButtonGroupGrayDemo },
+            { label: "Icon grid (Medium)", Demo: SocialButtonGroupsMD },
+            { label: "Icon grid (Large)", Demo: SocialButtonGroupsLG },
+        ],
+    },
+    {
+        id: "utility-buttons",
+        title: "Utility Buttons",
+        category: "Base",
+        description: "Common utility actions like Copy, Refresh, Edit, and Delete with pre-configured interactions.",
+        keyFeatures: ["Stateful copy", "Standardized icons", "Consistent tooltips"],
+        demoBlocks: [
+            { label: "Button set", Demo: UtilityButtonsPreview },
+            { label: "Standard buttons", Demo: UtilityButtonsStandardDemo },
+            { label: "Tertiary buttons", Demo: UtilityButtonsTertiaryDemo },
+            { label: "XS buttons", Demo: UtilityButtonsXSDemo },
+        ],
+    },
+    {
+        id: "text-editors",
+        title: "Text Editor",
+        category: "Base",
+        description: "Premium rich text editor UI with a complete toolbar and status bar for content creation.",
+        keyFeatures: ["Modern toolbar", "Status bar", "Word count", "Responsive"],
+        demoBlocks: [
+            { label: "Editor preview", Demo: TextEditorPreview },
+            { label: "Post editor", Demo: TextEditorFullDemo },
+            { label: "Comment editor", Demo: TextEditorCompactDemo },
+        ],
+    },
+    {
+        id: "mobile-app-buttons",
+        title: "Mobile App Buttons",
+        category: "Application",
+        description: "High-fidelity store buttons for iOS and Android with premium glassmorphism effects.",
+        keyFeatures: ["Apple & Google stores", "Glassmorphism variant", "Consistent sizing"],
+        demoBlocks: [
+            { label: "Badge preview", Demo: MobileAppButtonsPreview },
+            { label: "Black variant", Demo: MobileAppButtonsBlackDemo },
+            { label: "White variant", Demo: MobileAppButtonsWhiteDemo },
+            { label: "Glass variant", Demo: MobileAppButtonsGlassDemo },
+            { label: "Outline variant", Demo: MobileAppButtonsOutlineDemo },
+        ],
+    },
+    {
+        id: "credit-cards",
+        title: "Credit Card",
+        category: "Application",
+        description: "Premium credit card visual components with support for major brands and glassmorphism.",
+        keyFeatures: ["Visa/Mastercard/Amex", "Glass & Gradient themes", "Dynamic data"],
+        demoBlocks: [
+            { label: "Card preview", Demo: CreditCardPreview },
+            { label: "Brand variant", Demo: CreditCardBrandDemo },
+            { label: "Gradient variant", Demo: CreditCardGradientDemo },
+            { label: "Glass variant", Demo: CreditCardGlassDemo },
+            { label: "Light & Dark", Demo: CreditCardDarkLightDemo },
+        ],
+    },
+    {
+        id: "qr-codes",
+        title: "QR Codes",
+        category: "Application",
+        description: "Branded QR code generation with custom styles and logo integration for UIX identity.",
+        keyFeatures: ["Branded styling", "Logo integration", "Theme aware colors"],
+        demoBlocks: [
+            { label: "Branded preview", Demo: BrandedQRCodePreview },
+            { label: "Brand theme", Demo: BrandedQRCodeBrandDemo },
+            { label: "Dark theme", Demo: BrandedQRCodeDarkDemo },
+            { label: "Light theme", Demo: BrandedQRCodeLightDemo },
+        ],
+    },
   {
     id: "radio-buttons",
     title: "Radio Buttons",
@@ -411,8 +530,13 @@ const componentPages: ComponentPage[] = [
     description: "Data display components with sorting, selection, and responsive layouts.",
     keyFeatures: ["Sorting", "Selection", "Responsive design"],
     demoBlocks: [
-      { label: "Divider line", Demo: Table01DividerLine },
+      { label: "Table preview", Demo: TablePreview },
+      { label: "Team members", Demo: Table01DividerLine },
       { label: "Alternating fills", Demo: Table01AlternatingFills },
+      { label: "Customers", Demo: Table02DividerLine },
+      { label: "Invoices", Demo: Table03DividerLine },
+      { label: "File uploads", Demo: Table04DividerLine },
+      { label: "Project status", Demo: Table05ProjectManagement },
     ],
   },
   {
@@ -444,7 +568,21 @@ const componentPages: ComponentPage[] = [
     description: "Data visualization components including bar charts, line charts, and progress indicators.",
     keyFeatures: ["Multiple chart types", "Responsive", "Customizable"],
     demoBlocks: [
-      { label: "Bar chart", Demo: BarChart },
+      { label: "Charts preview", Demo: ComposedChartPreview },
+      { label: "Bar - Simple", Demo: BarChart },
+      { label: "Bar - Composed", Demo: BarChart02 },
+      { label: "Bar - Slim", Demo: BarChart03 },
+      { label: "Line - Area", Demo: LineChart01 },
+      { label: "Line - Dotted", Demo: LineChart02 },
+      { label: "Line - Pattern", Demo: LineChart03 },
+      { label: "Line - Smooth", Demo: LineChart04 },
+      { label: "Composed - Mixed", Demo: ComposedChart01 },
+      { label: "Scatter - Dots", Demo: ScatterChart01 },
+      { label: "Pie - Medium", Demo: PieChartMd },
+      { label: "Pie - Large", Demo: PieChartLg },
+      { label: "Radar", Demo: RadarChart },
+      { label: "Activity Gauge", Demo: ActivityGaugeMd },
+      { label: "Progress Circle", Demo: ProgressCircleMd },
     ],
   },
   {
@@ -467,6 +605,7 @@ const componentPages: ComponentPage[] = [
     description: "Header navigation components with menus, tabs, and user account dropdowns.",
     keyFeatures: ["Multiple layouts", "User actions", "Responsive"],
     demoBlocks: [
+      { label: "Header preview", Demo: HeaderNavigationPreview },
       { label: "Simple navigation", Demo: HeaderNavigationSimpleDemo },
       { label: "Dual tier", Demo: HeaderNavigationDualTierDemo },
     ],
@@ -488,19 +627,27 @@ function App() {
   const categories = ["Foundations", "Base", "Application"];
 
   return (
-    <div className="flex h-screen bg-slate-50 text-slate-900 overflow-hidden">
+    <div className={`flex h-screen overflow-hidden transition-colors duration-300 ${globalTheme === "dark" ? "dark bg-slate-950" : "bg-slate-50"}`}>
       {/* Sidebar */}
-      <aside className="w-64 border-r border-slate-200 bg-white flex flex-col shrink-0">
-        <div className="p-6 border-b border-slate-100">
+      <aside className="w-64 border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex flex-col shrink-0 transition-colors duration-300">
+        <div className="p-6 border-b border-slate-100 dark:border-slate-800">
           <div className="flex items-center">
-            <img src="/Logos/Main logo transparent.svg" className="h-8" alt="UIX Design Library" />
+            <img 
+              src={globalTheme === "dark" ? "/Logos/Main logo dark mode.svg" : "/Logos/Main logo transparent.svg"} 
+              className="h-8" 
+              alt="UIX Design Library" 
+              onError={(e) => {
+                // Fallback if the specific dark mode logo doesn't exist
+                (e.target as HTMLImageElement).src = "/Logos/Main logo transparent.svg";
+              }}
+            />
           </div>
         </div>
 
         <div className="flex-1 overflow-y-auto p-4">
           <button
             onClick={() => setSelectedPage(null)}
-            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition ${!selectedPage ? "bg-violet-50 text-violet-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
+            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-bold transition ${!selectedPage ? "bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"}`}
           >
             <Rocket className="size-4" />
             Overview
@@ -508,13 +655,13 @@ function App() {
 
           {categories.map(category => (
             <div key={category} className="mt-6">
-              <p className="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400 mb-2">{category}</p>
+              <p className="px-3 text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2">{category}</p>
               <div className="space-y-0.5">
                 {componentPages.filter(p => p.category === category).map(page => (
                   <button
                     key={page.id}
                     onClick={() => setSelectedPage(page.id)}
-                    className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-bold transition ${selectedPage === page.id ? "bg-violet-50 text-violet-700" : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"}`}
+                    className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-bold transition ${selectedPage === page.id ? "bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"}`}
                   >
                     {page.title}
                     {selectedPage === page.id && <ChevronRight className="size-3" />}
@@ -524,41 +671,35 @@ function App() {
             </div>
           ))}
         </div>
-{/* 
-        <div className="p-4 border-t border-slate-100">
-          <div className="rounded-xl bg-slate-50 p-3">
-            <p className="text-xs font-medium text-slate-500">Version</p>
-            <p className="text-sm font-bold text-slate-900 mt-1">v1.2.0-beta</p>
-          </div>
-        </div> */}
       </aside>
 
       {/* Main Content */}
-      <main className={`flex-1 h-full min-h-0 overflow-y-auto scroll-smooth transition-colors duration-300 ${globalTheme === "dark" ? "bg-slate-950 dark" : "bg-white"}`}>
+      <main className="flex-1 h-full min-h-0 overflow-y-auto scroll-smooth">
         <header className={`h-16 border-b sticky top-0 z-10 px-8 flex items-center justify-between transition-colors duration-300 ${globalTheme === "dark" ? "bg-slate-900/80 border-slate-800 text-white" : "bg-white/80 border-slate-200 text-slate-900"} backdrop-blur-md`}>
           <div className="relative w-96 group">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400 group-focus-within:text-violet-600 transition-colors" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400 group-focus-within:text-brand-600 transition-colors" />
             <input
               type="text"
               placeholder="Search components..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-violet-500/20 focus:border-violet-500 transition-all"
+              className="w-full pl-10 pr-4 py-2 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all dark:text-white"
             />
           </div>
           <div className="flex items-center gap-4">
             <button
               onClick={() => setGlobalTheme(globalTheme === "light" ? "dark" : "light")}
-              className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors"
+              className="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors"
               title="Toggle global theme"
+              aria-label="Toggle global theme"
             >
               {globalTheme === "light" ? <Moon className="size-5" /> : <Sun className="size-5" />}
             </button>
-            <button className="p-2 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
+            <button className="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors" aria-label="Settings">
               <Settings className="size-5" />
             </button>
-            <div className="h-4 w-px bg-slate-200" />
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-900 text-white rounded-xl text-xs font-bold shadow-lg shadow-slate-900/10">
+            <div className="h-4 w-px bg-slate-200 dark:bg-slate-700" />
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-900 dark:bg-brand-600 text-white rounded-xl text-xs font-bold shadow-lg shadow-slate-900/10">
               <div className="size-2 rounded-full bg-green-400 animate-pulse" />
               SYSTEM ACTIVE
             </div>
@@ -569,8 +710,8 @@ function App() {
           {!activePage ? (
             <div className="max-w-6xl mx-auto">
               <div className="mb-12">
-                <h1 className="text-5xl font-bold text-slate-900 tracking-tight mb-4">Component Library</h1>
-                <p className="text-lg text-slate-500 max-w-3xl leading-relaxed font-medium">
+                <h1 className="text-5xl font-bold text-slate-900 dark:text-white tracking-tight mb-4">Component Library</h1>
+                <p className="text-lg text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed font-medium">
                   Professional-grade React components for building high-performance SaaS applications. Fully customizable, accessible, and ready for production.
                 </p>
               </div>
@@ -583,22 +724,22 @@ function App() {
                     onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setSelectedPage(page.id)}
                     role="button"
                     tabIndex={0}
-                    className="group cursor-pointer text-left border border-slate-200 bg-white rounded-[2rem] p-4 hover:border-violet-400 hover:shadow-2xl hover:shadow-violet-500/10 transition-all duration-300 outline-none focus:ring-2 focus:ring-violet-500/20"
+                    className="group cursor-pointer text-left border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-[2rem] p-4 hover:border-brand-400 dark:hover:border-brand-500 hover:shadow-2xl hover:shadow-brand-500/10 transition-all duration-300 outline-none focus:ring-2 focus:ring-brand-500/20"
                   >
-                    <div className="aspect-[1.4] bg-slate-50 rounded-[1.5rem] mb-5 border border-slate-100 flex items-center justify-center p-8 overflow-hidden group-hover:bg-slate-100 transition-colors relative">
+                    <div className="aspect-[1.4] bg-slate-50 dark:bg-slate-800/50 rounded-[1.5rem] mb-5 border border-slate-100 dark:border-slate-800 flex items-center justify-center p-8 overflow-hidden group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-colors relative">
                       <div className="scale-[0.85] group-hover:scale-100 transition-transform duration-700 ease-out w-full flex justify-center">
                         {page.demoBlocks[0] && React.createElement(page.demoBlocks[0].Demo, { isCompact: true })}
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-white/20 dark:from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                     <div className="px-2 pb-2">
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="text-lg font-bold text-slate-900">{page.title}</h3>
-                        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 group-hover:bg-violet-600 group-hover:text-white transition-all duration-300 uppercase tracking-wider">
+                        <h3 className="text-lg font-bold text-slate-900 dark:text-white">{page.title}</h3>
+                        <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 group-hover:bg-brand-600 group-hover:text-white transition-all duration-300 uppercase tracking-wider">
                           {page.category}
                         </span>
                       </div>
-                      <p className="text-sm text-slate-500 font-medium line-clamp-2 leading-relaxed">{page.description}</p>
+                      <p className="text-sm text-slate-500 dark:text-slate-400 font-medium line-clamp-2 leading-relaxed">{page.description}</p>
                     </div>
                   </div>
                 ))}
@@ -606,22 +747,22 @@ function App() {
             </div>
           ) : (
             <div className="max-w-6xl mx-auto">
-              <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 mb-8 uppercase tracking-widest">
-                <button onClick={() => setSelectedPage(null)} className="hover:text-violet-600 transition-colors">Components</button>
+              <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 dark:text-slate-500 mb-8 uppercase tracking-widest">
+                <button onClick={() => setSelectedPage(null)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Components</button>
                 <ChevronRight className="size-3" />
-                <span className="text-slate-900">{activePage.title}</span>
+                <span className="text-slate-900 dark:text-white">{activePage.title}</span>
               </nav>
 
               <div className="mb-12">
                 <div className="flex items-center gap-3 mb-4">
                   {activePage.keyFeatures.map(feature => (
-                    <span key={feature} className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-violet-50 text-violet-600 border border-violet-100 uppercase tracking-wider">
+                    <span key={feature} className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-brand-50 dark:bg-brand-900/30 text-brand-600 dark:text-brand-400 border border-brand-100 dark:border-brand-800 uppercase tracking-wider">
                       {feature}
                     </span>
                   ))}
                 </div>
-                <h1 className="text-5xl font-bold text-slate-900 tracking-tight mb-4">{activePage.title}</h1>
-                <p className="text-xl text-slate-500 max-w-3xl leading-relaxed font-medium">{activePage.description}</p>
+                <h1 className="text-5xl font-bold text-slate-900 dark:text-white tracking-tight mb-4">{activePage.title}</h1>
+                <p className="text-xl text-slate-500 dark:text-slate-400 max-w-3xl leading-relaxed font-medium">{activePage.description}</p>
               </div>
 
               <div className="space-y-12">
@@ -636,8 +777,8 @@ function App() {
                 ) : (
                   <section>
                     <div className="flex items-center gap-2 mb-4">
-                      <Eye className="size-5 text-violet-600" />
-                      <h2 className="text-xl font-bold text-slate-900">Interactive Demos</h2>
+                      <Eye className="size-5 text-brand-600 dark:text-brand-400" />
+                      <h2 className="text-xl font-bold text-slate-900 dark:text-white">Interactive Demos</h2>
                     </div>
                     <div className="grid gap-8">
                       {activePage.demoBlocks.map(demo => (
@@ -651,24 +792,24 @@ function App() {
                   </section>
                 )}
 
-                <section className="bg-white border border-slate-200 rounded-2xl p-8">
+                <section className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-8">
                   <div className="flex items-center gap-2 mb-6">
-                    <BookOpen className="size-5 text-violet-600" />
-                    <h2 className="text-xl font-bold text-slate-900">Documentation</h2>
+                    <BookOpen className="size-5 text-brand-600 dark:text-brand-400" />
+                    <h2 className="text-xl font-bold text-slate-900 dark:text-white">Documentation</h2>
                   </div>
-                  <div className="prose prose-slate max-w-none">
-                    <h3 className="text-slate-900">Usage</h3>
-                    <p>
+                  <div className="prose prose-slate dark:prose-invert max-w-none">
+                    <h3 className="text-slate-900 dark:text-white">Usage</h3>
+                    <p className="text-slate-600 dark:text-slate-400">
                       The {activePage.title} component is designed to be highly flexible and accessible.
                       You can import it directly into your React application and use it within any layout.
                     </p>
-                    <div className="bg-slate-900 rounded-xl p-4 my-4">
-                      <code className="text-pink-400 text-sm">
+                    <div className="bg-slate-900 dark:bg-black rounded-xl p-4 my-4 border border-slate-800">
+                      <code className="text-brand-400 text-sm">
                         {`import { ${componentNameMap[activePage.id] || activePage.title.replace(/\s/g, "")} } from "@uix/design-library";`}
                       </code>
                     </div>
-                    <h3 className="text-slate-900 mt-6">Guidelines</h3>
-                    <ul className="list-disc pl-5 space-y-2 text-slate-600">
+                    <h3 className="text-slate-900 dark:text-white mt-6">Guidelines</h3>
+                    <ul className="list-disc pl-5 space-y-2 text-slate-600 dark:text-slate-400">
                       <li>Ensure proper contrast when using custom colors.</li>
                       <li>Use appropriate ARIA labels for accessibility.</li>
                       <li>Combine with other {activePage.category} components for consistent UI.</li>

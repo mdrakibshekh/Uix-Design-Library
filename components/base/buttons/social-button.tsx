@@ -4,7 +4,7 @@ import type { AnchorHTMLAttributes, ButtonHTMLAttributes, DetailedHTMLProps } fr
 import type { ButtonProps as AriaButtonProps, LinkProps as AriaLinkProps } from "react-aria-components";
 import { Button as AriaButton, Link as AriaLink } from "react-aria-components";
 import { cx, sortCx } from "@/utils/cx";
-import { AppleLogo, DribbleLogo, FacebookLogo, FigmaLogo, FigmaLogoOutlined, GoogleLogo, TwitterLogo } from "./social-logos";
+import { AppleLogo, DiscordLogo, DribbleLogo, FacebookLogo, FigmaLogo, FigmaLogoOutlined, GithubLogo, GoogleLogo, LinkedinLogo, SlackLogo, TwitterLogo } from "./social-logos";
 
 export const styles = sortCx({
     common: {
@@ -42,11 +42,27 @@ export const styles = sortCx({
             root: "bg-[#EA4C89] text-white shadow-xs-skeuomorphic ring-1 ring-transparent ring-inset before:absolute before:inset-px before:border before:border-white/12 before:mask-b-from-0% hover:bg-[#E62872]",
             icon: "",
         },
+        github: {
+            root: "bg-[#24292F] text-white shadow-xs-skeuomorphic ring-1 ring-transparent ring-inset before:absolute before:inset-px before:border before:border-white/12 before:mask-b-from-0% hover:bg-[#1A1E22]",
+            icon: "",
+        },
+        discord: {
+            root: "bg-[#5865F2] text-white shadow-xs-skeuomorphic ring-1 ring-transparent ring-inset before:absolute before:inset-px before:border before:border-white/12 before:mask-b-from-0% hover:bg-[#4752C4]",
+            icon: "",
+        },
+        slack: {
+            root: "bg-[#4A154B] text-white shadow-xs-skeuomorphic ring-1 ring-transparent ring-inset before:absolute before:inset-px before:border before:border-white/12 before:mask-b-from-0% hover:bg-[#3D113E]",
+            icon: "",
+        },
+        linkedin: {
+            root: "bg-[#0A66C2] text-white shadow-xs-skeuomorphic ring-1 ring-transparent ring-inset before:absolute before:inset-px before:border before:border-white/12 before:mask-b-from-0% hover:bg-[#08529C]",
+            icon: "",
+        },
     },
 });
 
 interface CommonProps {
-    social: "google" | "facebook" | "apple" | "twitter" | "figma" | "dribble";
+    social: "google" | "facebook" | "apple" | "twitter" | "figma" | "dribble" | "github" | "discord" | "slack" | "linkedin";
     disabled?: boolean;
     theme?: "brand" | "color" | "gray";
     size?: keyof typeof styles.sizes;
@@ -76,6 +92,10 @@ export const SocialButton = ({ size = "lg", theme = "brand", social, className, 
         twitter: "black",
         figma: "black",
         dribble: "dribble",
+        github: "github",
+        discord: "discord",
+        slack: "slack",
+        linkedin: "linkedin",
     } as const;
 
     const colorStyles = theme === "brand" ? styles.colors[socialToColor[social]] : styles.colors.gray;
@@ -87,6 +107,10 @@ export const SocialButton = ({ size = "lg", theme = "brand", social, className, 
         twitter: TwitterLogo,
         figma: theme === "gray" ? FigmaLogoOutlined : FigmaLogo,
         dribble: DribbleLogo,
+        github: GithubLogo,
+        discord: DiscordLogo,
+        slack: SlackLogo,
+        linkedin: LinkedinLogo,
     };
 
     const Logo = logos[social];
@@ -134,7 +158,7 @@ export const SocialButton = ({ size = "lg", theme = "brand", social, className, 
                 )}
                 colorful={
                     (theme === "brand" && (social === "google" || social === "figma")) ||
-                    (theme === "color" && (social === "google" || social === "facebook" || social === "figma" || social === "dribble")) ||
+                    (theme === "color" && (social === "google" || social === "facebook" || social === "figma" || social === "dribble" || social === "discord" || social === "slack" || social === "linkedin")) ||
                     undefined
                 }
             />

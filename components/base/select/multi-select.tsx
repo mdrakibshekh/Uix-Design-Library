@@ -152,6 +152,11 @@ interface MultiSelectProps extends RefAttributes<HTMLDivElement>, CommonProps {
     selectedCountFormatter?: (count: number) => ReactNode;
     /** Supporting text displayed next to the selected count in the trigger. */
     supportingText?: ReactNode;
+    /**
+     * The display variant of the trigger.
+     * @default "count"
+     */
+    variant?: "count" | "chips";
 }
 
 const MultiSelectRoot = ({
@@ -179,6 +184,7 @@ const MultiSelectRoot = ({
     emptyStateDescription,
     selectedCountFormatter,
     supportingText,
+    variant = "count",
 }: MultiSelectProps) => {
     const { contains } = useFilter({ sensitivity: "base" });
     const [searchValue, setSearchValue] = useState("");
@@ -229,12 +235,36 @@ const MultiSelectRoot = ({
                             )}
                         >
                             {hasSelection ? (
-                                <span className={cx("flex items-center", sizes[size].textContainer)}>
-                                    <span className={cx("font-medium text-primary", sizes[size].text)}>
-                                        {selectedCountFormatter ? selectedCountFormatter(selectedCount) : `${selectedCount} selected`}
+                                variant === "chips" ? (
+                                    <div className="flex flex-wrap gap-1.5 py-1">
+                                        {(selectedKeys === "all" ? items : items?.filter(i => (selectedKeys as Set<string | number>).has(i.id)))?.map(item => (
+                                            <div key={item.id} className="flex items-center">
+                                                <div className="rounded bg-utility-brand-50 px-2 py-0.5 text-xs font-medium text-utility-brand-700 dark:bg-utility-brand-900/30 dark:text-utility-brand-300 flex items-center gap-1">
+                                                    {item.label}
+                                                    <button
+                                                        type="button"
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            const newKeys = new Set(selectedKeys as Set<string | number>);
+                                                            newKeys.delete(item.id);
+                                                            onSelectionChange?.(newKeys);
+                                                        }}
+                                                        className="hover:text-utility-brand-800 dark:hover:text-utility-brand-200"
+                                                    >
+                                                        ×
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <span className={cx("flex items-center", sizes[size].textContainer)}>
+                                        <span className={cx("font-medium text-primary", sizes[size].text)}>
+                                            {selectedCountFormatter ? selectedCountFormatter(selectedCount) : `${selectedCount} selected`}
+                                        </span>
+                                        {supportingText && <span className={cx("text-tertiary", sizes[size].text)}>{supportingText}</span>}
                                     </span>
-                                    {supportingText && <span className={cx("text-tertiary", sizes[size].text)}>{supportingText}</span>}
-                                </span>
+                                )
                             ) : (
                                 <span className={cx("text-placeholder", sizes[size].text)}>{placeholder}</span>
                             )}

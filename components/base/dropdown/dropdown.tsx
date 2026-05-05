@@ -39,9 +39,11 @@ interface DropdownItemProps extends AriaMenuItemProps {
     avatarUrl?: string;
     /** The selection indicator to be displayed on the item. */
     selectionIndicator?: "checkmark" | "checkbox" | "radio" | "toggle" | "none";
+    /** A description of the item to be displayed below the label. */
+    description?: string;
 }
 
-const DropdownItem = ({ label, children, addon, icon: Icon, avatarUrl, unstyled, selectionIndicator = "checkmark", ...props }: DropdownItemProps) => {
+const DropdownItem = ({ label, children, addon, icon: Icon, avatarUrl, unstyled, selectionIndicator = "checkmark", description, ...props }: DropdownItemProps) => {
     const SelectionIndicator = useCallback(
         (state: MenuItemRenderProps & { className?: string }) => {
             if (selectionIndicator === "checkmark") {
@@ -96,6 +98,7 @@ const DropdownItem = ({ label, children, addon, icon: Icon, avatarUrl, unstyled,
                         state.isFocused && "bg-primary_hover",
                         state.isFocusVisible && "outline-2 -outline-offset-2",
                         state.hasSubmenu && "pr-1.5",
+                        description && "items-start",
                     )}
                 >
                     {state.selectionMode !== "none" && !avatarUrl && !Icon && <SelectionIndicator {...state} className="mr-2" />}
@@ -108,9 +111,12 @@ const DropdownItem = ({ label, children, addon, icon: Icon, avatarUrl, unstyled,
 
                     {Icon && <Icon aria-hidden="true" className="mr-2 size-4 shrink-0 stroke-[2.25px] text-fg-quaternary" />}
 
-                    <span className={cx("grow truncate text-sm font-semibold text-secondary", state.isFocused && "text-secondary_hover")}>
-                        {label || (typeof children === "function" ? children(state) : children)}
-                    </span>
+                    <div className="flex grow flex-col min-w-0">
+                        <span className={cx("truncate text-sm font-semibold text-secondary", state.isFocused && "text-secondary_hover")}>
+                            {label || (typeof children === "function" ? children(state) : children)}
+                        </span>
+                        {description && <span className="truncate text-xs text-tertiary font-normal mt-0.5">{description}</span>}
+                    </div>
 
                     {addon && <span className="ml-1 shrink-0 pr-1 text-xs font-medium text-quaternary">{addon}</span>}
 

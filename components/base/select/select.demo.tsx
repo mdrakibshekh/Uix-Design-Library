@@ -440,6 +440,28 @@ export const TagsDemo = () => {
     );
 };
 
+export const MultiSelectChipsDemo = () => {
+    const [selectedKeys, setSelectedKeys] = useState<Selection>(new Set(["@phoenix", "@olivia"]));
+    
+    return (
+        <MultiSelect
+            label="Team members"
+            placeholder="Select team members"
+            items={items}
+            selectedKeys={selectedKeys}
+            onSelectionChange={setSelectedKeys}
+            variant="chips"
+            hint="Select multiple members to see chips."
+        >
+            {(item) => (
+                <MultiSelect.Item id={item.id} avatarUrl={item.avatarUrl} supportingText={item.supportingText}>
+                    {item.label}
+                </MultiSelect.Item>
+            )}
+        </MultiSelect>
+    );
+};
+
 export const Native = () => (
     <NativeSelect
         label="Team members"

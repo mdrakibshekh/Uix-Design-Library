@@ -7,8 +7,8 @@ import { AnimatePresence, motion } from "motion/react";
 import { Button as AriaButton, DialogTrigger as AriaDialogTrigger, Popover as AriaPopover } from "react-aria-components";
 import { Avatar } from "@/components/base/avatar/avatar";
 import { ButtonUtility } from "@/components/base/buttons/button-utility";
-import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
-import { UntitledLogoMinimal } from "@/components/foundations/logo/untitledui-logo-minimal";
+import { UIXLogo } from "@/components/foundations/logo/uix-logo";
+import { UIXLogoMinimal } from "@/components/foundations/logo/uix-logo-minimal";
 import { cx } from "@/utils/cx";
 import { MobileNavigationHeader } from "../base-components/mobile-header";
 import { NavAccountCard, NavAccountMenu } from "../base-components/nav-account-card";
@@ -57,7 +57,7 @@ export const SidebarNavigationSlim = ({ activeUrl, items, footerItems = [], hide
                 )}
             >
                 <div className="flex justify-center px-3">
-                    <UntitledLogoMinimal className="size-6" />
+                    <UIXLogoMinimal className="size-6" />
                 </div>
 
                 <ul className="mt-5 flex flex-col gap-0.5 px-3.5">
@@ -112,9 +112,9 @@ export const SidebarNavigationSlim = ({ activeUrl, items, footerItems = [], hide
                                 cx(
                                     "will-change-transform",
                                     isEntering &&
-                                        "duration-300 ease-out animate-in fade-in placement-right:slide-in-from-left-2 placement-top:slide-in-from-bottom-2 placement-bottom:slide-in-from-top-2",
+                                    "duration-300 ease-out animate-in fade-in placement-right:slide-in-from-left-2 placement-top:slide-in-from-bottom-2 placement-bottom:slide-in-from-top-2",
                                     isExiting &&
-                                        "duration-150 ease-in animate-out fade-out placement-right:slide-out-to-left-2 placement-top:slide-out-to-bottom-2 placement-bottom:slide-out-to-top-2",
+                                    "duration-150 ease-in animate-out fade-out placement-right:slide-out-to-left-2 placement-top:slide-out-to-bottom-2 placement-bottom:slide-out-to-top-2",
                                 )
                             }
                         >
@@ -189,7 +189,7 @@ export const SidebarNavigationSlim = ({ activeUrl, items, footerItems = [], hide
             <MobileNavigationHeader>
                 <aside className="group flex h-full max-h-full w-full max-w-full flex-col justify-between overflow-y-auto bg-primary pt-4">
                     <div className="px-4">
-                        <UntitledLogo className="h-6" />
+                        <UIXLogo className="h-6" />
                     </div>
 
                     <NavList items={items} />

@@ -6,7 +6,7 @@ import { TabList, Tabs } from "@/components/application/tabs/tabs";
 import { BadgeWithDot } from "@/components/base/badges/badges";
 import { DropdownAccountButton } from "@/components/base/dropdown/dropdown-account-button";
 import { Input } from "@/components/base/input/input";
-import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
+import { UIXLogo } from "@/components/foundations/logo/uix-logo";
 import { cx } from "@/utils/cx";
 import { MobileNavigationHeader } from "./base-components/mobile-header";
 import { NavAccountCard } from "./base-components/nav-account-card";
@@ -114,9 +114,9 @@ export const HeaderNavigationBase = ({
 
     const tabItems = showSecondaryNav
         ? activeSubNavItems.map((item) => ({
-              id: item.label,
-              children: item.label,
-          }))
+            id: item.label,
+            children: item.label,
+        }))
         : [];
 
     const activeTabKey = activeSubNavItems?.find((item) => isActive(item))?.label;
@@ -126,7 +126,7 @@ export const HeaderNavigationBase = ({
             <MobileNavigationHeader>
                 <aside className="flex h-full max-w-full flex-col justify-between overflow-auto bg-primary pt-4">
                     <div className="flex flex-col gap-5 px-4">
-                        <UntitledLogo className="h-6" />
+                        <UIXLogo className="h-6" />
 
                         <Input size="md" aria-label="Search" placeholder="Search" icon={SearchLg} />
                     </div>
@@ -171,7 +171,7 @@ export const HeaderNavigationBase = ({
                                 href="/"
                                 className="rounded-xs outline-focus-ring focus-visible:outline-2 focus-visible:outline-offset-2"
                             >
-                                <UntitledLogo className="h-6" />
+                                <UIXLogo className="h-6" />
                             </a>
                         </div>
 

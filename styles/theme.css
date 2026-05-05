@@ -2,6 +2,7 @@
     /* FONT FAMILY */
     --font-body: "Nexa", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     --font-display: "Nexa", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --font-inter: "Inter", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     --font-mono: ui-monospace, "Roboto Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 
     /* FONT SIZE */
@@ -395,10 +396,10 @@
     --color-text-brand-secondary_hover: var(--color-brand-800);
 
     /* BORDER COLORS */
-    --color-border-primary: var(--color-neutral-300);
-    --color-border-secondary: var(--color-neutral-200);
+    --color-border-primary: var(--color-neutral-200);
+    --color-border-secondary: var(--color-neutral-100);
     --color-border-secondary_alt: rgb(0 0 0 / 0.1);
-    --color-border-tertiary: var(--color-neutral-100);
+    --color-border-tertiary: var(--color-neutral-50);
     --color-border-error: var(--color-red-500);
     --color-border-error_subtle: var(--color-red-300);
     --color-border-brand: var(--color-brand-500);
@@ -622,7 +623,6 @@
     font-style: normal;
 }
 
-
 @layer base {
     /* DARK MODE VARIABLES */
 
@@ -804,14 +804,14 @@
         --color-text-error-primary_hover: var(--color-red-300);
         --color-text-brand-secondary_hover: var(--color-neutral-200);
 
-        --color-border-secondary: var(--color-neutral-800);
+        --color-border-secondary: var(--color-neutral-900);
         --color-border-error_subtle: var(--color-red-500);
-        --color-border-primary: var(--color-neutral-700);
+        --color-border-primary: var(--color-neutral-800);
         --color-border-brand: var(--color-brand-400);
         --color-border-error: var(--color-red-400);
-        --color-border-tertiary: var(--color-neutral-800);
+        --color-border-tertiary: var(--color-neutral-950);
         --color-border-brand_alt: var(--color-neutral-700);
-        --color-border-secondary_alt: var(--color-neutral-800);
+        --color-border-secondary_alt: var(--color-neutral-900);
 
         --color-fg-secondary: var(--color-neutral-300);
         --color-fg-warning-primary: var(--color-yellow-500);

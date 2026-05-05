@@ -2,6 +2,30 @@
 
 import { useMemo, useState } from "react";
 import { FileIcon } from "@untitledui/file-icons";
+
+export const TablePreview = () => (
+    <div className="w-full scale-90 origin-top overflow-hidden rounded-xl border border-slate-200 dark:border-slate-800">
+        <div className="bg-slate-50 dark:bg-slate-900 px-4 py-2 border-b border-slate-200 dark:border-slate-800 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+            Preview Table
+        </div>
+        <div className="p-4 bg-white dark:bg-slate-950 flex flex-col gap-3">
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <div className="size-6 rounded-full bg-slate-100 dark:bg-slate-800" />
+                    <div className="h-2 w-16 bg-slate-100 dark:bg-slate-800 rounded" />
+                </div>
+                <div className="h-4 w-12 bg-brand-50 dark:bg-brand-900/30 rounded" />
+            </div>
+            <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                    <div className="size-6 rounded-full bg-slate-100 dark:bg-slate-800" />
+                    <div className="h-2 w-20 bg-slate-100 dark:bg-slate-800 rounded" />
+                </div>
+                <div className="h-4 w-12 bg-slate-100 dark:bg-slate-800 rounded" />
+            </div>
+        </div>
+    </div>
+);
 import {
     AlertCircle,
     Check,
@@ -1233,6 +1257,90 @@ export const TableOffline = () => {
                     </EmptyState.Footer>
                 </EmptyState>
             </div>
+        </TableCard.Root>
+    );
+};
+
+export const Table05ProjectManagement = () => {
+    const projects = [
+        { id: 1, name: "Brand Identity Redesign", status: "In Progress", progress: 65, leader: { name: "Sarah Chen", avatar: "https://i.pravatar.cc/150?u=sarah" }, dueDate: "2024-06-15", priority: "High" },
+        { id: 2, name: "Mobile App Development", status: "Completed", progress: 100, leader: { name: "James Wilson", avatar: "https://i.pravatar.cc/150?u=james" }, dueDate: "2024-05-20", priority: "Medium" },
+        { id: 3, name: "Marketing Campaign Q3", status: "Planning", progress: 15, leader: { name: "Emily Blunt", avatar: "https://i.pravatar.cc/150?u=emily" }, dueDate: "2024-08-01", priority: "High" },
+        { id: 4, name: "API Integration", status: "In Progress", progress: 40, leader: { name: "Alex Rivera", avatar: "https://i.pravatar.cc/150?u=alex" }, dueDate: "2024-07-10", priority: "Low" },
+        { id: 5, name: "User Research Phase 2", status: "Delayed", progress: 30, leader: { name: "Maya Patel", avatar: "https://i.pravatar.cc/150?u=maya" }, dueDate: "2024-06-05", priority: "High" },
+    ];
+
+    return (
+        <TableCard.Root>
+            <TableCard.Header
+                title="Project Management"
+                description="Track active projects, their progress and assigned team leads."
+                contentTrailing={
+                    <Button size="sm" iconLeading={Plus}>New Project</Button>
+                }
+            />
+            <Table aria-label="Project Management">
+                <Table.Header>
+                    <Table.Head id="project" label="Project Name" isRowHeader />
+                    <Table.Head id="status" label="Status" />
+                    <Table.Head id="progress" label="Progress" />
+                    <Table.Head id="leader" label="Team Lead" />
+                    <Table.Head id="dueDate" label="Due Date" />
+                    <Table.Head id="priority" label="Priority" />
+                    <Table.Head id="actions" />
+                </Table.Header>
+                <Table.Body items={projects}>
+                    {(item) => (
+                        <Table.Row id={item.id}>
+                            <Table.Cell className="font-bold text-primary">{item.name}</Table.Cell>
+                            <Table.Cell>
+                                <Badge
+                                    color={
+                                        item.status === "Completed" ? "success" :
+                                            item.status === "In Progress" ? "blue" :
+                                                item.status === "Delayed" ? "error" : "gray"
+                                    }
+                                    size="sm"
+                                    type="modern"
+                                >
+                                    {item.status}
+                                </Badge>
+                            </Table.Cell>
+                            <Table.Cell className="min-w-40">
+                                <div className="flex flex-col gap-1.5">
+                                    <div className="flex justify-between text-[10px] font-bold text-tertiary">
+                                        <span>{item.progress}%</span>
+                                    </div>
+                                    <ProgressBar value={item.progress} size="sm" />
+                                </div>
+                            </Table.Cell>
+                            <Table.Cell>
+                                <div className="flex items-center gap-2">
+                                    <Avatar src={item.leader.avatar} alt={item.leader.name} size="xs" />
+                                    <span className="text-sm font-medium text-secondary">{item.leader.name}</span>
+                                </div>
+                            </Table.Cell>
+                            <Table.Cell className="text-sm text-tertiary font-medium">
+                                {new Date(item.dueDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}
+                            </Table.Cell>
+                            <Table.Cell>
+                                <BadgeWithIcon
+                                    size="sm"
+                                    color={item.priority === "High" ? "error" : item.priority === "Medium" ? "warning" : "gray"}
+                                    iconLeading={AlertCircle}
+                                >
+                                    {item.priority}
+                                </BadgeWithIcon>
+                            </Table.Cell>
+                            <Table.Cell>
+                                <div className="flex justify-end">
+                                    <ButtonUtility icon={Edit01} size="xs" color="tertiary" />
+                                </div>
+                            </Table.Cell>
+                        </Table.Row>
+                    )}
+                </Table.Body>
+            </Table>
         </TableCard.Root>
     );
 };

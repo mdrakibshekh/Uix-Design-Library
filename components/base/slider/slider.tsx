@@ -39,9 +39,9 @@ export const Slider = ({ labelPosition = "default", minValue = 0, maxValue = 100
 
                     return (
                         <>
-                            <span className="absolute top-1/2 h-2 w-full -translate-y-1/2 rounded-full bg-quaternary" />
+                            <span className="absolute top-1/2 h-2 w-full -translate-y-1/2 rounded-full bg-utility-neutral-200" />
                             <span
-                                className="absolute top-1/2 h-2 w-full -translate-y-1/2 rounded-full bg-brand-solid"
+                                className="absolute top-1/2 h-2 w-full -translate-y-1/2 rounded-full bg-utility-brand-600"
                                 style={{
                                     left: `${left * 100}%`,
                                     width: `${width * 100}%`,
@@ -54,7 +54,7 @@ export const Slider = ({ labelPosition = "default", minValue = 0, maxValue = 100
                                         index={index}
                                         className={({ isFocusVisible, isDragging }) =>
                                             cx(
-                                                "top-1/2 box-border size-6 cursor-grab rounded-full bg-slider-handle-bg shadow-md ring-2 ring-slider-handle-border ring-inset",
+                                                "top-1/2 size-6 -translate-y-1/2 box-border cursor-grab rounded-full bg-slider-handle-bg shadow-md ring-2 ring-slider-handle-border ring-inset",
                                                 isFocusVisible && "outline-2 outline-offset-2 outline-focus-ring",
                                                 isDragging && "cursor-grabbing",
                                             )

@@ -7,8 +7,8 @@ import { Badge } from "@/components/base/badges/badges";
 import { cx, sortCx } from "@/utils/cx";
 
 const styles = sortCx({
-    root: "group relative flex max-h-9 w-full cursor-pointer items-center rounded-md bg-primary outline-focus-ring transition duration-100 ease-linear select-none hover:bg-primary_hover focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2",
-    rootSelected: "bg-secondary hover:bg-secondary_hover",
+    root: "group relative flex min-h-[40px] w-full cursor-pointer items-center rounded-xl bg-transparent outline-focus-ring transition-all duration-200 ease-in-out select-none hover:bg-slate-50 dark:hover:bg-slate-800/50 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2",
+    rootSelected: "bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400 font-bold",
 });
 
 interface NavItemBaseProps {
@@ -39,8 +39,8 @@ export const NavItemBase = ({ current, type, badge, href, icon: Icon, children, 
         <Icon
             aria-hidden="true"
             className={cx(
-                "mr-2 size-5 shrink-0 text-fg-quaternary transition-inherit-all group-hover/item:text-fg-quaternary_hover",
-                current && "text-fg-quaternary_hover",
+                "mr-3 size-5 shrink-0 text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors",
+                current && "text-brand-600 dark:text-brand-400",
             )}
         />
     );
@@ -57,9 +57,9 @@ export const NavItemBase = ({ current, type, badge, href, icon: Icon, children, 
     const labelElement = (
         <span
             className={cx(
-                "flex-1 text-sm font-semibold text-secondary transition-inherit-all group-hover/item:text-secondary_hover",
+                "flex-1 text-sm font-semibold text-slate-600 dark:text-slate-400 transition-colors group-hover:text-slate-900 dark:group-hover:text-white",
                 truncate && "truncate",
-                current && "text-secondary_hover",
+                current && "text-brand-700 dark:text-brand-400",
             )}
         >
             {children}
@@ -78,7 +78,7 @@ export const NavItemBase = ({ current, type, badge, href, icon: Icon, children, 
 
                 {badgeElement}
 
-                <ChevronDown aria-hidden="true" className="ml-3 size-4 shrink-0 stroke-[2.5px] text-fg-quaternary in-open:-scale-y-100" />
+                <ChevronDown aria-hidden="true" className={cx("ml-3 size-4 shrink-0 transition-transform duration-200 text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300", current && "text-brand-600 dark:text-brand-400", "in-open:-scale-y-100")} />
             </summary>
         );
     }

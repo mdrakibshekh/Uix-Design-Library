@@ -31,15 +31,15 @@ export const NavButton = ({ current, label, href, icon: Icon, className, tooltip
 
     return (
         <Tooltip isDisabled={!label} title={label} placement={tooltipPlacement}>
-            <Pressable>
+            <Pressable aria-label={label || (typeof children === "string" ? children : undefined)}>
                 <a
                     href={href}
                     aria-label={label}
                     onClick={onClick}
                     className={cx(
-                        "group/item relative flex w-full cursor-pointer items-center justify-center gap-1 rounded-md bg-primary outline-focus-ring transition duration-100 ease-linear select-none hover:bg-primary_hover focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2",
-                        current && "bg-secondary hover:bg-secondary_hover",
-                        iconOnly ? "size-9" : "px-2 py-1.5",
+                        "group/item relative flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-transparent outline-focus-ring transition-all duration-200 ease-in-out select-none hover:bg-slate-50 dark:hover:bg-slate-800/50 focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2",
+                        current && "bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400 font-bold",
+                        iconOnly ? "size-10" : "px-4 py-2.5",
                         className,
                     )}
                 >
@@ -47,8 +47,8 @@ export const NavButton = ({ current, label, href, icon: Icon, className, tooltip
                         <Icon
                             aria-hidden="true"
                             className={cx(
-                                "size-5 shrink-0 text-fg-quaternary transition-inherit-all group-hover/item:text-fg-quaternary_hover",
-                                current && "text-fg-quaternary_hover",
+                                "size-5 shrink-0 text-slate-400 group-hover:text-slate-600 dark:group-hover:text-slate-300 transition-colors",
+                                current && "text-brand-600 dark:text-brand-400",
                             )}
                         />
                     )}
@@ -56,8 +56,8 @@ export const NavButton = ({ current, label, href, icon: Icon, className, tooltip
                     {children && (
                         <span
                             className={cx(
-                                "px-0.5 text-sm font-semibold transition duration-100 ease-linear group-hover/item:text-secondary_hover",
-                                current && "text-secondary_hover",
+                                "text-sm font-semibold transition-colors text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white",
+                                current && "text-brand-700 dark:text-brand-400",
                             )}
                         >
                             {children}

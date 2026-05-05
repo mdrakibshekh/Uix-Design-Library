@@ -56,7 +56,7 @@ export const DocumentationIntroDemo = () => {
         <div className="space-y-2">
           <h3 className="text-xl font-bold text-slate-900">What is UIX Design Library?</h3>
           <p className="text-slate-500 leading-relaxed">
-            UIX is more than just a component library; it's a bridge between design and development. We've taken the best patterns from industry leaders like **Untitled UI**, **Lucide**, and **React Aria** and unified them into a single, cohesive design system.
+            UIX is more than just a component library; it's a bridge between design and development. We've taken the best patterns from industry leaders like **UIX**, **Lucide**, and **React Aria** and unified them into a single, cohesive design system.
           </p>
         </div>
 
@@ -166,7 +166,7 @@ export const DocumentationDesignDemo = () => {
         <h3 className="text-xl font-bold text-slate-900">Component Lifecycle</h3>
         <div className="relative pl-8 border-l-2 border-slate-100 space-y-8">
           {[
-            { title: "Design", desc: "Design components using the Sigma Studio V2.0 Figma Kit." },
+            { title: "Design", desc: "Design components using the UIX Design System Figma Kit." },
             { title: "Prototyping", desc: "Use UIX variants to rapidly assemble functional UI flows." },
             { title: "Production", desc: "Export theme-ready components directly to your React codebase." }
           ].map((step, i) => (

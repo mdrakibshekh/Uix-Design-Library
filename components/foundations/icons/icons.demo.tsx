@@ -309,19 +309,46 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
   // Combine a subset of icons for display
   const displayIcons = React.useMemo(() => {
     const icons: Array<{ name: string; Icon: React.ComponentType<any>; library: string }> = [];
+    const libs = Object.entries(ALL_ICONS);
     
-    Object.entries(ALL_ICONS).forEach(([libName, libIcons]) => {
-      // Filter logic:
-      // If a specific Solar variant is selected, only show Solar icons
-      const isSolarStyle = ['Bold', 'Line Duotone', 'Bold Duotone', 'Broken', 'Filled', 'Duo-Tone'].includes(selectedStyle);
-      if (isSolarStyle && libName !== 'Solar Icons') return;
+    // If search is active, just show all matches from all libraries
+    if (search) {
+      libs.forEach(([libName, libIcons]) => {
+        const isSolarStyle = ['Bold', 'Line Duotone', 'Bold Duotone', 'Broken', 'Filled', 'Duo-Tone'].includes(selectedStyle);
+        if (isSolarStyle && libName !== 'Solar Icons') return;
 
-      Object.entries(libIcons).forEach(([name, Icon]) => {
-        if (name.toLowerCase().includes(search.toLowerCase())) {
-          icons.push({ name, Icon: Icon as any, library: libName });
+        Object.entries(libIcons).forEach(([name, Icon]) => {
+          if (name.toLowerCase().includes(search.toLowerCase())) {
+            icons.push({ name, Icon: Icon as any, library: libName });
+          }
+        });
+      });
+      return icons;
+    }
+
+    // Interleave icons from different libraries to show variety in the "All" view
+    const libEntries = libs.map(([name, icons]) => {
+      const isSolarStyle = ['Bold', 'Line Duotone', 'Bold Duotone', 'Broken', 'Filled', 'Duo-Tone'].includes(selectedStyle);
+      // Filter the library based on selected style
+      if (isSolarStyle && name !== 'Solar Icons') return { name, entries: [] };
+      return { name, entries: Object.entries(icons) };
+    }).filter(lib => lib.entries.length > 0);
+
+    let maxLen = 0;
+    libEntries.forEach(lib => {
+      if (lib.entries.length > maxLen) maxLen = lib.entries.length;
+    });
+
+    for (let i = 0; i < maxLen; i++) {
+      libEntries.forEach(lib => {
+        if (lib.entries[i]) {
+          icons.push({ name: lib.entries[i][0], Icon: lib.entries[i][1] as any, library: lib.name });
         }
       });
-    });
+      // Cap at a reasonable number for performance if not searching
+      if (icons.length > 2000) break;
+    }
+    
     return icons;
   }, [search, selectedStyle]);
 

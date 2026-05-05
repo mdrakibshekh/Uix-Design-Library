@@ -201,16 +201,22 @@ export const FileUploadDropZone = ({
             onDragEnd={handleDragOut}
             onDrop={handleDrop}
             className={cx(
-                "relative flex flex-col items-center gap-3 rounded-xl bg-primary px-6 py-4 text-tertiary ring-1 ring-secondary transition duration-100 ease-linear ring-inset",
-                isDraggingOver && "ring-2 ring-brand",
-                isDisabled && "cursor-not-allowed bg-secondary",
+                "relative flex flex-col items-center gap-4 rounded-2xl bg-primary px-8 py-10 text-tertiary border-2 border-dashed border-secondary transition-all duration-200 ease-in-out",
+                isDraggingOver && "border-brand-500 bg-brand-50/10 dark:bg-brand-900/10",
+                isDisabled && "cursor-not-allowed opacity-60 bg-secondary/50",
                 className,
             )}
         >
-            <FeaturedIcon icon={UploadCloud02} color="gray" theme="modern" size="md" className={cx(isDisabled && "opacity-50")} />
+            <FeaturedIcon 
+                icon={UploadCloud02} 
+                color="brand" 
+                theme="modern" 
+                size="lg" 
+                className={cx(isDisabled && "grayscale")} 
+            />
 
-            <div className="flex flex-col gap-1 text-center">
-                <div className="flex justify-center gap-1 text-center">
+            <div className="flex flex-col gap-2 text-center max-w-sm">
+                <div className="flex flex-col items-center gap-1.5">
                     <input
                         ref={inputRef}
                         id={id}
@@ -221,14 +227,19 @@ export const FileUploadDropZone = ({
                         multiple={allowsMultiple}
                         onChange={handleInputFileChange}
                     />
-                    <label htmlFor={id} className="flex cursor-pointer">
-                        <Button color="link-color" size="md" isDisabled={isDisabled} onClick={() => inputRef.current?.click()}>
-                            Click to upload <span className="md:hidden">and attach files</span>
-                        </Button>
-                    </label>
-                    <span className="text-sm max-md:hidden">or drag and drop</span>
+                    <div className="flex items-center gap-1 font-semibold text-sm">
+                        <button 
+                            type="button"
+                            onClick={() => inputRef.current?.click()}
+                            className="text-brand-600 dark:text-brand-400 hover:text-brand-700 dark:hover:text-brand-300 underline-offset-4 hover:underline transition-all"
+                            disabled={isDisabled}
+                        >
+                            Click to upload
+                        </button>
+                        <span className="text-secondary">or drag and drop</span>
+                    </div>
                 </div>
-                <p className={cx("text-xs transition duration-100 ease-linear", isInvalid && "text-error-primary")}>
+                <p className={cx("text-xs font-medium text-quaternary leading-relaxed transition-colors", isInvalid && "text-error-primary")}>
                     {hint || "SVG, PNG, JPG or GIF (max. 800x400px)"}
                 </p>
             </div>
@@ -264,50 +275,67 @@ export const FileListItemProgressBar = ({ name, size, progress, failed, type, fi
         <motion.li
             layout="position"
             className={cx(
-                "relative flex gap-3 rounded-xl bg-primary p-4 ring-1 ring-secondary transition-shadow duration-100 ease-linear ring-inset",
-                failed && "ring-2 ring-error",
+                "relative flex gap-4 rounded-2xl bg-primary p-4 ring-1 ring-secondary shadow-sm transition-all duration-200 group",
+                failed && "ring-2 ring-error-500",
                 className,
             )}
         >
-            <FileTypeIcon className="size-10 shrink-0 dark:hidden" type={type ?? "empty"} theme="light" variant={fileIconVariant ?? "default"} />
-            <FileTypeIcon className="size-10 shrink-0 not-dark:hidden" type={type ?? "empty"} theme="dark" variant={fileIconVariant ?? "default"} />
+            <div className="relative">
+                <FileTypeIcon className="size-10 shrink-0 dark:hidden" type={type ?? "empty"} theme="light" variant={fileIconVariant ?? "default"} />
+                <FileTypeIcon className="size-10 shrink-0 not-dark:hidden" type={type ?? "empty"} theme="dark" variant={fileIconVariant ?? "default"} />
+                {isComplete && (
+                    <div className="absolute -bottom-1 -right-1 bg-white dark:bg-slate-900 rounded-full p-0.5">
+                        <CheckCircle className="size-3.5 text-success-500 fill-success-50 dark:fill-success-900/50" />
+                    </div>
+                )}
+            </div>
 
-            <div className="flex min-w-0 flex-1 flex-col items-start">
-                <div className="flex w-full max-w-full min-w-0 flex-1">
+            <div className="flex min-w-0 flex-1 flex-col justify-center">
+                <div className="flex w-full items-start justify-between">
                     <div className="min-w-0 flex-1">
-                        <p className="truncate text-sm font-medium text-secondary">{name}</p>
-
-                        <div className="mt-0.5 flex items-center gap-2">
-                            <p className="truncate text-sm whitespace-nowrap text-tertiary">{getReadableFileSize(size)}</p>
-
-                            <hr className="h-3 w-px rounded-t-full rounded-b-full border-none bg-border-primary" />
-
-                            <div className="flex items-center gap-1">
-                                {isComplete && <CheckCircle className="size-4 stroke-[2.5px] text-fg-success-primary" />}
-                                {isComplete && <p className="text-sm font-medium text-success-primary">Complete</p>}
-
-                                {!isComplete && !failed && <UploadCloud02 className="size-4 stroke-[2.5px] text-fg-quaternary" />}
-                                {!isComplete && !failed && <p className="text-sm font-medium text-quaternary">Uploading...</p>}
-
-                                {failed && <XCircle className="size-4 text-fg-error-primary" />}
-                                {failed && <p className="text-sm font-medium text-error-primary">Failed</p>}
-                            </div>
-                        </div>
+                        <p className="truncate text-sm font-bold text-primary tracking-tight">{name}</p>
+                        <p className="mt-0.5 text-xs font-medium text-tertiary">{getReadableFileSize(size)}</p>
                     </div>
 
-                    <ButtonUtility color="tertiary" tooltip="Delete" icon={Trash01} size="xs" className="-mt-2 -mr-2 self-start" onClick={onDelete} />
+                    <div className="flex items-center gap-1">
+                        {!failed && !isComplete && (
+                            <span className="text-[10px] font-bold text-brand-600 dark:text-brand-400 tabular-nums">{progress}%</span>
+                        )}
+                        <ButtonUtility 
+                            color="tertiary" 
+                            tooltip="Remove" 
+                            icon={Trash01} 
+                            size="xs" 
+                            className="opacity-0 group-hover:opacity-100 transition-opacity" 
+                            onClick={onDelete} 
+                        />
+                    </div>
                 </div>
 
                 {!failed && (
-                    <div className="mt-1 w-full">
-                        <ProgressBar labelPosition="right" max={100} min={0} value={progress} />
+                    <div className="mt-2.5 w-full">
+                        <ProgressBar 
+                            labelPosition="none" 
+                            max={100} 
+                            min={0} 
+                            value={progress} 
+                            className="h-1.5"
+                        />
                     </div>
                 )}
 
                 {failed && (
-                    <Button color="link-destructive" size="sm" onClick={onRetry} className="mt-1.5">
-                        Try again
-                    </Button>
+                    <div className="mt-2 flex items-center gap-3">
+                        <span className="text-xs font-bold text-error-600 flex items-center gap-1">
+                            <XCircle className="size-3" /> Upload failed
+                        </span>
+                        <button 
+                            onClick={onRetry} 
+                            className="text-xs font-bold text-brand-600 hover:text-brand-700 underline"
+                        >
+                            Retry
+                        </button>
+                    </div>
                 )}
             </div>
         </motion.li>
@@ -318,11 +346,14 @@ export const FileListItemProgressFill = ({ name, size, progress, failed, type, f
     const isComplete = progress === 100;
 
     return (
-        <motion.li layout="position" className={cx("relative flex gap-3 overflow-hidden rounded-xl bg-primary p-4", className)}>
+        <motion.li layout="position" className={cx("relative flex gap-4 overflow-hidden rounded-2xl bg-primary p-4 shadow-sm group", className)}>
             {/* Progress fill. */}
             <div
                 style={{ transform: `translateX(-${100 - progress}%)` }}
-                className={cx("absolute inset-0 size-full bg-secondary transition duration-75 ease-linear", isComplete && "opacity-0")}
+                className={cx(
+                    "absolute inset-0 size-full bg-brand-50/40 dark:bg-brand-900/10 transition-transform duration-300 ease-out", 
+                    isComplete && "opacity-0"
+                )}
                 role="progressbar"
                 aria-valuenow={progress}
                 aria-valuemin={0}
@@ -332,55 +363,58 @@ export const FileListItemProgressFill = ({ name, size, progress, failed, type, f
             <div
                 className={cx(
                     "absolute inset-0 size-full rounded-[inherit] ring-1 ring-secondary transition duration-100 ease-linear ring-inset",
-                    failed && "ring-2 ring-error",
+                    failed && "ring-2 ring-error-500",
                 )}
             />
-            <FileTypeIcon className="relative size-10 shrink-0 dark:hidden" type={type ?? "empty"} theme="light" variant={fileIconVariant ?? "solid"} />
-            <FileTypeIcon className="relative size-10 shrink-0 not-dark:hidden" type={type ?? "empty"} theme="dark" variant={fileIconVariant ?? "solid"} />
+            
+            <div className="relative">
+                <FileTypeIcon className="size-10 shrink-0 dark:hidden" type={type ?? "empty"} theme="light" variant={fileIconVariant ?? "solid"} />
+                <FileTypeIcon className="size-10 shrink-0 not-dark:hidden" type={type ?? "empty"} theme="dark" variant={fileIconVariant ?? "solid"} />
+            </div>
 
-            <div className="relative flex min-w-0 flex-1">
-                <div className="relative flex min-w-0 flex-1 flex-col items-start">
-                    <div className="w-full min-w-0 flex-1">
-                        <p className="truncate text-sm font-medium text-secondary">{name}</p>
-
-                        <div className="mt-0.5 flex items-center gap-2">
-                            <p className="text-sm text-tertiary">{failed ? "Upload failed, please try again" : getReadableFileSize(size)}</p>
-
-                            {!failed && (
-                                <>
-                                    <hr className="h-3 w-px rounded-t-full rounded-b-full border-none bg-border-primary" />
-                                    <div className="flex items-center gap-1">
-                                        {isComplete && <CheckCircle className="size-4 stroke-[2.5px] text-fg-success-primary" />}
-                                        {!isComplete && <UploadCloud02 className="size-4 stroke-[2.5px] text-fg-quaternary" />}
-
-                                        <p className="text-sm text-tertiary">{progress}%</p>
-                                    </div>
-                                </>
-                            )}
-                        </div>
+            <div className="relative flex min-w-0 flex-1 flex-col justify-center">
+                <div className="flex w-full items-start justify-between">
+                    <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-bold text-primary tracking-tight">{name}</p>
+                        <p className="mt-0.5 text-xs font-medium text-tertiary">
+                            {failed ? "Failed to upload" : getReadableFileSize(size)}
+                        </p>
                     </div>
 
-                    {failed && (
-                        <Button color="link-destructive" size="sm" onClick={onRetry} className="mt-1.5">
-                            Try again
-                        </Button>
-                    )}
+                    <div className="flex items-center gap-2">
+                        {!failed && isComplete && <CheckCircle className="size-4 text-success-500" />}
+                        <ButtonUtility 
+                            color="tertiary" 
+                            tooltip="Remove" 
+                            icon={Trash01} 
+                            size="xs" 
+                            className="opacity-0 group-hover:opacity-100 transition-opacity" 
+                            onClick={onDelete} 
+                        />
+                    </div>
                 </div>
 
-                <ButtonUtility color="tertiary" tooltip="Delete" icon={Trash01} size="xs" className="-mt-2 -mr-2 self-start" onClick={onDelete} />
+                {failed && (
+                    <button 
+                        onClick={onRetry} 
+                        className="mt-1 text-xs font-bold text-brand-600 hover:text-brand-700 underline text-left"
+                    >
+                        Try again
+                    </button>
+                )}
             </div>
         </motion.li>
     );
 };
 
 const FileUploadRoot = (props: ComponentPropsWithRef<"div">) => (
-    <div {...props} className={cx("flex flex-col gap-4", props.className)}>
+    <div {...props} className={cx("flex flex-col gap-5", props.className)}>
         {props.children}
     </div>
 );
 
 const FileUploadList = (props: ComponentPropsWithRef<"ul">) => (
-    <ul {...props} className={cx("flex flex-col gap-3", props.className)}>
+    <ul {...props} className={cx("flex flex-col gap-3.5", props.className)}>
         <AnimatePresence initial={false}>{props.children}</AnimatePresence>
     </ul>
 );

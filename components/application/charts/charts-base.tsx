@@ -51,20 +51,21 @@ export const ChartLegendContent = ({ reversed, payload, align, layout, className
     return (
         <ul
             className={cx(
-                "flex",
+                "flex flex-wrap",
                 layout === "vertical"
-                    ? `flex-col gap-1 pl-4 ${align === "center" ? "items-center" : align === "right" ? "items-start" : "items-start"}`
-                    : `flex-row gap-3 ${align === "center" ? "justify-center" : align === "right" ? "justify-end" : "justify-start"}`,
+                    ? `flex-col gap-2 pl-4 ${align === "center" ? "items-center" : align === "right" ? "items-end" : "items-start"}`
+                    : `flex-row gap-4 ${align === "center" ? "justify-center" : align === "right" ? "justify-end" : "justify-start"}`,
                 className,
             )}
         >
             {payload?.map((entry, index) => (
-                <li className="flex items-center gap-2 text-sm text-tertiary" key={index}>
+                <li className="flex items-center gap-2 text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest" key={index}>
                     <span
                         className={cx(
-                            "block size-2 rounded-full bg-current ring-[0.5px] ring-black/10 ring-inset",
+                            "block size-2.5 rounded-full bg-current shadow-sm ring-2 ring-white dark:ring-slate-900",
                             (entry.payload as { className?: string })?.className,
                         )}
+                        style={{ backgroundColor: entry.color }}
                     />
                     {entry.value}
                 </li>
@@ -105,20 +106,35 @@ export const ChartTooltipContent = ({ active, payload, label, isRadialChart, isP
     secondaryTitle = isSingleDataPoint && labelFormatter ? labelFormatter(secondaryTitle, payload) : secondaryTitle;
 
     return (
-        <div className="flex flex-col gap-0.5 rounded-lg bg-primary-solid px-3 py-2 shadow-lg">
-            <p className="text-xs font-semibold text-white">{title}</p>
-
-            {!secondaryTitle ? null : Array.isArray(secondaryTitle) ? (
-                <div>
-                    {secondaryTitle.map((entry, index) => (
-                        <p key={index} className={cx("text-xs text-tooltip-supporting-text")}>
-                            {`${entry.name}: ${formatter ? formatter(entry.value, entry.name, entry, index, entry.payload) : entry.value}`}
-                        </p>
-                    ))}
-                </div>
-            ) : (
-                <p className="text-xs text-tooltip-supporting-text">{secondaryTitle}</p>
+        <div className="flex flex-col gap-2 rounded-2xl bg-slate-900/90 dark:bg-black/90 backdrop-blur-xl border border-white/10 px-4 py-3 shadow-2xl ring-1 ring-black/5">
+            {title && (
+                <p className="text-xs font-bold text-white tracking-tight uppercase opacity-50">{title}</p>
             )}
+
+            <div className="flex flex-col gap-1.5">
+                {!secondaryTitle ? null : Array.isArray(secondaryTitle) ? (
+                    <div className="space-y-1.5">
+                        {secondaryTitle.map((entry, index) => (
+                            <div key={index} className="flex items-center justify-between gap-4">
+                                <div className="flex items-center gap-2">
+                                    <div 
+                                        className="size-2 rounded-full ring-2 ring-white/10" 
+                                        style={{ backgroundColor: entry.color || entry.fill }} 
+                                    />
+                                    <span className="text-xs font-bold text-slate-300">{entry.name}</span>
+                                </div>
+                                <span className="text-xs font-bold text-white tabular-nums">
+                                    {formatter ? formatter(entry.value, entry.name, entry, index, entry.payload) : entry.value}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div className="flex items-center justify-between gap-4">
+                        <span className="text-sm font-bold text-white tabular-nums">{secondaryTitle}</span>
+                    </div>
+                )}
+            </div>
         </div>
     );
 };
@@ -129,12 +145,14 @@ interface ChartActiveDotProps extends DotProps {
     payload?: any;
 }
 
-export const ChartActiveDot = ({ cx = 0, cy = 0 }: ChartActiveDotProps) => {
-    const size = 12;
+export const ChartActiveDot = ({ cx = 0, cy = 0, stroke, fill }: ChartActiveDotProps) => {
+    const size = 16;
 
     return (
-        <svg x={cx - size / 2} y={cy - size / 2} width={size} height={size} viewBox="0 0 12 12" fill="none">
-            <rect x="2" y="2" width="8" height="8" rx="6" className="fill-bg-primary stroke-utility-brand-600" strokeWidth="2" />
+        <svg x={cx - size / 2} y={cy - size / 2} width={size} height={size} viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="7" fill={fill || "white"} fillOpacity="0.2" />
+            <circle cx="8" cy="8" r="5" fill={fill || "white"} className="shadow-lg" />
+            <circle cx="8" cy="8" r="5" stroke="white" strokeOpacity="0.5" strokeWidth="1" />
         </svg>
     );
 };

@@ -52,7 +52,13 @@ const TableContext = createContext<{ size: "sm" | "md" }>({ size: "md" });
 const TableCardRoot = ({ children, className, size = "md", ...props }: HTMLAttributes<HTMLDivElement> & { size?: "sm" | "md" }) => {
     return (
         <TableContext.Provider value={{ size }}>
-            <div {...props} className={cx("overflow-hidden rounded-xl bg-primary shadow-xs ring-1 ring-secondary", className)}>
+            <div 
+                {...props} 
+                className={cx(
+                    "overflow-hidden rounded-2xl bg-primary shadow-lg shadow-neutral-900/5 ring-1 ring-secondary transition-all", 
+                    className
+                )}
+            >
                 {children}
             </div>
         </TableContext.Provider>
@@ -83,20 +89,20 @@ const TableCardHeader = ({ title, badge, description, contentTrailing, className
                 className,
             )}
         >
-            <div className="flex flex-1 flex-col gap-0.5">
+            <div className="flex flex-1 flex-col gap-1">
                 <div className="flex items-center gap-2">
-                    <h2 className="text-md font-semibold text-primary">{title}</h2>
+                    <h2 className="text-lg font-bold text-primary tracking-tight">{title}</h2>
                     {badge ? (
                         isValidElement(badge) ? (
                             badge
                         ) : (
-                            <Badge color="gray" size="sm" type="modern">
+                            <Badge color="brand" size="sm" type="modern">
                                 {badge}
                             </Badge>
                         )
                     ) : null}
                 </div>
-                {description && <p className="text-sm text-tertiary">{description}</p>}
+                {description && <p className="text-sm font-medium text-tertiary leading-relaxed">{description}</p>}
             </div>
             {contentTrailing}
         </div>
@@ -112,8 +118,8 @@ const TableRoot = ({ className, size = "md", ...props }: TableRootProps) => {
 
     return (
         <TableContext.Provider value={{ size: context?.size ?? size }}>
-            <div className="overflow-x-auto">
-                <AriaTable className={(state) => cx("w-full overflow-x-hidden", typeof className === "function" ? className(state) : className)} {...props} />
+            <div className="overflow-x-auto scrollbar-hide">
+                <AriaTable className={(state) => cx("w-full overflow-x-hidden border-collapse", typeof className === "function" ? className(state) : className)} {...props} />
             </div>
         </TableContext.Provider>
     );
@@ -137,8 +143,8 @@ const TableHeader = <T extends object>({ columns, children, bordered = true, cla
             {...props}
             className={(state) =>
                 cx(
-                    "relative bg-secondary",
-                    size === "sm" ? "h-9" : "h-11",
+                    "relative bg-secondary/50 backdrop-blur-sm",
+                    size === "sm" ? "h-10" : "h-12",
 
                     // Row border—using an "after" pseudo-element to avoid the border taking up space.
                     bordered &&
@@ -149,7 +155,7 @@ const TableHeader = <T extends object>({ columns, children, bordered = true, cla
             }
         >
             {selectionBehavior === "toggle" && (
-                <AriaColumn className={cx("relative py-2 pr-0 pl-4", size === "sm" ? "w-9 md:pl-5" : "w-11 md:pl-6")}>
+                <AriaColumn className={cx("relative py-2 pr-0 pl-4", size === "sm" ? "w-10 md:pl-5" : "w-12 md:pl-6")}>
                     {selectionMode === "multiple" && (
                         <div className="flex items-start">
                             <Checkbox slot="selection" size="md" />
@@ -177,33 +183,33 @@ const TableHead = ({ className, tooltip, label, children, ...props }: TableHeadP
             {...props}
             className={(state) =>
                 cx(
-                    "relative p-0 px-6 py-2 outline-hidden focus-visible:z-1 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-bg-primary focus-visible:ring-inset",
+                    "relative p-0 px-6 py-2 outline-hidden focus-visible:z-1 focus-visible:ring-2 focus-visible:ring-focus-ring focus-visible:ring-offset-bg-primary focus-visible:ring-inset transition-colors",
                     selectionBehavior === "toggle" && "nth-2:pl-3",
-                    state.allowsSorting && "cursor-pointer",
+                    state.allowsSorting && "cursor-pointer hover:bg-secondary/80",
                     typeof className === "function" ? className(state) : className,
                 )
             }
         >
             {(state) => (
-                <AriaGroup className="flex items-center gap-1">
-                    <div className="flex items-center gap-1">
-                        {label && <span className="text-xs font-semibold whitespace-nowrap text-quaternary">{label}</span>}
+                <AriaGroup className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-1.5">
+                        {label && <span className="text-[11px] font-bold uppercase tracking-widest text-quaternary">{label}</span>}
                         {typeof children === "function" ? children(state) : children}
                     </div>
 
                     {tooltip && (
                         <Tooltip title={tooltip} placement="top">
                             <TooltipTrigger className="cursor-pointer text-fg-quaternary transition duration-100 ease-linear hover:text-fg-quaternary_hover focus:text-fg-quaternary_hover">
-                                <HelpCircle className="size-4" />
+                                <HelpCircle className="size-3.5" />
                             </TooltipTrigger>
                         </Tooltip>
                     )}
 
                     {state.allowsSorting &&
                         (state.sortDirection ? (
-                            <ArrowDown className={cx("size-3 stroke-[3px] text-fg-quaternary", state.sortDirection === "ascending" && "rotate-180")} />
+                            <ArrowDown className={cx("size-3 stroke-[3px] text-brand-600 dark:text-brand-400", state.sortDirection === "ascending" && "rotate-180")} />
                         ) : (
-                            <ChevronSelectorVertical size={12} strokeWidth={3} className="text-fg-quaternary" />
+                            <ChevronSelectorVertical size={12} strokeWidth={3} className="text-fg-quaternary opacity-0 group-hover:opacity-100 transition-opacity" />
                         ))}
                 </AriaGroup>
             )}
@@ -229,9 +235,9 @@ const TableRow = <T extends object>({ columns, children, className, highlightSel
             {...props}
             className={(state) =>
                 cx(
-                    "relative outline-focus-ring transition-colors after:pointer-events-none hover:bg-secondary focus-visible:outline-2 focus-visible:-outline-offset-2",
+                    "relative outline-focus-ring transition-all after:pointer-events-none hover:bg-secondary/40 focus-visible:outline-2 focus-visible:-outline-offset-2",
                     size === "sm" ? "h-14" : "h-18",
-                    highlightSelectedRow && "selected:bg-secondary",
+                    highlightSelectedRow && "selected:bg-brand-50/50 dark:selected:bg-brand-900/10",
 
                     // Row border—using an "after" pseudo-element to avoid the border taking up space.
                     "[&>td]:after:absolute [&>td]:after:inset-x-0 [&>td]:after:bottom-0 [&>td]:after:h-px [&>td]:after:w-full [&>td]:after:bg-border-secondary last:[&>td]:after:hidden [&>td]:focus-visible:after:opacity-0 focus-visible:[&>td]:after:opacity-0",
@@ -242,7 +248,7 @@ const TableRow = <T extends object>({ columns, children, className, highlightSel
         >
             {selectionBehavior === "toggle" && (
                 <AriaCell className={cx("relative py-2 pr-0 pl-4", size === "sm" ? "md:pl-5" : "md:pl-6")}>
-                    <div className="flex items-end">
+                    <div className="flex items-center">
                         <Checkbox slot="selection" size="md" />
                     </div>
                 </AriaCell>
@@ -270,7 +276,7 @@ const TableCell = ({ className, children, size: sizeProp, ...props }: TableCellP
             {...props}
             className={(state) =>
                 cx(
-                    "relative text-sm text-tertiary outline-focus-ring focus-visible:z-1 focus-visible:outline-2 focus-visible:-outline-offset-2",
+                    "relative text-sm font-medium text-secondary outline-focus-ring focus-visible:z-1 focus-visible:outline-2 focus-visible:-outline-offset-2 transition-colors",
                     size === "sm" && "px-5 py-3",
                     size === "md" && "px-6 py-4",
 

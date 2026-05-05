@@ -2,6 +2,14 @@
 
 import { SocialButton } from "@/components/base/buttons/social-button";
 
+export const SocialButtonPreview = () => (
+    <div className="flex gap-4">
+        <SocialButton social="google" theme="brand" />
+        <SocialButton social="github" theme="brand" />
+        <SocialButton social="apple" theme="brand" />
+    </div>
+);
+
 export const SocialButtonGoogleDemo = () => {
     return (
         <div className="flex flex-col gap-4">
@@ -362,6 +370,94 @@ export const SocialButtons = () => {
                         Sign in with Dribble
                     </SocialButton>
                     <SocialButton social="dribble" theme="gray" />
+                </div>
+            </div>
+
+            {/* GitHub */}
+            <div className="mb-4 flex justify-items-start gap-16">
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="github" theme="brand">
+                        Sign in with GitHub
+                    </SocialButton>
+                    <SocialButton social="github" theme="brand" />
+                </div>
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="github" theme="color">
+                        Sign in with GitHub
+                    </SocialButton>
+                    <SocialButton social="github" theme="color" />
+                </div>
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="github" theme="gray">
+                        Sign in with GitHub
+                    </SocialButton>
+                    <SocialButton social="github" theme="gray" />
+                </div>
+            </div>
+
+            {/* Discord */}
+            <div className="mb-4 flex justify-items-start gap-16">
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="discord" theme="brand">
+                        Sign in with Discord
+                    </SocialButton>
+                    <SocialButton social="discord" theme="brand" />
+                </div>
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="discord" theme="color">
+                        Sign in with Discord
+                    </SocialButton>
+                    <SocialButton social="discord" theme="color" />
+                </div>
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="discord" theme="gray">
+                        Sign in with Discord
+                    </SocialButton>
+                    <SocialButton social="discord" theme="gray" />
+                </div>
+            </div>
+
+            {/* Slack */}
+            <div className="mb-4 flex justify-items-start gap-16">
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="slack" theme="brand">
+                        Sign in with Slack
+                    </SocialButton>
+                    <SocialButton social="slack" theme="brand" />
+                </div>
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="slack" theme="color">
+                        Sign in with Slack
+                    </SocialButton>
+                    <SocialButton social="slack" theme="color" />
+                </div>
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="slack" theme="gray">
+                        Sign in with Slack
+                    </SocialButton>
+                    <SocialButton social="slack" theme="gray" />
+                </div>
+            </div>
+
+            {/* LinkedIn */}
+            <div className="mb-4 flex justify-items-start gap-16">
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="linkedin" theme="brand">
+                        Sign in with LinkedIn
+                    </SocialButton>
+                    <SocialButton social="linkedin" theme="brand" />
+                </div>
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="linkedin" theme="color">
+                        Sign in with LinkedIn
+                    </SocialButton>
+                    <SocialButton social="linkedin" theme="color" />
+                </div>
+                <div className="grid grid-cols-[238px_44px] justify-items-start gap-8">
+                    <SocialButton social="linkedin" theme="gray">
+                        Sign in with LinkedIn
+                    </SocialButton>
+                    <SocialButton social="linkedin" theme="gray" />
                 </div>
             </div>
         </div>
