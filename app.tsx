@@ -6,7 +6,7 @@ import { DefaultDemo as CheckboxDefaultDemo, SizesDemo as CheckboxSizesDemo, Che
 import { DefaultDemo as SelectDefaultDemo, DisabledDemo as SelectDisabledDemo, SizesDemo as SelectSizesDemo } from "./components/base/select/select.demo";
 import { DefaultDemo as AvatarDefaultDemo, VerifiedDemo as AvatarVerifiedDemo, GroupDemo as AvatarGroupDemo } from "./components/base/avatar/avatar.demo";
 import { Default as BadgeDefaultDemo, PillColor as BadgePillColorDemo, BadgeColor as BadgeColorDemo, WithDot as BadgeWithDotDemo } from "./components/base/badges/badges.demo";
-import { DefaultDemo as TagsDefaultDemo, CloseXDemo as TagsCloseXDemo } from "./components/base/tags/tags.demo";
+import { DefaultDemo as TagsDefaultDemo, CloseXDemo as TagsCloseXDemo, SizesDemo as TagsSizesDemo, CheckboxDemo as TagsCheckboxDemo, CountDemo as TagsCountDemo } from "./components/base/tags/tags.demo";
 import { LeadingIcon as ButtonGroupLeadingIconDemo, ButtonGroupDot as ButtonGroupDotDemo, DisabledIndividualButton as ButtonGroupDisabledIndividualDemo, SelectedItem as ButtonGroupSelectedDemo, MultipleSelectedItems as ButtonGroupMultipleDemo } from "./components/base/button-group/button-group.demo";
 import { WithLabelDemo as RadioWithLabelDemo, WithLabelAndHintDemo as RadioWithLabelAndHintDemo, DisabledDemo as RadioDisabledDemo, RadioButtons as RadioButtonsDemo } from "./components/base/radio-buttons/radio-buttons.demo";
 import { DefaultDemo as ToggleDefaultDemo, WithLabelAndHintDemo as ToggleWithLabelAndHintDemo, DisabledDemo as ToggleDisabledDemo, SizesDemo as ToggleSizesDemo } from "./components/base/toggle/toggle.demo";
@@ -14,11 +14,11 @@ import { DefaultDemo as TextareaDefaultDemo, DisabledDemo as TextareaDisabledDem
 import { Default as SliderDefault, BottomLabel as SliderBottomLabel, TopFloating as SliderTopFloating, SingleThumb as SliderSingleThumb } from "./components/base/slider/slider.demo";
 import { DefaultDemo as TooltipDefaultDemo, WithArrowDemo as TooltipWithArrowDemo, WithSupportingTextDemo as TooltipWithSupportingTextDemo } from "./components/base/tooltip/tooltip.demo";
 import { ProgressBarDefault, ProgressBarTextRight, CircleProgressBar, CircleProgressBarLabel } from "./components/base/progress-indicators/progress-indicators.demo";
-import { CalendarDemo, CalendarCardDemo, DatePickerDemo, DatePickerControlledDemo } from "./components/application/date-picker/date-picker.demo";
+import { CalendarDemo, CalendarCardDemo, DatePickerDemo, DatePickerControlledDemo, DateTimePickerDemo, RangeCalendarDemo, RangeCalendarCardDemo, DateRangePickerDemo, DatePickerCardDemo, DatePickerMinimalDemo } from "./components/application/date-picker/date-picker.demo";
 import { ButtonBrandHorizontalDemo, ButtonBrandVerticalDemo, ButtonGrayHorizontalDemo } from "./components/application/tabs/tabs.demo";
 import { PaginationPageDefault, PaginationPageMinimalCenter, PaginationCardDefault, PaginationCardMinimalCenterAligned } from "./components/application/pagination/pagination.demo";
 import { Table01DividerLine, Table01AlternatingFills, Table02DividerLine, Table03DividerLine, Table04DividerLine, Table05ProjectManagement, TablePreview } from "./components/application/table/table.demo";
-import { ImagesOnlyDemo, MaxSizeLimitDemo } from "./components/application/file-upload/file-upload.demo";
+import { ImagesOnlyDemo, MaxSizeLimitDemo, CompactVariantDemo, ModernVariantDemo, MinimalVariantDemo, ImageVariantDemo } from "./components/application/file-upload/file-upload.demo";
 import { CarouselMd, CarouselLg } from "./components/application/carousel/carousel.demo";
 import { BarChart, BarChart02, BarChart03 } from "./components/application/charts/bar-charts.demo";
 import { LineChart01, LineChart02, LineChart03, LineChart04 } from "./components/application/charts/line-charts.demo";
@@ -35,13 +35,14 @@ import { LucideIconsDemo, TablerIconsDemo, UntitledIconsDemo, IconsPreview } fro
 import { DocumentationIntroDemo, DocumentationDesignDemo } from "./components/foundations/documentation/documentation.demo";
 import { SocialButtonPreview, SocialButtonGroupBrandDemo, SocialButtonGroupColorDemo, SocialButtonGroupGrayDemo, SocialButtonGroupsMD, SocialButtonGroupsLG } from "./components/base/buttons/social-buttons.demo";
 import { MobileAppButtonsPreview, MobileAppButtonsBlackDemo, MobileAppButtonsWhiteDemo, MobileAppButtonsGlassDemo, MobileAppButtonsOutlineDemo } from "./components/application/mobile-app-buttons/mobile-app-buttons.demo";
-import { CreditCardPreview, CreditCardBrandDemo, CreditCardGradientDemo, CreditCardGlassDemo, CreditCardDarkLightDemo } from "./components/application/credit-card/credit-card.demo";
-import { BrandedQRCodePreview, BrandedQRCodeBrandDemo, BrandedQRCodeDarkDemo, BrandedQRCodeLightDemo } from "./components/application/qr-code/qr-code.demo";
+import { CreditCardPreview, CreditCardBrandDemo, CreditCardGradientDemo, CreditCardGlassDemo, CreditCardDarkLightDemo, CreditCardInteractiveDemo } from "./components/application/credit-card/credit-card.demo";
+import { BrandedQRCodePreview, BrandedQRCodeBrandDemo, BrandedQRCodeDarkDemo, BrandedQRCodeLightDemo, BrandedQRCodeColorfulDemo, BrandedQRCodeMinimalDemo, BrandedQRCodeClassicDemo, BrandedQRCodeModernDemo, BrandedQRCodeElegantDemo } from "./components/application/qr-code/qr-code.demo";
+import { EmptyStateDefaultDemo, EmptyStateCardDemo, EmptyStateMinimalDemo, EmptyStateColorfulDemo } from "./components/application/empty-state/empty-state.demo";
 import { UtilityButtonsPreview, UtilityButtonsStandardDemo, UtilityButtonsTertiaryDemo, UtilityButtonsXSDemo } from "./components/base/buttons/utility-buttons.demo";
-import { TextEditorPreview, TextEditorFullDemo, TextEditorCompactDemo } from "./components/base/text-editor/text-editor.demo";
+import { TextEditorPreview, TextEditorFullDemo, TextEditorCompactDemo, TextEditorMinimalDemo } from "./components/base/text-editor/text-editor.demo";
 import { ColorsDemo as TagsColorsDemo } from "./components/base/tags/tags.demo";
 import { MultiSelectChipsDemo } from "./components/base/select/select.demo";
-import { ProfileDropdownDemo, MegaMenuDemo } from "./components/base/dropdown/dropdown.demo";
+import { ProfileDropdownDemo, MegaMenuDemo, SimpleDropdownDemo, DropdownWithIconsDemo, DropdownWithSelectionDemo } from "./components/base/dropdown/dropdown.demo";
 
 
 type ComponentPage = {
@@ -83,6 +84,7 @@ const componentNameMap: Record<string, string> = {
   "mobile-app-buttons": "StoreBadge",
   "credit-cards": "CreditCard",
   "qr-codes": "BrandedQRCode",
+  "empty-states": "EmptyState",
   "utility-buttons": "ButtonUtility",
   "text-editors": "TextEditor",
   "dropdowns": "Dropdown",
@@ -288,6 +290,9 @@ const componentPages: ComponentPage[] = [
         description: "Modern, accessible dropdown menus with support for multiple sections, icons, and complex layouts.",
         keyFeatures: ["Accessible", "Multi-section", "Icons & Avatars", "Mega menu support"],
         demoBlocks: [
+            { label: "Simple dropdown", Demo: SimpleDropdownDemo },
+            { label: "With icons", Demo: DropdownWithIconsDemo },
+            { label: "With selection", Demo: DropdownWithSelectionDemo },
             { label: "Account profile", Demo: ProfileDropdownDemo },
             { label: "Mega menu", Demo: MegaMenuDemo },
         ],
@@ -325,6 +330,9 @@ const componentPages: ComponentPage[] = [
     demoBlocks: [
             { label: "Default tags", Demo: TagsDefaultDemo },
             { label: "Closable tags", Demo: TagsCloseXDemo },
+            { label: "Tag sizes", Demo: TagsSizesDemo },
+            { label: "Selectable tags", Demo: TagsCheckboxDemo },
+            { label: "Tag counters", Demo: TagsCountDemo },
             { label: "Tag colors", Demo: TagsColorsDemo },
         ],
     },
@@ -364,8 +372,9 @@ const componentPages: ComponentPage[] = [
         keyFeatures: ["Modern toolbar", "Status bar", "Word count", "Responsive"],
         demoBlocks: [
             { label: "Editor preview", Demo: TextEditorPreview },
-            { label: "Post editor", Demo: TextEditorFullDemo },
+            { label: "Minimal editor", Demo: TextEditorMinimalDemo },
             { label: "Comment editor", Demo: TextEditorCompactDemo },
+            { label: "Post editor", Demo: TextEditorFullDemo },
         ],
     },
     {
@@ -394,6 +403,7 @@ const componentPages: ComponentPage[] = [
             { label: "Gradient variant", Demo: CreditCardGradientDemo },
             { label: "Glass variant", Demo: CreditCardGlassDemo },
             { label: "Light & Dark", Demo: CreditCardDarkLightDemo },
+            { label: "Interactive variants", Demo: CreditCardInteractiveDemo },
         ],
     },
     {
@@ -407,6 +417,24 @@ const componentPages: ComponentPage[] = [
             { label: "Brand theme", Demo: BrandedQRCodeBrandDemo },
             { label: "Dark theme", Demo: BrandedQRCodeDarkDemo },
             { label: "Light theme", Demo: BrandedQRCodeLightDemo },
+            { label: "Colorful variant", Demo: BrandedQRCodeColorfulDemo },
+            { label: "Minimal variant", Demo: BrandedQRCodeMinimalDemo },
+            { label: "Classic variant", Demo: BrandedQRCodeClassicDemo },
+            { label: "Modern variant", Demo: BrandedQRCodeModernDemo },
+            { label: "Elegant variant", Demo: BrandedQRCodeElegantDemo },
+        ],
+    },
+    {
+        id: "empty-states",
+        title: "Empty States",
+        category: "Application",
+        description: "Empty state components with illustrations, avatars, and different layouts for various scenarios.",
+        keyFeatures: ["Multiple illustrations", "Avatar layouts", "Size variants", "Theme variants"],
+        demoBlocks: [
+            { label: "Default empty state", Demo: EmptyStateDefaultDemo },
+            { label: "Card variant", Demo: EmptyStateCardDemo },
+            { label: "Minimal variant", Demo: EmptyStateMinimalDemo },
+            { label: "Colorful variant", Demo: EmptyStateColorfulDemo },
         ],
     },
   {
@@ -496,6 +524,12 @@ const componentPages: ComponentPage[] = [
       { label: "Calendar card", Demo: CalendarCardDemo },
       { label: "Date picker", Demo: DatePickerDemo },
       { label: "Controlled picker", Demo: DatePickerControlledDemo },
+      { label: "Date time picker", Demo: DateTimePickerDemo },
+      { label: "Range calendar", Demo: RangeCalendarDemo },
+      { label: "Range calendar card", Demo: RangeCalendarCardDemo },
+      { label: "Date range picker", Demo: DateRangePickerDemo },
+      { label: "Card variant", Demo: DatePickerCardDemo },
+      { label: "Minimal variant", Demo: DatePickerMinimalDemo },
     ],
   },
   {
@@ -548,6 +582,10 @@ const componentPages: ComponentPage[] = [
     demoBlocks: [
       { label: "Images only", Demo: ImagesOnlyDemo },
       { label: "Size limit", Demo: MaxSizeLimitDemo },
+      { label: "Compact variant", Demo: CompactVariantDemo },
+      { label: "Modern variant", Demo: ModernVariantDemo },
+      { label: "Minimal variant", Demo: MinimalVariantDemo },
+      { label: "Image variant", Demo: ImageVariantDemo },
     ],
   },
   {

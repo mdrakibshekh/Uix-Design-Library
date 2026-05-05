@@ -309,14 +309,9 @@ export const DateRangePickerDemo = () => {
     );
 };
 
-export const DateRangePickerControlledDemo = () => {
-    const [value, setValue] = useState<{ start: DateValue; end: DateValue } | null>({
-        start: now.subtract({ days: 7 }),
-        end: now,
-    });
+export const DatePickerCardDemo = () => <DatePicker variant="card" />;
 
-    return <DateRangePicker aria-label="Date range picker" shouldCloseOnSelect={false} value={value} onChange={setValue} />;
-};
+export const DatePickerMinimalDemo = () => <DatePicker variant="minimal" />;
 
 export const DarkModeDemo = () => {
     const [value, setValue] = useState<DateValue | null>(now);

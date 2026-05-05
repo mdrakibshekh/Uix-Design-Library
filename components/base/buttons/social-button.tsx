@@ -25,7 +25,7 @@ export const styles = sortCx({
 
     colors: {
         gray: {
-            root: "bg-primary text-secondary shadow-xs-skeuomorphic ring-1 ring-primary ring-inset hover:bg-primary_hover hover:text-secondary_hover",
+            root: "bg-primary text-secondary shadow-xs-skeuomorphic ring-1 ring-border-secondary ring-inset hover:bg-primary_hover hover:text-secondary_hover",
             icon: "text-fg-quaternary group-hover:text-fg-quaternary_hover",
         },
         black: {

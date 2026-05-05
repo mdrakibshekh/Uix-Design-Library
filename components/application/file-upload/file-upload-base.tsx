@@ -4,7 +4,7 @@ import type { ComponentProps, ComponentPropsWithRef } from "react";
 import { useId, useRef, useState } from "react";
 import type { FileIcon } from "@untitledui/file-icons";
 import { FileIcon as FileTypeIcon } from "@untitledui/file-icons";
-import { CheckCircle, Trash01, UploadCloud02, XCircle } from "@untitledui/icons";
+import { CheckCircle, Trash01, UploadCloud02, XCircle, Camera01 } from "@untitledui/icons";
 import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/base/buttons/button";
 import { ButtonUtility } from "@/components/base/buttons/button-utility";
@@ -52,6 +52,10 @@ interface FileUploadDropZoneProps {
      */
     maxSize?: number;
     /**
+     * Variant of the drop zone.
+     */
+    variant?: "default" | "compact" | "modern" | "minimal" | "image";
+    /**
      * Callback function that is called with the list of dropped files
      * when files are dropped on the drop zone.
      */
@@ -75,6 +79,7 @@ export const FileUploadDropZone = ({
     accept,
     allowsMultiple = true,
     maxSize,
+    variant = "default",
     onDropFiles,
     onDropUnacceptedFiles,
     onSizeLimitExceed,
@@ -83,6 +88,14 @@ export const FileUploadDropZone = ({
     const inputRef = useRef<HTMLInputElement>(null);
     const [isInvalid, setIsInvalid] = useState(false);
     const [isDraggingOver, setIsDraggingOver] = useState(false);
+
+    const variantStyles = {
+        default: "relative flex flex-col items-center gap-4 rounded-2xl bg-primary px-8 py-10 text-tertiary border-2 border-dashed border-secondary",
+        compact: "relative flex flex-col items-center gap-3 rounded-xl bg-primary px-6 py-6 text-tertiary border-2 border-dashed border-secondary",
+        modern: "relative flex flex-col items-center gap-4 rounded-2xl bg-gradient-to-br from-primary to-secondary px-8 py-10 text-tertiary border-2 border-dashed border-secondary shadow-lg",
+        minimal: "relative flex flex-col items-center gap-2 rounded-lg bg-primary px-4 py-4 text-tertiary border border-secondary",
+        image: "relative flex flex-col items-center gap-4 rounded-2xl bg-primary px-8 py-12 text-tertiary border-2 border-dashed border-secondary",
+    };
 
     const isFileTypeAccepted = (file: File): boolean => {
         if (!accept) return true;
@@ -201,14 +214,15 @@ export const FileUploadDropZone = ({
             onDragEnd={handleDragOut}
             onDrop={handleDrop}
             className={cx(
-                "relative flex flex-col items-center gap-4 rounded-2xl bg-primary px-8 py-10 text-tertiary border-2 border-dashed border-secondary transition-all duration-200 ease-in-out",
+                variantStyles[variant],
+                "transition-all duration-200 ease-in-out",
                 isDraggingOver && "border-brand-500 bg-brand-50/10 dark:bg-brand-900/10",
                 isDisabled && "cursor-not-allowed opacity-60 bg-secondary/50",
                 className,
             )}
         >
             <FeaturedIcon 
-                icon={UploadCloud02} 
+                icon={variant === "image" ? Camera01 : UploadCloud02} 
                 color="brand" 
                 theme="modern" 
                 size="lg" 
@@ -240,7 +254,7 @@ export const FileUploadDropZone = ({
                     </div>
                 </div>
                 <p className={cx("text-xs font-medium text-quaternary leading-relaxed transition-colors", isInvalid && "text-error-primary")}>
-                    {hint || "SVG, PNG, JPG or GIF (max. 800x400px)"}
+                    {hint || (variant === "image" ? "PNG, JPG or GIF (max. 800x400px)" : "SVG, PNG, JPG or GIF (max. 800x400px)")}
                 </p>
             </div>
         </div>

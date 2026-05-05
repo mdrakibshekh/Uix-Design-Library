@@ -48,7 +48,7 @@ export const CarouselMd = () => {
 
             <Carousel.Content className="gap-2">
                 <Carousel.Item className="overflow-hidden rounded-xl">
-                    <img alt="Image by Unsplash" src="https://www.uix.design/application/plants.webp" className="size-full object-cover" />
+                    <img alt="Image by Unsplash" src="https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?q=80&w=2971&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" className="size-full object-cover" />
                 </Carousel.Item>
                 <Carousel.Item className="overflow-hidden rounded-xl">
                     <img
@@ -85,12 +85,12 @@ export const CarouselLg = () => {
 
             <Carousel.Content className="gap-2">
                 <Carousel.Item className="overflow-hidden rounded-xl">
-                    <img alt="Image by Unsplash" src="https://www.uix.design/application/plants.webp" className="size-full object-cover" />
+                    <img alt="Image by Unsplash" src="https://cdn.dribbble.com/userupload/18317923/file/original-51469241c0a3430a810ff410bf24c9a8.png?resize=1024x768&vertical=center" className="size-full object-cover" />
                 </Carousel.Item>
                 <Carousel.Item className="overflow-hidden rounded-xl">
                     <img
                         alt="Image by Unsplash"
-                        src="https://images.unsplash.com/photo-1484506097116-1bcba4fa7568?q=80&w=2970&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        src="https://cdn.dribbble.com/userupload/18310775/file/original-8e6eac521a817f3c4b8ce09fa720a5ed.png?resize=1024x768&vertical=center"
                         className="size-full object-cover"
                     />
                 </Carousel.Item>

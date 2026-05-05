@@ -8,15 +8,21 @@ export const TextEditorPreview = () => (
     </div>
 );
 
-export const TextEditorFullDemo = () => (
+export const TextEditorMinimalDemo = () => (
     <div className="w-full max-w-3xl">
-        <TextEditor placeholder="Write your thoughts here..." />
+        <TextEditor variant="minimal" placeholder="Start typing..." />
     </div>
 );
 
 export const TextEditorCompactDemo = () => (
-    <div className="w-full max-w-2xl">
-        <TextEditor className="min-h-[150px]" placeholder="Add a comment..." />
+    <div className="w-full max-w-3xl">
+        <TextEditor variant="compact" placeholder="Add a comment..." />
+    </div>
+);
+
+export const TextEditorFullDemo = () => (
+    <div className="w-full max-w-3xl">
+        <TextEditor variant="full" placeholder="Write your thoughts here..." />
     </div>
 );
 

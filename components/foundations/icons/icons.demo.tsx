@@ -217,7 +217,11 @@ const ALL_ICONS = {
   Lucide: LucideIcons,
   Tabler: TablerIcons,
   'Untitled UI': UntitledIcons,
-  'Solar Icons': SolarLinear,
+  'Solar Linear': SolarLinear,
+  'Solar Bold': SolarBold,
+  'Solar Bold Duotone': SolarBoldDuotone,
+  'Solar Line Duotone': SolarLineDuotone,
+  'Solar Broken': SolarBroken,
 };
 
 export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => {
@@ -258,7 +262,7 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
     if (!svgElement || !activeIcon) return;
 
     const displayColor = iconColor === 'currentColor' ? '#475569' : iconColor;
-    const cleanName = activeIcon.library === 'Solar Icons' && activeIcon.name.startsWith('Li') 
+    const cleanName = activeIcon.library === 'Solar Icons' && ['Li','Bo','Bd','Ld','Br'].some(prefix => activeIcon.name.startsWith(prefix)) 
       ? activeIcon.name.substring(2) 
       : activeIcon.name;
     const figmaName = `UIX: ${cleanName}`;
@@ -314,12 +318,10 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
     // If search is active, just show all matches from all libraries
     if (search) {
       libs.forEach(([libName, libIcons]) => {
-        const isSolarStyle = ['Bold', 'Line Duotone', 'Bold Duotone', 'Broken', 'Filled', 'Duo-Tone'].includes(selectedStyle);
-        if (isSolarStyle && libName !== 'Solar Icons') return;
-
         Object.entries(libIcons).forEach(([name, Icon]) => {
           if (name.toLowerCase().includes(search.toLowerCase())) {
-            icons.push({ name, Icon: Icon as any, library: libName });
+            const isSolar = libName.startsWith('Solar');
+            icons.push({ name, Icon: Icon as any, library: isSolar ? 'Solar Icons' : libName });
           }
         });
       });
@@ -328,9 +330,16 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
 
     // Interleave icons from different libraries to show variety in the "All" view
     const libEntries = libs.map(([name, icons]) => {
-      const isSolarStyle = ['Bold', 'Line Duotone', 'Bold Duotone', 'Broken', 'Filled', 'Duo-Tone'].includes(selectedStyle);
-      // Filter the library based on selected style
-      if (isSolarStyle && name !== 'Solar Icons') return { name, entries: [] };
+      const isSolar = name.startsWith('Solar');
+      if (selectedStyle !== 'All') {
+        if (isSolar) {
+          const solarStyle = name.replace('Solar ', '').toLowerCase().replace(' ', '-');
+          if (solarStyle !== selectedStyle.toLowerCase().replace(' ', '-')) return { name, entries: [] };
+        } else {
+          // For non-Solar, only include for 'Linear' or 'All'
+          if (['Bold', 'Line Duotone', 'Bold Duotone', 'Broken', 'Filled', 'Duo-Tone'].includes(selectedStyle)) return { name, entries: [] };
+        }
+      }
       return { name, entries: Object.entries(icons) };
     }).filter(lib => lib.entries.length > 0);
 
@@ -342,7 +351,8 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
     for (let i = 0; i < maxLen; i++) {
       libEntries.forEach(lib => {
         if (lib.entries[i]) {
-          icons.push({ name: lib.entries[i][0], Icon: lib.entries[i][1] as any, library: lib.name });
+          const isSolar = lib.name.startsWith('Solar');
+          icons.push({ name: lib.entries[i][0], Icon: lib.entries[i][1] as any, library: isSolar ? 'Solar Icons' : lib.name });
         }
       });
       // Cap at a reasonable number for performance if not searching

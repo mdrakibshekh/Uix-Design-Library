@@ -5,7 +5,7 @@ import { cx } from "@/utils/cx";
 
 interface CreditCardProps {
     brand?: "visa" | "mastercard" | "amex";
-    variant?: "brand" | "glass" | "dark" | "light" | "gradient";
+    variant?: "brand" | "glass" | "dark" | "light" | "gradient" | "ocean" | "sunset" | "forest" | "midnight";
     cardNumber?: string;
     cardHolder?: string;
     expiry?: string;
@@ -26,6 +26,10 @@ export const CreditCard = ({
         dark: "bg-slate-900 text-white shadow-xl ring-1 ring-white/10",
         light: "bg-white text-slate-900 shadow-xl ring-1 ring-slate-200",
         gradient: "bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-500 text-white shadow-xl ring-1 ring-white/20",
+        ocean: "bg-gradient-to-br from-blue-500 via-cyan-500 to-teal-500 text-white shadow-xl ring-1 ring-white/20",
+        sunset: "bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 text-white shadow-xl ring-1 ring-white/20",
+        forest: "bg-gradient-to-br from-green-500 via-emerald-500 to-teal-500 text-white shadow-xl ring-1 ring-white/20",
+        midnight: "bg-gradient-to-br from-slate-800 via-purple-900 to-slate-900 text-white shadow-xl ring-1 ring-white/20",
     };
 
     const logos = {
@@ -94,15 +98,15 @@ export const CreditCard = ({
             </div>
 
             {/* Card Number */}
-            <div className="mt-10 text-2xl tracking-[0.25em] drop-shadow-md">
+            <div className="mt-2 text-2xl tracking-[0.25em] drop-shadow-md">
                 {cardNumber}
             </div>
 
             {/* Bottom Section */}
-            <div className="mt-8 flex items-end justify-between">
+            <div className="mt-4 flex items-end justify-between">
                 <div className="flex flex-col gap-1">
                     <span className="text-[10px] uppercase tracking-wider opacity-60">Card Holder</span>
-                    <span className="text-sm font-semibold tracking-widest">{cardHolder}</span>
+                    <span className="text-sm font-semibold tracking-widest truncate">{cardHolder}</span>
                 </div>
                 <div className="flex flex-col gap-1 text-right">
                     <span className="text-[10px] uppercase tracking-wider opacity-60">Expires</span>

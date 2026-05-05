@@ -12,34 +12,57 @@ import { cx } from "@/utils/cx";
 
 interface RootContextProps {
     size?: "sm" | "md" | "lg";
+    variant?: "default" | "card" | "minimal" | "colorful";
 }
 
-const RootContext = createContext<RootContextProps>({ size: "lg" });
+const RootContext = createContext<RootContextProps>({ size: "lg", variant: "default" });
 
 interface RootProps extends ComponentPropsWithRef<"div">, RootContextProps {}
 
-const Root = ({ size = "lg", ...props }: RootProps) => {
+const Root = ({ size = "lg", variant = "default", ...props }: RootProps) => {
+    const variantStyles = {
+        default: "",
+        card: "rounded-2xl bg-primary p-8 shadow-sm ring-1 ring-secondary",
+        minimal: "p-4",
+        colorful: "rounded-2xl bg-gradient-to-br from-blue-50 to-purple-50 p-8 shadow-sm ring-1 ring-blue-200/50",
+    };
+
     return (
-        <RootContext.Provider value={{ size }}>
-            <div {...props} className={cx("mx-auto flex w-full max-w-lg flex-col items-center justify-center", props.className)} />
+        <RootContext.Provider value={{ size, variant }}>
+            <div {...props} className={cx("mx-auto flex w-full max-w-lg flex-col items-center justify-center", variantStyles[variant], props.className)} />
         </RootContext.Provider>
     );
 };
 
-const FeaturedIcon = ({ color = "gray", theme = "modern", icon = SearchLg, size, ...props }: ComponentPropsWithRef<typeof FeaturedIconbase>) => {
-    const { size: rootSize } = useContext(RootContext);
+const FeaturedIcon = ({ color, theme = "modern", icon = SearchLg, size, ...props }: ComponentPropsWithRef<typeof FeaturedIconbase>) => {
+    const { size: rootSize, variant } = useContext(RootContext);
 
-    return <FeaturedIconbase {...props} {...{ color, theme, icon }} size={!size && rootSize === "lg" ? "xl" : size || "lg"} />;
+    const variantColors = {
+        default: color || "gray",
+        card: color || "gray",
+        minimal: color || "gray",
+        colorful: color || "brand",
+    };
+
+    return <FeaturedIconbase {...props} {...{ theme, icon }} color={variantColors[variant]} size={!size && rootSize === "lg" ? "xl" : size || "lg"} />;
 };
 
-const Illustration = ({ type = "cloud", color = "gray", size = "lg", ...props }: ComponentPropsWithRef<typeof Illustrations>) => {
-    const { size: rootSize } = useContext(RootContext);
+const Illustration = ({ type = "cloud", color, size = "lg", ...props }: ComponentPropsWithRef<typeof Illustrations>) => {
+    const { size: rootSize, variant } = useContext(RootContext);
+
+    const variantColors = {
+        default: color || "gray",
+        card: color || "gray",
+        minimal: color || "gray",
+        colorful: color || "brand",
+    };
 
     return (
         <Illustrations
             role="img"
             {...props}
-            {...{ type, color }}
+            {...{ type }}
+            color={variantColors[variant]}
             size={rootSize === "sm" ? "sm" : rootSize === "md" ? "md" : size}
             className={cx("z-10", props.className)}
         />

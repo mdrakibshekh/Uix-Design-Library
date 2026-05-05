@@ -290,3 +290,27 @@ export const FileUploadProgressFill = (props: { isDisabled?: boolean }) => {
         </FileUpload.Root>
     );
 };
+
+export const CompactVariantDemo = () => (
+    <FileUpload.Root>
+        <FileUpload.DropZone variant="compact" hint="Compact upload zone for tight spaces." />
+    </FileUpload.Root>
+);
+
+export const ModernVariantDemo = () => (
+    <FileUpload.Root>
+        <FileUpload.DropZone variant="modern" hint="Modern gradient design with enhanced visual appeal." />
+    </FileUpload.Root>
+);
+
+export const MinimalVariantDemo = () => (
+    <FileUpload.Root>
+        <FileUpload.DropZone variant="minimal" hint="Minimalist design for subtle file uploads." />
+    </FileUpload.Root>
+);
+
+export const ImageVariantDemo = () => (
+    <FileUpload.Root>
+        <FileUpload.DropZone variant="image" accept="image/*" hint="Upload your favorite images here." />
+    </FileUpload.Root>
+);

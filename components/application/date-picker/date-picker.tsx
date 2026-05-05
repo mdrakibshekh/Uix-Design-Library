@@ -12,15 +12,22 @@ import { Calendar } from "./calendar";
 
 const highlightedDates = [today(getLocalTimeZone())];
 
+const variantStyles = {
+    default: "rounded-2xl bg-primary shadow-xl ring ring-secondary_alt",
+    card: "rounded-xl bg-primary shadow-lg ring ring-secondary",
+    minimal: "rounded-lg bg-primary shadow-md",
+};
+
 interface DatePickerProps extends AriaDatePickerProps<DateValue> {
     /** The function to call when the apply button is clicked. */
     onApply?: () => void;
     /** The function to call when the cancel button is clicked. */
     onCancel?: () => void;
     size?: ButtonProps["size"];
+    variant?: "default" | "card" | "minimal";
 }
 
-export const DatePicker = ({ value: valueProp, defaultValue, onChange, onApply, onCancel, size = "sm", ...props }: DatePickerProps) => {
+export const DatePicker = ({ value: valueProp, defaultValue, onChange, onApply, onCancel, size = "sm", variant = "default", ...props }: DatePickerProps) => {
     const formatter = useDateFormatter({
         month: "short",
         day: "numeric",
@@ -50,7 +57,7 @@ export const DatePicker = ({ value: valueProp, defaultValue, onChange, onApply, 
                     )
                 }
             >
-                <AriaDialog aria-label="Date picker" className="rounded-2xl bg-primary shadow-xl ring ring-secondary_alt">
+                <AriaDialog aria-label="Date picker" className={variantStyles[variant]}>
                     {({ close }) => (
                         <>
                             <div className="flex px-6 py-5">
