@@ -842,6 +842,7 @@ function App() {
   const isPreviewMode = urlParams.get('preview') === 'true';
   const previewComponentId = urlParams.get('component');
   const previewVariant = urlParams.get('variant');
+  const isAutomationMode = urlParams.get('automation') === 'true';
 
   const [globalTheme, setGlobalTheme] = useState<"light" | "dark">(() => {
     if (typeof window !== "undefined") {
@@ -1246,6 +1247,25 @@ function App() {
           )}
         </div>
       </main>
+
+      {/* Hidden Automation Renderer: Silently renders all components for the sync script */}
+      {isAutomationMode && (
+        <div className="fixed inset-0 z-[-1] opacity-0 pointer-events-none overflow-hidden h-0 w-0">
+          {componentPages.map(page => (
+            <div key={page.id}>
+              {page.demoBlocks.map(demo => (
+                <DemoCard
+                  key={`${page.id}-${demo.label}`}
+                  demo={demo}
+                  pageId={page.id}
+                  globalTheme="light"
+                  onPayloadReady={handlePayloadReady}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

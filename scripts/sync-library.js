@@ -20,7 +20,7 @@ async function sync() {
   
   try {
     console.log('🌐 Connecting to local library...');
-    await page.goto('http://localhost:3333', { waitUntil: 'networkidle2' });
+    await page.goto('http://localhost:3333/?automation=true', { waitUntil: 'networkidle2' });
 
     // Wait up to 10 seconds for data to appear
     console.log('⏳ Waiting for components to serialize...');
