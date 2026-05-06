@@ -880,7 +880,23 @@ function App() {
     setDemoPayloads(prev => {
       const next = { ...prev, [key]: payload };
       if (typeof window !== 'undefined') {
-        (window as any).__UIX_LIBRARY_DATA__ = Object.values(next);
+        // STRUCTURED API ENGINE: Group variants by component name
+        const allPayloads = Object.values(next);
+        const grouped: Record<string, any> = {};
+        
+        allPayloads.forEach((item: any) => {
+          const compName = item.componentName || "Other";
+          if (!grouped[compName]) {
+            grouped[compName] = {
+              id: item.componentId || compName.toLowerCase().replace(/\s+/g, '-'),
+              name: compName,
+              variants: []
+            };
+          }
+          grouped[compName].variants.push(item);
+        });
+        
+        (window as any).__UIX_LIBRARY_DATA__ = Object.values(grouped);
       }
       return next;
     });
