@@ -22,31 +22,20 @@ async function sync() {
     console.log('🌐 Connecting to local library...');
     await page.goto('http://localhost:3333', { waitUntil: 'networkidle2' });
 
+    // Wait up to 10 seconds for data to appear
+    console.log('⏳ Waiting for components to serialize...');
+    await page.waitForFunction(() => 
+      window.__UIX_LIBRARY_DATA__ && window.__UIX_LIBRARY_DATA__.length > 0,
+      { timeout: 10000 }
+    ).catch(() => console.log('⚠️ Timeout waiting for data, proceeding anyway...'));
+
     // The logic to extract all payloads
     console.log('📦 Extracting component data...');
-    const libraryData = await page.evaluate(async () => {
-      // We need to wait for the React app to populate demoPayloads
-      // Since we are in a headless browser, we might need to "click" through categories
-      // But for now, we assume the app generates payloads for the visible landing page components.
-      
-      // Accessing the state from the window if we exposed it, or just scraping the DOM
-      // For the most robust way, we'll wait for the 'demoPayloads' to be populated
-      // We'll return the value of the internal state if accessible, 
-      // or we can re-run the serialization logic here on all elements with a specific class.
-      
-      const components = [];
-      const cards = document.querySelectorAll('article'); // DemoCard
-      
-      cards.forEach(card => {
-        const name = card.querySelector('h3')?.innerText;
-        const componentId = name?.toLowerCase().replace(/\s+/g, '-');
-        // This is a simplified version; in reality, we'd trigger the serializeToFigma function
-        // that is already in the app.tsx.
-      });
-
-      // FOR NOW: We'll rely on the app.tsx to have a "Global Export" object we can read
+    const libraryData = await page.evaluate(() => {
       return window.__UIX_LIBRARY_DATA__ || []; 
     });
+
+    console.log(`📊 Found ${libraryData.length} component variants.`);
 
     if (libraryData.length > 0) {
       const outputPath = path.join(__dirname, '../public/api/library_data.json');
