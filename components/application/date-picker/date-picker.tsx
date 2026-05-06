@@ -13,9 +13,15 @@ import { Calendar } from "./calendar";
 const highlightedDates = [today(getLocalTimeZone())];
 
 const variantStyles = {
-    default: "rounded-2xl bg-primary shadow-xl ring ring-secondary_alt",
-    card: "rounded-xl bg-primary shadow-lg ring ring-secondary",
-    minimal: "rounded-lg bg-primary shadow-md",
+    default: "rounded-3xl bg-primary shadow-2xl ring ring-secondary_alt border border-secondary/10 outline-none",
+    card: "rounded-3xl bg-primary shadow-xl ring ring-secondary_alt border border-secondary/10 outline-none",
+    minimal: "rounded-2xl bg-primary shadow-sm border border-secondary/20 outline-none",
+    glass: "rounded-[2rem] bg-white/15 backdrop-blur-xl border border-white/20 shadow-2xl ring ring-white/10 outline-none",
+    modern: "rounded-[2rem] bg-slate-950 text-white shadow-[0_30px_60px_-30px_rgba(15,23,42,0.75)] border border-slate-800 ring ring-brand-500/20 outline-none",
+    neo: "rounded-[2rem] bg-slate-100 dark:bg-slate-900 shadow-[14px_14px_36px_rgba(15,23,42,0.08),-14px_-14px_36px_rgba(255,255,255,0.65)] border border-slate-200/80 dark:border-slate-800/70 outline-none",
+    soft: "rounded-[2rem] bg-slate-50 dark:bg-slate-950 shadow-inner ring ring-secondary_alt border border-secondary/20 outline-none",
+    range: "rounded-3xl bg-primary shadow-2xl ring ring-secondary_alt border border-secondary/10 outline-none",
+    custom: "rounded-3xl bg-primary shadow-2xl ring ring-secondary_alt border border-secondary/10 outline-none",
 };
 
 interface DatePickerProps extends AriaDatePickerProps<DateValue> {
@@ -24,10 +30,12 @@ interface DatePickerProps extends AriaDatePickerProps<DateValue> {
     /** The function to call when the cancel button is clicked. */
     onCancel?: () => void;
     size?: ButtonProps["size"];
-    variant?: "default" | "card" | "minimal";
+    variant?: "default" | "card" | "minimal" | "glass" | "modern" | "neo" | "soft" | "range" | "custom";
+    onClear?: () => void;
+    onToday?: () => void;
 }
 
-export const DatePicker = ({ value: valueProp, defaultValue, onChange, onApply, onCancel, size = "sm", variant = "default", ...props }: DatePickerProps) => {
+export const DatePicker = ({ value: valueProp, defaultValue, onChange, onApply, onCancel, onClear, onToday, size = "sm", variant = "default", ...props }: DatePickerProps) => {
     const formatter = useDateFormatter({
         month: "short",
         day: "numeric",
@@ -37,10 +45,21 @@ export const DatePicker = ({ value: valueProp, defaultValue, onChange, onApply, 
 
     const formattedDate = value ? formatter.format(value.toDate(getLocalTimeZone())) : "Select date";
 
+    const handleToday = () => {
+        const t = today(getLocalTimeZone());
+        setValue(t);
+        onToday?.();
+    };
+
+    const handleClear = () => {
+        setValue(null);
+        onClear?.();
+    };
+
     return (
         <AriaDatePicker aria-label="Date picker" shouldCloseOnSelect={false} {...props} value={value} onChange={setValue}>
             <AriaGroup>
-                <Button size={size} color="secondary" iconLeading={CalendarIcon}>
+                <Button size={size} color="secondary" iconLeading={CalendarIcon} className="min-w-40 justify-start font-sans">
                     {formattedDate}
                 </Button>
             </AriaGroup>
@@ -49,7 +68,7 @@ export const DatePicker = ({ value: valueProp, defaultValue, onChange, onApply, 
                 placement="bottom right"
                 className={({ isEntering, isExiting }) =>
                     cx(
-                        "origin-(--trigger-anchor-point) will-change-transform",
+                        "origin-(--trigger-anchor-point) will-change-transform z-50",
                         isEntering &&
                             "duration-150 ease-out animate-in fade-in placement-right:slide-in-from-left-0.5 placement-top:slide-in-from-bottom-0.5 placement-bottom:slide-in-from-top-0.5",
                         isExiting &&
@@ -57,33 +76,46 @@ export const DatePicker = ({ value: valueProp, defaultValue, onChange, onApply, 
                     )
                 }
             >
-                <AriaDialog aria-label="Date picker" className={variantStyles[variant]}>
+                <AriaDialog aria-label="Date picker" className={cx(variantStyles[variant], "focus:outline-none font-sans")}> 
                     {({ close }) => (
                         <>
                             <div className="flex px-6 py-5">
                                 <Calendar highlightedDates={highlightedDates} />
                             </div>
-                            <div className="grid grid-cols-2 gap-3 border-t border-secondary p-4">
-                                <Button
-                                    size="md"
-                                    color="secondary"
-                                    onClick={() => {
-                                        onCancel?.();
-                                        close();
-                                    }}
-                                >
-                                    Cancel
-                                </Button>
-                                <Button
-                                    size="md"
-                                    color="primary"
-                                    onClick={() => {
-                                        onApply?.();
-                                        close();
-                                    }}
-                                >
-                                    Apply
-                                </Button>
+                            
+                            <div className={cx(
+                                "flex gap-3 border-t border-secondary p-4",
+                                variant === "custom" ? "justify-between" : "justify-end"
+                            )}>
+                                {variant === "custom" && (
+                                    <div className="flex gap-2">
+                                        <Button size="sm" color="tertiary" onClick={handleToday}>Today</Button>
+                                        <Button size="sm" color="tertiary" onClick={handleClear}>Clear</Button>
+                                    </div>
+                                )}
+                                
+                                <div className="flex gap-2">
+                                    <Button
+                                        size="sm"
+                                        color="secondary"
+                                        onClick={() => {
+                                            onCancel?.();
+                                            close();
+                                        }}
+                                    >
+                                        Cancel
+                                    </Button>
+                                    <Button
+                                        size="sm"
+                                        color="primary"
+                                        onClick={() => {
+                                            onApply?.();
+                                            close();
+                                        }}
+                                    >
+                                        Apply
+                                    </Button>
+                                </div>
                             </div>
                         </>
                     )}

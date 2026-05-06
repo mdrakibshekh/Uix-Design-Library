@@ -18,7 +18,7 @@ export const Variants = ({ isCompact = false }: { isCompact?: boolean }) => {
         );
     }
     return (
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-10">
             <div className="flex flex-col gap-4">
                 <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wider">Solid</h3>
                 <div className="flex flex-wrap gap-4">

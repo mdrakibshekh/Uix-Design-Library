@@ -313,6 +313,30 @@ export const DatePickerCardDemo = () => <DatePicker variant="card" />;
 
 export const DatePickerMinimalDemo = () => <DatePicker variant="minimal" />;
 
+export const DatePickerGlassDemo = () => <DatePicker variant="glass" aria-label="Glass date picker" />;
+
+export const DatePickerModernDemo = () => <DatePicker variant="modern" aria-label="Modern date picker" />;
+
+export const DatePickerNeoDemo = () => <DatePicker variant="neo" aria-label="Neumorphic date picker" />;
+
+export const DatePickerSoftDemo = () => <DatePicker variant="soft" aria-label="Soft date picker" />;
+
+export const DatePickerCustomDemo = () => (
+    <DatePicker 
+        variant="custom" 
+        aria-label="Custom date picker"
+        onToday={() => console.log('Today clicked')}
+        onClear={() => console.log('Clear clicked')}
+    />
+);
+
+export const DatePickerCompactDemo = () => (
+    <div className="flex flex-col gap-4">
+        <DatePicker variant="minimal" size="sm" aria-label="Small minimal" />
+        <DatePicker variant="minimal" size="md" aria-label="Medium minimal" />
+    </div>
+);
+
 export const DarkModeDemo = () => {
     const [value, setValue] = useState<DateValue | null>(now);
     const [focusedValue, setFocusedValue] = useState<DateValue | null>(now);
@@ -347,7 +371,7 @@ export const DarkModeDemo = () => {
                     clipPath: "polygon(var(--clip-boundary) 0, 100% 0, 100% 100%, var(--clip-boundary) 100%)",
                     transitionTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
                 }}
-                className="peer/dark dark-mode absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl bg-tertiary outline-1 -outline-offset-1 outline-secondary_alt transition-all duration-200 peer-hover/light:[--clip-boundary:90%] hover:z-10 hover:[--clip-boundary:10%]"
+                className="peer/dark dark absolute inset-0 flex items-center justify-center overflow-hidden rounded-2xl bg-tertiary outline-1 -outline-offset-1 outline-secondary_alt transition-all duration-200 peer-hover/light:[--clip-boundary:90%] hover:z-10 hover:[--clip-boundary:10%]"
             >
                 <AriaDatePicker aria-label="Calendar card" value={value} onChange={setValue}>
                     <AriaDialog className="rounded-2xl bg-primary shadow-xl ring ring-secondary_alt">

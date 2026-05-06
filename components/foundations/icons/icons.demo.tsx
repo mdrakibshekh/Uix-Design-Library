@@ -93,13 +93,13 @@ const ModernColorPicker = ({ color, onChange }: { color: string; onChange: (c: s
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2.5 px-3 h-11 bg-slate-50 rounded-2xl border border-slate-200 hover:border-slate-300 transition-all group shrink-0"
+        className="flex items-center gap-2.5 px-3 h-11 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-all group shrink-0"
       >
         <div
-          className="size-6 rounded-lg border border-white shadow-sm ring-1 ring-slate-200 transition-transform group-hover:scale-110"
+          className="size-6 rounded-lg border border-white dark:border-slate-900 shadow-sm ring-1 ring-slate-200 dark:ring-slate-700 transition-transform group-hover:scale-110"
           style={{ backgroundColor: color === 'currentColor' ? '#475569' : color }}
         />
-        <span className="text-[11px] font-bold text-slate-900 uppercase tracking-tight">
+        <span className="text-[11px] font-bold text-slate-900 dark:text-slate-100 uppercase tracking-tight">
           {color === 'currentColor' ? '#475569' : color}
         </span>
       </button>
@@ -107,11 +107,11 @@ const ModernColorPicker = ({ color, onChange }: { color: string; onChange: (c: s
       {isOpen && (
         <>
           <div className="fixed inset-0 z-[60]" onClick={() => setIsOpen(false)} />
-          <div className="absolute top-full mt-2 right-0 w-60 bg-white rounded-[1.5rem] border border-slate-200 shadow-2xl p-4 z-[70] animate-in slide-in-from-top-2 duration-200">
+          <div className="absolute top-full mt-2 right-0 w-60 bg-white dark:bg-slate-900 rounded-[1.5rem] border border-slate-200 dark:border-slate-800 shadow-2xl p-4 z-[70] animate-in slide-in-from-top-2 duration-200">
             <div className="space-y-4">
               {/* Preview & Hex */}
-              <div className="flex items-center gap-3 p-2 bg-slate-50 rounded-xl border border-slate-100">
-                <div className="size-8 rounded-lg border-2 border-white shadow-sm shrink-0" style={{ backgroundColor: color === 'currentColor' ? '#475569' : color }} />
+              <div className="flex items-center gap-3 p-2 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700">
+                <div className="size-8 rounded-lg border-2 border-white dark:border-slate-700 shadow-sm shrink-0" style={{ backgroundColor: color === 'currentColor' ? '#475569' : color }} />
                 <div className="flex-1 min-w-0">
                   <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">HEX</p>
                   <div className="flex items-center justify-between">
@@ -119,11 +119,11 @@ const ModernColorPicker = ({ color, onChange }: { color: string; onChange: (c: s
                       type="text"
                       value={hexInput}
                       onChange={(e) => handleHexInput(e.target.value)}
-                      className="w-full bg-transparent text-xs font-bold text-slate-900 focus:outline-none"
+                      className="w-full bg-transparent text-xs font-bold text-slate-900 dark:text-white focus:outline-none"
                     />
                     <button
                       onClick={() => navigator.clipboard.writeText(hexInput)}
-                      className="p-1 hover:bg-slate-200 rounded-md transition-all text-slate-400 hover:text-slate-900"
+                      className="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-md transition-all text-slate-400 hover:text-slate-900 dark:hover:text-white"
                     >
                       <Copy className="size-3" />
                     </button>
@@ -224,6 +224,15 @@ const ALL_ICONS = {
   'Solar Broken': SolarBroken,
 };
 
+const ICON_STYLE_CATEGORIES = [
+  'All',
+  'Linear',
+  'Bold',
+  'Line Duotone',
+  'Bold Duotone',
+  'Broken',
+];
+
 export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => {
   const [search, setSearch] = useState('');
   const [selectedStyle, setSelectedStyle] = useState<string>('All');
@@ -310,6 +319,9 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
     }
   };
   
+
+  const getIconWrapperClass = () => 'bg-white dark:bg-slate-950 border border-slate-100 dark:border-slate-800 shadow-sm';
+
   // Combine a subset of icons for display
   const displayIcons = React.useMemo(() => {
     const icons: Array<{ name: string; Icon: React.ComponentType<any>; library: string }> = [];
@@ -318,12 +330,14 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
     // If search is active, just show all matches from all libraries
     if (search) {
       libs.forEach(([libName, libIcons]) => {
-        Object.entries(libIcons).forEach(([name, Icon]) => {
-          if (name.toLowerCase().includes(search.toLowerCase())) {
-            const isSolar = libName.startsWith('Solar');
-            icons.push({ name, Icon: Icon as any, library: isSolar ? 'Solar Icons' : libName });
-          }
-        });
+        Object.entries(libIcons)
+          .filter(([, Icon]) => typeof Icon === 'function')
+          .forEach(([name, Icon]) => {
+            if (name.toLowerCase().includes(search.toLowerCase())) {
+              const isSolar = libName.startsWith('Solar');
+              icons.push({ name, Icon: Icon as any, library: isSolar ? 'Solar Icons' : libName });
+            }
+          });
       });
       return icons;
     }
@@ -334,10 +348,11 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
       if (selectedStyle !== 'All') {
         if (isSolar) {
           const solarStyle = name.replace('Solar ', '').toLowerCase().replace(' ', '-');
-          if (solarStyle !== selectedStyle.toLowerCase().replace(' ', '-')) return { name, entries: [] };
+          const selectedNormalized = selectedStyle.toLowerCase().replace(' ', '-');
+          if (solarStyle !== selectedNormalized) return { name, entries: [] };
         } else {
-          // For non-Solar, only include for 'Linear' or 'All'
-          if (['Bold', 'Line Duotone', 'Bold Duotone', 'Broken', 'Filled', 'Duo-Tone'].includes(selectedStyle)) return { name, entries: [] };
+          const nonSolarExcludeStyles = ['Bold', 'Line Duotone', 'Bold Duotone', 'Broken', 'Filled', 'Duo-Tone'];
+          if (nonSolarExcludeStyles.includes(selectedStyle)) return { name, entries: [] };
         }
       }
       return { name, entries: Object.entries(icons) };
@@ -379,8 +394,8 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
     return (
       <div className="grid grid-cols-6 gap-2 w-full">
         {displayIcons.slice(0, 18).map(({ name, Icon, library }, index) => (
-          <div key={`${library}-${name}-${index}`} className="flex items-center justify-center aspect-square rounded-xl bg-white border border-slate-100 shadow-sm transition-all hover:bg-slate-50">
-            <Icon className="size-5 text-slate-400" />
+          <div key={`${library}-${name}-${index}`} className="flex items-center justify-center aspect-square rounded-xl bg-white dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 shadow-sm transition-all hover:bg-slate-50 dark:hover:bg-slate-800">
+            <Icon className="size-5 text-slate-400 dark:text-slate-600" />
           </div>
         ))}
       </div>
@@ -388,17 +403,17 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
   }
 
   return (
-    <div className="space-y-8 w-full p-6 bg-slate-50 rounded-3xl border border-slate-100">
+    <div className="space-y-8 w-full p-6 bg-slate-50 dark:bg-slate-950/20 rounded-3xl border border-slate-100 dark:border-slate-800 transition-colors">
       <div className="flex flex-col gap-6">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             {/* Style Filters */}
-            <div className="w-full flex items-center gap-2 p-1 bg-slate-200/40 rounded-xl border border-slate-200/50 overflow-x-auto scrollbar-hide">
-              {['All', 'Linear', 'Bold', 'Line Duotone', 'Bold Duotone', 'Broken'].map(style => (
+            <div className="w-full flex items-center gap-2 p-1 bg-slate-200/40 dark:bg-slate-800/40 rounded-xl border border-slate-200/50 dark:border-slate-800/50 overflow-x-auto scrollbar-hide">
+              {ICON_STYLE_CATEGORIES.map(style => (
                 <button
                   key={style}
                   onClick={() => setSelectedStyle(style)}
-                  className={`flex-1 px-4 py-2.5 text-[12px] border-2 border-slate-100 font-bold rounded-lg transition-all whitespace-nowrap ${selectedStyle === style ? 'bg-violet-100 border-2 border-violet-600 text-slate-950' : 'text-slate-500 hover:text-slate-900'}`}
+                  className={`flex-1 px-4 py-2.5 text-[12px] border-2 border-slate-100 dark:border-slate-800/50 font-bold rounded-lg transition-all whitespace-nowrap ${selectedStyle === style ? 'bg-violet-100 dark:bg-violet-900/30 border-violet-600 dark:border-violet-500 text-slate-950 dark:text-white' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'}`}
                 >
                   {style}
                 </button>
@@ -406,18 +421,17 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
             </div>
           </div>
           <div className="relative w-[360px] md:w-80 group">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400 group-focus-within:text-violet-600 transition-colors" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-slate-400 dark:text-slate-500 group-focus-within:text-violet-600 dark:group-focus-within:text-violet-400 transition-colors" />
             <input
               type="text"
               placeholder="Search icons..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-white border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-violet-500/10 focus:border-violet-500 transition-all"
+              className="w-full pl-10 pr-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm focus:outline-none focus:ring-4 focus:ring-violet-500/10 dark:focus:ring-violet-400/10 focus:border-violet-500 dark:focus:border-violet-400 transition-all dark:text-white"
             />
           </div>
         </div>
 
-        
       </div>
 
       <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-3">
@@ -448,9 +462,14 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
               onClick={() => {
                 setActiveIcon({ name, Icon: RenderIcon, library });
               }}
-              className="group relative flex flex-col items-center justify-center aspect-square rounded-2xl border border-slate-200 bg-white hover:border-violet-500 hover:shadow-xl hover:shadow-violet-500/10 transition-all cursor-pointer isolate"
+              className={`group relative flex flex-col items-center justify-center aspect-square rounded-3xl px-3 py-3 transition-all cursor-pointer isolate ${getIconWrapperClass()}`}
             >
-              <RenderIcon className="size-6 text-slate-600 hover:text-violet-600 transition-colors" {...(library !== 'Solar Icons' ? styleProps : {})} />
+              <RenderIcon
+                size={28}
+                color="currentColor"
+                className="text-slate-600 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
+                {...(library !== 'Solar Icons' ? styleProps : {})}
+              />
             </div>
           );
         })}
@@ -461,15 +480,15 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity" onClick={() => setActiveIcon(null)} />
 
-          <div className="relative w-full max-w-3xl bg-white rounded-[2.5rem] shadow-2xl animate-in zoom-in-95 fade-in duration-300">
+          <div className="relative w-full max-w-3xl bg-white dark:bg-slate-900 rounded-[2.5rem] border border-slate-200 dark:border-white/5 shadow-2xl animate-in zoom-in-95 fade-in duration-300 overflow-hidden">
             {/* Modal Header */}
-            <div className="flex items-center justify-between px-10 py-6 border-b border-slate-100">
-              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                <span className="hover:text-violet-600 transition-colors cursor-pointer">UIX ICONS</span>
+            <div className="flex items-center justify-between px-10 py-6 border-b border-slate-100 dark:border-white/5">
+              <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-500">
+                <span className="hover:text-violet-600 dark:hover:text-violet-400 transition-colors cursor-pointer">UIX ICONS</span>
                 <ChevronRight className="size-3" />
-                <span className="hover:text-violet-600 transition-colors cursor-pointer">{selectedStyle}</span>
+                <span className="hover:text-violet-600 dark:hover:text-violet-400 transition-colors cursor-pointer">{selectedStyle}</span>
                 <ChevronRight className="size-3" />
-                <span className="text-slate-900">
+                <span className="text-slate-900 dark:text-white">
                   {activeIcon.library === 'Solar Icons' && activeIcon.name.startsWith('Li') ? activeIcon.name.substring(2) : activeIcon.name}
                 </span>
                 <button 
@@ -486,7 +505,7 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="px-3 py-1.5 bg-slate-50 rounded-xl border border-slate-100 text-[11px] font-bold text-slate-500 shadow-sm">
+                <div className="px-3 py-1.5 bg-slate-50 dark:bg-white/5 rounded-xl border border-slate-100 dark:border-white/5 text-[11px] font-bold text-slate-500 dark:text-slate-400 shadow-sm">
                   {(() => {
                     let hash = 0;
                     for (let i = 0; i < activeIcon.name.length; i++) {
@@ -503,7 +522,7 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
                     setShareCopied(true);
                     setTimeout(() => setShareCopied(false), 2000);
                   }}
-                  className="p-2.5 hover:bg-slate-100 rounded-full transition-all text-slate-500 hover:text-slate-900 group/share relative"
+                  className="p-2.5 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white group/share relative"
                 >
                   <Share2 className="size-4" />
                   {shareCopied && (
@@ -512,7 +531,7 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
                     </span>
                   )}
                 </button>
-                <button onClick={() => setActiveIcon(null)} className="p-2.5 hover:bg-slate-100 rounded-full transition-all text-slate-500 hover:text-slate-900">
+                <button onClick={() => setActiveIcon(null)} className="p-2.5 hover:bg-slate-100 dark:hover:bg-white/10 rounded-full transition-all text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white">
                   <X className="size-5" />
                 </button>
               </div>
@@ -521,15 +540,16 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
             <div className="p-10">
               <div className="flex flex-col md:flex-row gap-12">
                 {/* Large Preview - 40% */}
-                <div className="w-full md:w-[40%] aspect-square md:aspect-auto md:h-[240px] rounded-[2rem] bg-slate-50 border border-slate-200 flex items-center justify-center group overflow-hidden shrink-0">
+                <div className="w-full md:w-[40%] aspect-square md:aspect-auto md:h-[240px] rounded-[2rem] bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 flex items-center justify-center group overflow-hidden shrink-0 relative isolate">
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-violet-500/10 opacity-0 dark:opacity-100 pointer-events-none" />
                   {(() => {
                     const PreviewIcon = activeIcon.Icon;
-                    const displayColor = iconColor === 'currentColor' ? '#475569' : iconColor;
+                    const displayColor = iconColor === 'currentColor' ? (globalTheme === 'dark' ? '#94A3B8' : '#475569') : iconColor;
                     return (
                       <PreviewIcon
                         id="icon-preview-svg"
                         style={{ width: iconSize * 4, height: iconSize * 4 }}
-                        className="transition-all duration-300 transform group-hover:scale-110"
+                        className="transition-all duration-300 transform group-hover:scale-110 relative z-10"
                         color={displayColor}
                         {...(activeIcon.library !== 'Solar Icons' ? {
                           strokeWidth: selectedStyle === 'Filled' ? 0 : strokeWidth,
@@ -546,10 +566,10 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
                 <div className="w-full md:w-[70%] space-y-8 min-w-0">
                   <div className="space-y-3">
                     <div className="flex items-start justify-between gap-4">
-                      <h4 className="text-3xl font-bold text-slate-900 tracking-tight break-all leading-tight">
+                      <h4 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight break-all leading-tight">
                         {activeIcon.library === 'Solar Icons' && activeIcon.name.startsWith('Li') ? activeIcon.name.substring(2) : activeIcon.name}
                       </h4>
-                      <button onClick={() => copyCode(activeIcon.name)} className="shrink-0 p-2 hover:bg-slate-100 rounded-xl text-slate-400 hover:text-slate-900 transition-all border border-transparent hover:border-slate-200">
+                      <button onClick={() => copyCode(activeIcon.name)} className="shrink-0 p-2 hover:bg-slate-100 dark:hover:bg-white/10 rounded-xl text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all border border-transparent hover:border-slate-200 dark:hover:border-white/10">
                         <Copy className="size-5" />
                       </button>
                     </div>
@@ -559,24 +579,24 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
                   {/* Properties Row */}
                   <div className="flex items-center gap-3">
                     {selectedStyle !== 'Filled' && selectedStyle !== 'Bold' && selectedStyle !== 'Bold Duotone' && activeIcon.library !== 'Solar Icons' && (
-                      <div className="flex items-center h-11 bg-slate-50 rounded-2xl border border-slate-200 px-3 gap-2 animate-in fade-in slide-in-from-left-2 duration-200">
-                        <UntitledIcons.Activity className="size-4 text-slate-600" />
+                      <div className="flex items-center h-11 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/5 px-3 gap-2 animate-in fade-in slide-in-from-left-2 duration-200">
+                        <UntitledIcons.Activity className="size-4 text-slate-600 dark:text-slate-400" />
                         <select
                           value={strokeWidth}
                           onChange={(e) => setStrokeWidth(Number(e.target.value))}
-                          className="bg-transparent text-[11px] font-bold text-slate-900 focus:outline-none cursor-pointer"
+                          className="bg-transparent text-[11px] font-bold text-slate-900 dark:text-white focus:outline-none cursor-pointer"
                         >
                           {[0.5, 1, 1.5, 2, 2.5, 3].map(w => <option key={w} value={w}>{w}</option>)}
                         </select>
                       </div>
                     )}
 
-                    <div className="flex items-center h-11 bg-slate-50 rounded-2xl border border-slate-200 px-3 gap-2">
-                      <UntitledIcons.Maximize01 className="size-4 text-slate-600" />
+                    <div className="flex items-center h-11 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/5 px-3 gap-2">
+                      <UntitledIcons.Maximize01 className="size-4 text-slate-600 dark:text-slate-400" />
                       <select
                         value={iconSize}
                         onChange={(e) => setIconSize(Number(e.target.value))}
-                        className="bg-transparent text-[11px] font-bold text-slate-900 focus:outline-none cursor-pointer"
+                        className="bg-transparent text-[11px] font-bold text-slate-900 dark:text-white focus:outline-none cursor-pointer"
                       >
                         {[16, 20, 24, 32, 48, 64].map(s => <option key={s} value={s}>{s}px</option>)}
                       </select>
@@ -593,7 +613,7 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
                         setIconSize(24);
                         setIconColor('currentColor');
                       }}
-                      className="size-11 flex items-center justify-center hover:bg-slate-100 rounded-2xl text-slate-400 transition-all border border-slate-200 hover:text-slate-900 shrink-0"
+                      className="size-11 flex items-center justify-center hover:bg-slate-100 dark:hover:bg-white/10 rounded-2xl text-slate-400 dark:text-slate-500 transition-all border border-slate-200 dark:border-white/5 hover:text-slate-900 dark:hover:text-white shrink-0"
                     >
                       <RotateCcw className="size-4.5" />
                     </button>
@@ -609,9 +629,9 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
                     </button>
                     <button 
                       onClick={copySVG}
-                      className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-white text-slate-900 border border-slate-200 rounded-xl font-bold text-[12px] hover:border-slate-900 transition-all active:scale-95 shadow-sm uppercase tracking-wider"
+                      className="flex-1 flex items-center justify-center gap-2 py-3.5 bg-white dark:bg-white/5 text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 rounded-xl font-bold text-[12px] hover:border-slate-900 dark:hover:border-white transition-all active:scale-95 shadow-sm uppercase tracking-wider"
                     >
-                      <Copy className="size-4 text-slate-400" />
+                      <Copy className="size-4 text-slate-400 dark:text-slate-500" />
                       COPY SVG
                     </button>
                   </div>
@@ -620,12 +640,12 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
 
               {/* Implementation Tabs */}
               <div className="mt-12">
-                <div className="flex items-center gap-1 p-1 bg-slate-100 rounded-2xl w-fit mb-6">
+                <div className="flex items-center gap-1 p-1 bg-slate-100 dark:bg-white/5 rounded-2xl w-fit mb-6">
                   {['Web', 'React', 'React Native', 'Vue', 'Svelte', 'Flutter', 'Angular'].map((tab) => (
                     <button
                       key={tab}
                       onClick={() => setActiveTab(tab)}
-                      className={`px-6 py-2.5 rounded-xl text-[11px] font-bold transition-all ${activeTab === tab ? 'bg-white text-violet-600 shadow-sm ring-1 ring-slate-200' : 'text-slate-500 hover:text-slate-900'}`}
+                      className={`px-6 py-2.5 rounded-xl text-[11px] font-bold transition-all ${activeTab === tab ? 'bg-white dark:bg-white/10 text-violet-600 dark:text-violet-400 shadow-sm ring-1 ring-slate-200 dark:ring-white/10' : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'}`}
                     >
                       {tab}
                     </button>
@@ -634,14 +654,14 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
 
                 <div className="relative group">
                   <div className="absolute -top-3 -right-3 size-6 bg-violet-600 rounded-full blur-xl opacity-0 group-hover:opacity-20 transition-opacity" />
-                  <pre className="bg-slate-50 p-8 rounded-[2.5rem] text-[11px] font-bold text-slate-600 border border-slate-100 overflow-x-auto leading-relaxed shadow-inner">
+                  <pre className="bg-slate-50 dark:bg-slate-950 p-8 rounded-[2.5rem] text-[11px] font-bold text-slate-600 dark:text-slate-400 border border-slate-100 dark:border-white/5 overflow-x-auto leading-relaxed shadow-inner">
                     <code className="block">
                       {getCodeSnippet(activeTab)}
                     </code>
                   </pre>
                   <button 
                     onClick={() => copyCode(getCodeSnippet(activeTab))}
-                    className="absolute top-6 right-6 p-3 bg-white hover:bg-slate-50 rounded-2xl border border-slate-200 text-slate-400 hover:text-slate-900 transition-all shadow-sm"
+                    className="absolute top-6 right-6 p-3 bg-white dark:bg-white/5 hover:bg-slate-50 dark:hover:bg-white/10 rounded-2xl border border-slate-200 dark:border-white/10 text-slate-400 dark:text-slate-500 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
                   >
                     <Copy className="size-4" />
                   </button>
@@ -659,7 +679,7 @@ export const IconsPreview = ({ isCompact = false }: { isCompact?: boolean }) => 
             onClick={() => setVisibleCount(prev => prev + 200)}
             className="px-8 py-4 bg-white border border-slate-200 rounded-2xl font-bold text-sm text-slate-600 hover:border-violet-600 hover:text-violet-600 transition-all shadow-sm active:scale-95"
           >
-            Explore all {displayIcons.length}+ icons
+            Explore all 1{displayIcons.length}+ icons
           </button>
         </div>
       )}

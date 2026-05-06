@@ -15,7 +15,9 @@ import {
     MessageSquare,
     BookOpen,
     ChevronDown,
-    HelpCircle
+    HelpCircle,
+    Share2,
+    Trash2
 } from "lucide-react";
 import { GitHub } from "@/components/foundations/social-icons";
 import { Dropdown } from "./dropdown";
@@ -120,7 +122,7 @@ export const MegaMenuDemo = () => {
                                 <p className="text-sm font-semibold text-primary group-hover:text-brand-secondary">What's new in UIX 2.0</p>
                                 <p className="text-xs text-tertiary mt-1">Discover the latest features and improvements.</p>
                             </div>
-                            <Button size="xs" color="link-color" className="w-fit p-0">Read more →</Button>
+                            <Button size="sm" color="blue" className="w-fit p-0" variant="ghost">Read more →</Button>
                         </div>
                     </div>
                 </div>
@@ -129,13 +131,126 @@ export const MegaMenuDemo = () => {
     );
 };
 
+export const DropdownWithAvatarsAndDescriptionsDemo = () => {
+    return (
+        <Dropdown.Root>
+            <Button color="secondary" size="md" iconTrailing={ChevronDown}>Assign User</Button>
+            <Dropdown.Popover className="w-72">
+                <Dropdown.Menu>
+                    <Dropdown.Item 
+                        label="Olivia Rhye" 
+                        description="Product Designer" 
+                        avatarUrl="https://i.pravatar.cc/150?u=olivia" 
+                    />
+                    <Dropdown.Item 
+                        label="Phoenix Baker" 
+                        description="Engineering Manager" 
+                        avatarUrl="https://i.pravatar.cc/150?u=phoenix" 
+                    />
+                    <Dropdown.Item 
+                        label="Lana Steiner" 
+                        description="Frontend Developer" 
+                        avatarUrl="https://i.pravatar.cc/150?u=lana" 
+                    />
+                </Dropdown.Menu>
+            </Dropdown.Popover>
+        </Dropdown.Root>
+    );
+};
+
+export const DropdownWithSubmenusDemo = () => {
+    return (
+        <Dropdown.Root>
+            <Button color="secondary" size="md" iconTrailing={ChevronDown}>More Actions</Button>
+            <Dropdown.Popover className="w-56">
+                <Dropdown.Menu>
+                    <Dropdown.Item label="Share" icon={Users} />
+                    <Dropdown.Item label="Download" icon={Cloud} />
+                    <Dropdown.Separator />
+                    <Dropdown.SubmenuTrigger>
+                        <Dropdown.Item label="Invite users" icon={Plus} />
+                        <Dropdown.Popover placement="right top">
+                            <Dropdown.Menu>
+                                <Dropdown.Item label="Email" icon={Mail} />
+                                <Dropdown.Item label="Message" icon={MessageSquare} />
+                                <Dropdown.Item label="Twitter" icon={Share2} />
+                            </Dropdown.Menu>
+                        </Dropdown.Popover>
+                    </Dropdown.SubmenuTrigger>
+                    <Dropdown.Item label="Settings" icon={Settings} />
+                    <Dropdown.Separator />
+                    <Dropdown.Item label="Delete" icon={Trash2} variant="danger" />
+                </Dropdown.Menu>
+            </Dropdown.Popover>
+        </Dropdown.Root>
+    );
+};
+
+export const DropdownWithSelectionModesDemo = () => {
+    const [selectedItems, setSelectedItems] = React.useState<any>(new Set(["email"]));
+    const [theme, setTheme] = React.useState<any>(new Set(["light"]));
+
+    return (
+        <div className="flex gap-4">
+            {/* Checkbox selection */}
+            <Dropdown.Root>
+                <Button color="secondary" size="md" iconTrailing={ChevronDown}>Notifications</Button>
+                <Dropdown.Popover className="w-56">
+                    <Dropdown.Menu 
+                        selectionMode="multiple" 
+                        selectedKeys={selectedItems} 
+                        onSelectionChange={setSelectedItems}
+                    >
+                        <Dropdown.Section>
+                            <Dropdown.SectionHeader className="px-3 py-1.5 text-xs font-semibold text-tertiary uppercase">Preferences</Dropdown.SectionHeader>
+                            <Dropdown.Item id="email" label="Email" selectionIndicator="checkbox" />
+                            <Dropdown.Item id="push" label="Push" selectionIndicator="checkbox" />
+                            <Dropdown.Item id="sms" label="SMS" selectionIndicator="checkbox" />
+                        </Dropdown.Section>
+                    </Dropdown.Menu>
+                </Dropdown.Popover>
+            </Dropdown.Root>
+
+            {/* Radio selection */}
+            <Dropdown.Root>
+                <Button color="secondary" size="md" iconTrailing={ChevronDown}>Theme</Button>
+                <Dropdown.Popover className="w-48">
+                    <Dropdown.Menu 
+                        selectionMode="single" 
+                        selectedKeys={theme} 
+                        onSelectionChange={setTheme}
+                    >
+                        <Dropdown.Item id="light" label="Light" selectionIndicator="radio" />
+                        <Dropdown.Item id="dark" label="Dark" selectionIndicator="radio" />
+                        <Dropdown.Item id="system" label="System" selectionIndicator="radio" />
+                    </Dropdown.Menu>
+                </Dropdown.Popover>
+            </Dropdown.Root>
+            
+            {/* Toggle selection */}
+            <Dropdown.Root>
+                <Button color="secondary" size="md" iconTrailing={ChevronDown}>Settings</Button>
+                <Dropdown.Popover className="w-56">
+                    <Dropdown.Menu>
+                        <Dropdown.Item id="public" label="Public Profile" selectionIndicator="toggle" />
+                        <Dropdown.Item id="marketing" label="Marketing Emails" selectionIndicator="toggle" />
+                    </Dropdown.Menu>
+                </Dropdown.Popover>
+            </Dropdown.Root>
+        </div>
+    );
+};
+
 export const ProfileDropdownDemo = () => {
     return (
         <Dropdown.Root>
-            <Button className="w-fit flex px-4 py-2 flex-row items-center justify-center gap-2 bg-tertiary/20 border border-border-secondary text-secondary hover:bg-tertiary/40 hover:border-border-secondary/60 ">
-                <Avatar size="xs" src="https://i.pravatar.cc/150?u=rakib" alt="Rakib Shekh" />
-                <p>My Account</p>
-                 <ChevronDown className="size-4 stroke-2"/>
+            <Button 
+                className="w-fit bg-tertiary/20 border border-border-secondary text-secondary hover:bg-tertiary/40 hover:border-border-secondary/60"
+                color="secondary"
+                iconLeading={(props) => <Avatar size="xs" src="https://i.pravatar.cc/150?u=rakib" alt="Rakib Shekh" {...props} />}
+                iconTrailing={ChevronDown}
+            >
+                My Account
             </Button>
             <Dropdown.Popover className="w-64">
                 <Dropdown.Menu>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nexa:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand: #6301E4;
+            --brand-light: #EEF2FF;
+            --brand-dark: #16035E;
+            --bg: #FFFFFF;
+            --sidebar: #F8FAFC;
+            --text: #0F172A;
+            --text-muted: #64748B;
+            --border: #E2E8F0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar: The Navigator */
+        .sidebar {
+            width: 260px;
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            z-index: 10;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-box { display: flex; align-items: center; gap: 10px; }
+        .logo {
+            width: 24px; height: 24px;
+            background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .title { font-size: 12px; font-weight: 900; text-transform: uppercase; }
+
+        .btn-add {
+            margin: 12px;
+            background: white;
+            border: 1px dashed var(--brand);
+            color: var(--brand);
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-add:hover { background: var(--brand-light); border-style: solid; }
+
+        .variants-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .variant-item {
+            padding: 12px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        .variant-item:hover { border-color: var(--brand); transform: translateY(-1px); }
+        .variant-item.active { background: var(--brand-light); border-color: var(--brand); }
+
+        .preview-thumb {
+            width: 32px; height: 32px;
+            border-radius: 6px;
+            background: var(--brand);
+            flex-shrink: 0;
+        }
+
+        /* Main View: The Canvas */
+        .canvas {
+            flex: 1;
+            background: #F1F5F9;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .toolbar {
+            padding: 12px 24px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .preview-stage {
+            flex: 1;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-frame {
+            width: 100%; height: 100%;
+            background: white;
+            border-radius: 24px;
+            border: none;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        /* Overlay Drawer: The Inspector */
+        .drawer {
+            position: absolute;
+            top: 0; right: -320px;
+            width: 300px;
+            height: 100%;
+            background: white;
+            border-left: 1px solid var(--border);
+            box-shadow: -10px 0 40px rgba(0,0,0,0.05);
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .drawer.open { right: 0; }
+
+        .drawer-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+        }
+
+        .drawer-body {
+            flex: 1;
+            padding: 24px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .btn-import {
+            margin: 20px;
+            background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+            color: white; border: none; padding: 16px; border-radius: 12px;
+            font-weight: 700; font-size: 14px; cursor: pointer;
+            box-shadow: 0 4px 12px rgba(99, 1, 228, 0.2);
+        }
+
+        .prop-group { display: flex; flex-direction: column; gap: 8px; }
+        .prop-label { font-size: 11px; font-weight: 800; color: var(--text-muted); text-transform: uppercase; }
+
+        select, input, textarea {
+            width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border);
+            font-family: inherit; font-size: 13px; outline: none; box-sizing: border-box;
+        }
+
+        /* Modals & Overlays */
+        #pasteOverlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: none;
+            align-items: center; justify-content: center;
+        }
+
+        .modal {
+            width: 480px; background: white; border-radius: 24px; padding: 32px;
+            display: flex; flex-direction: column; gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="logo-box">
+                <div class="logo">
+                    <svg viewBox="0 0 24 24" fill="white" width="14" height="14">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" /><path d="M2 17L12 22L22 17" /><path d="M2 12L12 17L22 12" />
+                    </svg>
+                </div>
+                <div class="title">UIX Bridge</div>
+            </div>
+            <div style="font-size: 10px; font-weight: 800; color: #F97316;">PRO</div>
+        </div>
+        
+        <button class="btn-add" onclick="showPasteModal()">
+            <span>+</span> Add Variants
+        </button>
+
+        <div class="variants-list" id="variantsList"></div>
+        
+        <button class="btn-import" id="importBtn" disabled>IMPORT TO FIGMA</button>
+    </div>
+
+    <!-- Main Canvas -->
+    <div class="canvas">
+        <div class="toolbar">
+            <div id="activeInfo" style="font-size: 13px; font-weight: 700;">No variant selected</div>
+            <button onclick="toggleDrawer()" style="background: white; border: 1px solid var(--border); border-radius: 8px; padding: 6px 12px; font-size: 12px; cursor: pointer; font-weight: 600;">Edit Properties</button>
+        </div>
+
+        <div class="preview-stage">
+            <iframe id="previewFrame" class="preview-frame" src="about:blank"></iframe>
+        </div>
+
+        <!-- Overlay Drawer (Properties) -->
+        <div class="drawer" id="propDrawer">
+            <div class="drawer-header">
+                <div style="font-weight: 800; font-size: 16px;">Customize Variant</div>
+                <button onclick="toggleDrawer()" style="background: none; border: none; font-size: 20px; cursor: pointer;">&times;</button>
+            </div>
+            <div class="drawer-body">
+                <div class="prop-group">
+                    <div class="prop-label">Border Radius</div>
+                    <select id="radius">
+                        <option value="8">Soft (8px)</option>
+                        <option value="12" selected>Modern (12px)</option>
+                        <option value="24">Round (24px)</option>
+                        <option value="0">Sharp (0px)</option>
+                    </select>
+                </div>
+
+                <div class="prop-group">
+                    <div class="prop-label">Brand Color</div>
+                    <input type="color" id="accent" value="#6301E4">
+                </div>
+
+                <div class="prop-group">
+                    <div class="prop-label">Figma Frame</div>
+                    <label style="display: flex; align-items: center; gap: 8px; font-size: 13px;">
+                        <input type="checkbox" id="docFrame" checked style="width: auto;"> Include Doc Shell
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Paste Modal -->
+    <div id="pasteOverlay">
+        <div class="modal">
+            <div style="font-weight: 900; font-size: 24px; letter-spacing: -0.02em;">Add New Variants</div>
+            <div style="font-size: 14px; color: var(--text-muted);">Paste the component data copied from your library website below.</div>
+            <textarea id="manualPaste" placeholder="Paste UIX JSON data here..." style="height: 120px;"></textarea>
+            <div style="display: flex; gap: 12px;">
+                <button onclick="hidePasteModal()" style="flex: 1; padding: 14px; border-radius: 12px; border: 1px solid var(--border); background: white; font-weight: 700; cursor: pointer;">Cancel</button>
+                <button onclick="processPaste()" style="flex: 1; padding: 14px; border-radius: 12px; background: var(--brand); color: white; border: none; font-weight: 700; cursor: pointer;">Add to Catalog</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentPayloads = [];
+        let selectedIndex = -1;
+
+        const variantsList = document.getElementById('variantsList');
+        const previewFrame = document.getElementById('previewFrame');
+        const activeInfo = document.getElementById('activeInfo');
+        const propDrawer = document.getElementById('propDrawer');
+        const pasteOverlay = document.getElementById('pasteOverlay');
+        const manualPaste = document.getElementById('manualPaste');
+        const importBtn = document.getElementById('importBtn');
+
+        function toggleDrawer() { propDrawer.classList.toggle('open'); }
+        function showPasteModal() { pasteOverlay.style.display = 'flex'; manualPaste.focus(); }
+        function hidePasteModal() { pasteOverlay.style.display = 'none'; manualPaste.value = ''; }
+
+        function processPaste() {
+            try {
+                const data = JSON.parse(manualPaste.value);
+                if (data.source === 'UIX_DESIGN_LIBRARY' || (Array.isArray(data) && data[0].source === 'UIX_DESIGN_LIBRARY')) {
+                    renderVariants(data);
+                    hidePasteModal();
+                } else {
+                    alert("Invalid UIX Data format.");
+                }
+            } catch (err) {
+                alert("Failed to parse JSON data.");
+            }
+        }
+
+        const renderVariants = (payloads) => {
+            const newPayloads = Array.isArray(payloads) ? payloads : [payloads];
+            currentPayloads = [...currentPayloads, ...newPayloads]; // Append mode
+            
+            variantsList.innerHTML = '';
+            currentPayloads.forEach((p, index) => {
+                const item = document.createElement('div');
+                item.className = 'variant-item' + (index === selectedIndex ? ' active' : '');
+                item.innerHTML = `
+                    <div class="preview-thumb" style="background: ${p.visualPreview?.color || '#6301E4'}"></div>
+                    <div style="flex: 1">
+                        <div style="font-weight: 700; font-size: 12px;">${p.variant}</div>
+                        <div style="font-size: 10px; color: var(--text-muted)">${p.component}</div>
+                    </div>
+                `;
+                item.onclick = () => selectVariant(index);
+                variantsList.appendChild(item);
+            });
+
+            if (selectedIndex === -1 && currentPayloads.length > 0) selectVariant(0);
+            importBtn.disabled = currentPayloads.length === 0;
+        };
+
+        const selectVariant = (index) => {
+            selectedIndex = index;
+            const p = currentPayloads[index];
+            
+            document.querySelectorAll('.variant-item').forEach((item, i) => {
+                if (i === index) item.classList.add('active');
+                else item.classList.remove('active');
+            });
+
+            previewFrame.src = p.previewUrl || 'about:blank';
+            activeInfo.innerText = `${p.component.toUpperCase()} / ${p.variant.toUpperCase()}`;
+        };
+
+        importBtn.onclick = () => {
+            parent.postMessage({ 
+                pluginMessage: { 
+                    type: 'import-component',
+                    payload: currentPayloads,
+                    settings: {
+                        radius: parseInt(document.getElementById('radius').value),
+                        accent: document.getElementById('accent').value,
+                        docFrame: document.getElementById('docFrame').checked
+                    }
+                } 
+            }, '*');
+        };
+
+        // Auto-read clipboard
+        window.onload = async () => {
+            try {
+                const text = await navigator.clipboard.readText();
+                const data = JSON.parse(text);
+                if (data.source === 'UIX_DESIGN_LIBRARY' || (Array.isArray(data) && data[0].source === 'UIX_DESIGN_LIBRARY')) {
+                    renderVariants(data);
+                }
+            } catch (err) {}
+        };
+    </script>
+</body>
+</html>

@@ -171,21 +171,27 @@ export const ColorsDemo = () => {
     
     return (
         <div className="flex flex-col gap-8">
-            <div className="flex flex-wrap gap-4">
-                {colors.map(color => (
-                    <Tag key={color} color={color}>{color.charAt(0).toUpperCase() + color.slice(1)}</Tag>
-                ))}
-            </div>
-            <div className="flex flex-wrap gap-4">
-                {colors.map(color => (
-                    <Tag key={color} color={color} dot={true}>{color.charAt(0).toUpperCase() + color.slice(1)}</Tag>
-                ))}
-            </div>
-            <div className="flex flex-wrap gap-4">
-                {colors.map(color => (
-                    <Tag key={color} color={color} count={5}>{color.charAt(0).toUpperCase() + color.slice(1)}</Tag>
-                ))}
-            </div>
+            <TagGroup label="Colors gray">
+                <TagList className="flex flex-wrap gap-4">
+                    {colors.map(color => (
+                        <Tag key={color} color={color}>{color.charAt(0).toUpperCase() + color.slice(1)}</Tag>
+                    ))}
+                </TagList>
+            </TagGroup>
+            <TagGroup label="Colors dot">
+                <TagList className="flex flex-wrap gap-4">
+                    {colors.map(color => (
+                        <Tag key={color} color={color} dot={true}>{color.charAt(0).toUpperCase() + color.slice(1)}</Tag>
+                    ))}
+                </TagList>
+            </TagGroup>
+            <TagGroup label="Colors count">
+                <TagList className="flex flex-wrap gap-4">
+                    {colors.map(color => (
+                        <Tag key={color} color={color} count={5}>{color.charAt(0).toUpperCase() + color.slice(1)}</Tag>
+                    ))}
+                </TagList>
+            </TagGroup>
         </div>
     );
 };

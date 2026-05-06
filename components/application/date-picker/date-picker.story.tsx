@@ -31,6 +31,18 @@ DatePickerDemo.storyName = "Date picker";
 export const DatePickerControlledDemo = () => <Demos.DatePickerControlledDemo />;
 DatePickerControlledDemo.storyName = "Date picker controlled";
 
+export const DatePickerGlassDemo = () => <Demos.DatePickerGlassDemo />;
+DatePickerGlassDemo.storyName = "Date picker glass";
+
+export const DatePickerModernDemo = () => <Demos.DatePickerModernDemo />;
+DatePickerModernDemo.storyName = "Date picker modern";
+
+export const DatePickerNeoDemo = () => <Demos.DatePickerNeoDemo />;
+DatePickerNeoDemo.storyName = "Date picker neo";
+
+export const DatePickerSoftDemo = () => <Demos.DatePickerSoftDemo />;
+DatePickerSoftDemo.storyName = "Date picker soft";
+
 export const RangeCalendarDemo = () => <Demos.RangeCalendarDemo />;
 RangeCalendarDemo.storyName = "Range calendar";
 

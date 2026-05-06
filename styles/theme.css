@@ -626,6 +626,96 @@
 @layer base {
     /* DARK MODE VARIABLES */
 
+    .light {
+        --color-alpha-white: rgb(255 255 255);
+        --color-alpha-black: rgb(0 0 0);
+
+        /* TEXT COLORS */
+        --color-text-primary: var(--color-neutral-900);
+        --color-text-tertiary: var(--color-neutral-600);
+        --color-text-error-primary: var(--color-red-600);
+        --color-text-warning-primary: var(--color-yellow-600);
+        --color-text-success-primary: var(--color-green-600);
+        --color-text-secondary: var(--color-neutral-700);
+        --color-text-secondary_hover: var(--color-neutral-800);
+        --color-text-tertiary_hover: var(--color-neutral-700);
+        --color-text-brand-secondary: var(--color-brand-700);
+        --color-text-placeholder: var(--color-neutral-500);
+        --color-text-brand-tertiary: var(--color-brand-600);
+        --color-text-editor-icon-fg: var(--color-neutral-400);
+        --color-text-editor-icon-fg_active: var(--color-neutral-500);
+        --color-text-quaternary: var(--color-neutral-500);
+        --color-text-brand-primary: var(--color-brand-900);
+        --color-text-primary_on-brand: var(--color-white);
+        --color-text-secondary_on-brand: var(--color-brand-200);
+        --color-text-tertiary_on-brand: var(--color-brand-200);
+        --color-text-quaternary_on-brand: var(--color-brand-300);
+        --color-text-brand-tertiary_alt: var(--color-brand-600);
+        --color-text-error-primary_hover: var(--color-red-700);
+        --color-text-brand-secondary_hover: var(--color-brand-800);
+
+        /* BORDER COLORS */
+        --color-border-primary: var(--color-neutral-200);
+        --color-border-secondary: var(--color-neutral-100);
+        --color-border-secondary_alt: rgb(0 0 0 / 0.1);
+        --color-border-tertiary: var(--color-neutral-50);
+        --color-border-error: var(--color-red-500);
+        --color-border-error_subtle: var(--color-red-300);
+        --color-border-brand: var(--color-brand-500);
+        --color-border-brand_alt: var(--color-brand-600);
+
+        /* FOREGROUND COLORS */
+        --color-fg-secondary: var(--color-neutral-700);
+        --color-fg-warning-primary: var(--color-yellow-600);
+        --color-fg-success-primary: var(--color-green-600);
+        --color-fg-white: var(--color-white);
+        --color-fg-success-secondary: var(--color-green-500);
+        --color-fg-secondary_hover: var(--color-neutral-800);
+        --color-fg-primary: var(--color-neutral-900);
+        --color-fg-brand-secondary: var(--color-brand-500);
+        --color-fg-brand-primary: var(--color-brand-600);
+        --color-fg-quaternary: var(--color-neutral-400);
+        --color-fg-quaternary_hover: var(--color-neutral-500);
+        --color-fg-error-primary: var(--color-red-600);
+        --color-fg-warning-secondary: var(--color-yellow-500);
+        --color-fg-error-secondary: var(--color-red-500);
+        --color-fg-tertiary: var(--color-neutral-600);
+        --color-fg-tertiary_hover: var(--color-neutral-700);
+        --color-fg-brand-primary_alt: var(--color-fg-brand-primary);
+        --color-fg-brand-secondary_alt: var(--color-fg-brand-secondary);
+        --color-fg-brand-secondary_hover: var(--color-brand-600);
+
+        /* BACKGROUND COLORS */
+        --color-bg-primary: var(--color-white);
+        --color-bg-tertiary: var(--color-neutral-100);
+        --color-bg-brand-primary: var(--color-brand-50);
+        --color-bg-error-secondary: var(--color-red-100);
+        --color-bg-warning-primary: var(--color-yellow-50);
+        --color-bg-warning-secondary: var(--color-yellow-100);
+        --color-bg-success-primary: var(--color-green-50);
+        --color-bg-success-secondary: var(--color-green-100);
+        --color-bg-brand-solid: var(--color-brand-600);
+        --color-bg-secondary-solid: var(--color-neutral-600);
+        --color-bg-error-solid: var(--color-red-600);
+        --color-bg-warning-solid: var(--color-yellow-600);
+        --color-bg-success-solid: var(--color-green-600);
+        --color-bg-secondary_hover: var(--color-neutral-100);
+        --color-bg-primary_hover: var(--color-neutral-50);
+        --color-bg-brand-solid_hover: var(--color-brand-700);
+        --color-bg-error-primary: var(--color-red-50);
+        --color-bg-brand-secondary: var(--color-brand-100);
+        --color-bg-secondary: var(--color-neutral-50);
+        --color-bg-quaternary: var(--color-neutral-200);
+        --color-bg-primary_alt: var(--color-white);
+        --color-bg-brand-primary_alt: var(--color-brand-50);
+        --color-bg-secondary_alt: var(--color-neutral-50);
+        --color-bg-overlay: var(--color-neutral-950);
+        --color-bg-brand-section: var(--color-brand-800);
+        --color-bg-brand-section_subtle: var(--color-brand-700);
+        --color-bg-primary-solid: var(--color-neutral-950);
+        --color-bg-error-solid_hover: var(--color-red-700);
+    }
+
     .dark {
         --color-alpha-white: rgb(12 14 18);
         --color-alpha-black: rgb(255 255 255);
@@ -977,5 +1067,22 @@
         --outline-color-brand-solid: var(--color-bg-brand-solid);
         --outline-color-brand-solid_hover: var(--color-bg-brand-solid_hover);
         --outline-color-brand_alt: var(--color-border-brand_alt);
+    }
+}
+
+/* Premium Brand Utilities */
+@layer utilities {
+    .bg-brand-gradient {
+        background: linear-gradient(135deg, #16035E 0%, #6301E4 100%);
+    }
+    
+    .bg-brand-gradient-hover {
+        background: linear-gradient(135deg, #1e0580 0%, #7c0dfb 100%);
+    }
+
+    .text-brand-gradient {
+        background: linear-gradient(135deg, #16035E 0%, #6301E4 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
 }

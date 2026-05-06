@@ -30,18 +30,20 @@ export const Slider = ({ labelPosition = "default", minValue = 0, maxValue = 100
     };
 
     return (
-        <AriaSlider {...rest} {...{ minValue, maxValue }} formatOptions={formatOptions ?? defaultFormatOptions}>
+        <AriaSlider {...rest} {...{ minValue, maxValue }} formatOptions={formatOptions ?? defaultFormatOptions} className={cx("relative flex w-full flex-col gap-2", rest.className)}>
             <AriaLabel />
-            <AriaSliderTrack className="relative h-6 w-full">
+            <AriaSliderTrack className="relative h-8 w-full">
                 {({ state: { values, getThumbValue, getThumbPercent, getFormattedValue } }) => {
                     const left = values.length === 1 ? 0 : getThumbPercent(0);
                     const width = values.length === 1 ? getThumbPercent(0) : getThumbPercent(1) - left;
 
                     return (
                         <>
-                            <span className="absolute top-1/2 h-2 w-full -translate-y-1/2 rounded-full bg-secondary" />
+                            {/* Track Background */}
+                            <span className="absolute top-1/2 h-2 w-full -translate-y-1/2 rounded-full bg-neutral-100 shadow-inner dark:bg-neutral-800" />
+                            {/* Active Fill */}
                             <span
-                                className="absolute top-1/2 h-2 w-full -translate-y-1/2 rounded-full bg-brand-primary"
+                                className="absolute top-1/2 h-2 -translate-y-1/2 rounded-full bg-brand-600"
                                 style={{
                                     left: `${left * 100}%`,
                                     width: `${width * 100}%`,
@@ -54,9 +56,9 @@ export const Slider = ({ labelPosition = "default", minValue = 0, maxValue = 100
                                         index={index}
                                         className={({ isFocusVisible, isDragging }) =>
                                             cx(
-                                                "top-1/2 size-6 -translate-y-1/2 box-border cursor-grab rounded-full bg-primary shadow-md ring-2 ring-secondary ring-inset",
+                                                "top-1/2 z-10 size-6 -translate-y-1/2 box-border cursor-grab rounded-full border-2 border-white bg-white shadow-xl ring-2 ring-brand-600 transition-all",
                                                 isFocusVisible && "outline-2 outline-offset-2 outline-focus-ring",
-                                                isDragging && "cursor-grabbing",
+                                                isDragging && "cursor-grabbing scale-110",
                                             )
                                         }
                                     >

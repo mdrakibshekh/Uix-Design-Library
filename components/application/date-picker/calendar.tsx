@@ -47,10 +47,10 @@ export const Calendar = ({ highlightedDates, className, children, ...props }: Ca
             <AriaCalendar {...props} className={(state) => cx("flex flex-col gap-3", typeof className === "function" ? className(state) : className)}>
                 {({ state }) => (
                     <>
-                        <header className="flex items-center justify-between">
-                            <Button slot="previous" iconLeading={ChevronLeft} size="sm" color="tertiary" className="size-8" />
-                            <AriaHeading className="text-sm font-semibold text-fg-secondary" />
-                            <Button slot="next" iconLeading={ChevronRight} size="sm" color="tertiary" className="size-8" />
+                        <header className="flex items-center justify-between px-1 mb-2">
+                            <Button slot="previous" iconLeading={ChevronLeft} size="sm" color="tertiary" className="size-9 rounded-xl hover:bg-secondary" />
+                            <AriaHeading className="text-sm font-black uppercase tracking-widest text-fg-primary" />
+                            <Button slot="next" iconLeading={ChevronRight} size="sm" color="tertiary" className="size-9 rounded-xl hover:bg-secondary" />
                         </header>
 
                         {children || (

@@ -13,11 +13,15 @@ export const styles = sortCx({
             "group relative inline-flex h-max cursor-pointer items-center justify-center whitespace-nowrap outline-none transition-all duration-200 ease-in-out before:absolute focus-visible:ring-2 focus-visible:ring-offset-2",
             // Disabled styles
             "disabled:cursor-not-allowed disabled:opacity-50",
-            "*:data-icon:pointer-events-none *:data-icon:size-5 *:data-icon:shrink-0 *:data-icon:transition-inherit-all",
+            "*:data-icon:pointer-events-none *:data-icon:size-5 *:data-icon:shrink-0 *:data-icon:transition-all *:data-icon:duration-200",
+            "aria-expanded:[&_[data-icon=trailing]]:rotate-180",
         ].join(" "),
         icon: "pointer-events-none size-5 shrink-0 transition-inherit-all",
     },
     sizes: {
+        xs: {
+            root: "gap-1 rounded-md px-2 py-1 text-xs font-semibold",
+        },
         sm: {
             root: "gap-1.5 rounded-lg px-3 py-1.5 text-sm font-semibold",
         },
@@ -41,9 +45,11 @@ export const styles = sortCx({
             success: "bg-success-500 text-white hover:bg-success-600 focus-visible:ring-success-500",
             destructive: "bg-error-500 text-white hover:bg-error-600 focus-visible:ring-error-500",
             warning: "bg-warning-500 text-white hover:bg-warning-600 focus-visible:ring-warning-500",
+            secondary: "bg-white text-slate-700 hover:bg-slate-50 border border-slate-200 shadow-xs focus-visible:ring-slate-200",
+            "link-color": "text-brand-700 hover:text-brand-800 p-0 h-auto",
         },
         outlined: {
-            dark: "border border-slate-900 text-slate-900 hover:bg-slate-50 focus-visible:ring-slate-900",
+            dark: "border border-slate-500 text-slate-900 hover:bg-slate-50 focus-visible:ring-slate-900",
             gray: "border border-slate-200 text-slate-600 hover:bg-slate-50 focus-visible:ring-slate-200",
             blue: "border border-brand-300 text-brand-500 hover:bg-brand-50 focus-visible:ring-brand-500",
             green: "border border-success-500 text-success-500 hover:bg-success-50 focus-visible:ring-success-500",
@@ -53,6 +59,8 @@ export const styles = sortCx({
             success: "border border-success-500 text-success-500 hover:bg-success-50 focus-visible:ring-success-500",
             destructive: "border border-error-500 text-error-500 hover:bg-error-50 focus-visible:ring-error-500",
             warning: "border border-warning-500 text-warning-500 hover:bg-warning-50 focus-visible:ring-warning-500",
+            secondary: "border border-slate-200 text-slate-700 hover:bg-slate-50 focus-visible:ring-slate-200",
+            "link-color": "text-brand-700 hover:text-brand-800",
         },
         ghost: {
             dark: "text-slate-900 hover:bg-slate-100",
@@ -65,6 +73,8 @@ export const styles = sortCx({
             success: "text-success-600 hover:bg-success-50",
             destructive: "text-error-600 hover:bg-error-50",
             warning: "text-warning-600 hover:bg-warning-50",
+            secondary: "text-slate-600 hover:bg-slate-50",
+            "link-color": "text-brand-700 hover:text-brand-800",
         },
         soft: {
             dark: "bg-slate-100 text-slate-900 hover:bg-slate-200",
@@ -77,6 +87,8 @@ export const styles = sortCx({
             success: "bg-success-50 text-success-700 hover:bg-success-100",
             destructive: "bg-error-50 text-error-700 hover:bg-error-100",
             warning: "bg-warning-50 text-warning-700 hover:bg-warning-100",
+            secondary: "bg-slate-50 text-slate-700 hover:bg-slate-100",
+            "link-color": "bg-brand-50 text-brand-700",
         }
     },
 });
@@ -94,7 +106,7 @@ export interface CommonProps {
     /** The style variant of the button */
     variant?: keyof typeof styles.variants;
     /** The color variant of the button */
-    color?: "dark" | "gray" | "blue" | "green" | "red" | "yellow" | "light" | "success" | "destructive" | "warning";
+    color?: "dark" | "gray" | "blue" | "green" | "red" | "yellow" | "light" | "success" | "destructive" | "warning" | "secondary" | "link-color";
     /** Icon component or element to show before the text */
     iconLeading?: FC<{ className?: string }> | ReactNode;
     /** Icon component or element to show after the text */
