@@ -876,7 +876,13 @@ function App() {
   const [selectedDemos, setSelectedDemos] = useState<Set<string>>(new Set());
   const [demoPayloads, setDemoPayloads] = useState<Record<string, any>>({});
   const handlePayloadReady = useCallback((key: string, payload: any) => {
-    setDemoPayloads(prev => ({ ...prev, [key]: payload }));
+    setDemoPayloads(prev => {
+      const next = { ...prev, [key]: payload };
+      if (typeof window !== 'undefined') {
+        (window as any).__UIX_LIBRARY_DATA__ = Object.values(next);
+      }
+      return next;
+    });
   }, []);
 
   // Fetch GitHub Stars
@@ -931,6 +937,63 @@ function App() {
     alert(`Copied ${payloads.length} selected variant${payloads.length === 1 ? '' : 's'} from ${selectedComponentCount} component${selectedComponentCount === 1 ? '' : 's'} to clipboard.`);
     setSelectedDemos(new Set());
     setIsSelectionMode(false);
+  };
+
+  const syncLibraryToCloud = async () => {
+    try {
+      // 1. Collect ALL payloads from all pages
+      // This is a bit complex because payloads are generated in DemoCard useEffect
+      // So we'll only sync what has been rendered or we'll trigger a full pass.
+      
+      const payloads = Object.values(demoPayloads);
+      if (payloads.length === 0) {
+        alert("No components rendered yet. Please browse through categories to generate payloads.");
+        return;
+      }
+
+      // 2. Group by component
+      const componentsMap: Record<string, any> = {};
+      payloads.forEach((p: any) => {
+        if (!componentsMap[p.component]) {
+          const page = componentPages.find(cp => cp.id === p.component);
+          componentsMap[p.component] = {
+            id: p.component,
+            name: page?.title || p.component,
+            category: page?.category.toLowerCase() || 'base',
+            description: page?.description || '',
+            variants: []
+          };
+        }
+        componentsMap[p.component].variants.push({
+          id: `${p.component}-${p.variant.toLowerCase().replace(/\s+/g, '-')}`,
+          name: p.variant,
+          properties: { theme: p.theme },
+          figmaLayers: p.figmaLayers
+        });
+      });
+
+      const libraryData = Object.values(componentsMap);
+
+      // 3. Send to Backend
+      const response = await fetch('https://uix.sigmastudioo.com/api/library/publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+          success: true, 
+          data: libraryData,
+          updatedAt: new Date().toISOString()
+        })
+      });
+
+      if (response.ok) {
+        alert("Library successfully published to Cloud!");
+      } else {
+        throw new Error("Failed to publish");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Publishing failed. Check console for details.");
+    }
   };
 
   const copyActivePageVariants = async () => {
@@ -1036,6 +1099,14 @@ function App() {
               </button>
               <div className="w-px h-4 bg-slate-200 dark:bg-white/10 mx-1" />
             </div>
+
+            <button 
+              onClick={syncLibraryToCloud}
+              className="flex items-center gap-2.5 px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-2xl text-sm font-bold leading-none shadow-xl transition-all active:scale-95 group overflow-hidden relative"
+            >
+              <RotateCcw className="size-5 group-hover:rotate-180 transition-transform duration-500" />
+              <span>Sync All</span>
+            </button>
 
             <button className="flex items-center gap-2.5 px-6 py-3 bg-brand-gradient hover:bg-brand-gradient-hover text-white rounded-2xl text-sm font-bold leading-none shadow-2xl shadow-indigo-950/60 transition-all active:scale-95 group overflow-hidden relative">
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 -translate-x-full group-hover:animate-shimmer" />
