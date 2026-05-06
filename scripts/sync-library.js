@@ -12,7 +12,10 @@ async function sync() {
   // Wait for server to be ready
   await new Promise(resolve => setTimeout(resolve, 5000));
 
-  const browser = await puppeteer.launch({ headless: "new" });
+  const browser = await puppeteer.launch({ 
+    headless: "new",
+    args: ['--no-sandbox', '--disable-setuid-sandbox'] 
+  });
   const page = await browser.newPage();
   
   try {
