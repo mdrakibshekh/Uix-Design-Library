@@ -222,6 +222,10 @@
             <span>+</span> Add Variants
         </button>
 
+        <button class="btn-add" id="loadLibraryBtn" onclick="loadLibraryFromApi()" style="margin: 0 12px 0 12px;">
+            Load Library API
+        </button>
+
         <div class="variants-list" id="variantsList"></div>
         
         <button class="btn-import" id="importBtn" disabled>IMPORT TO FIGMA</button>
@@ -284,6 +288,7 @@
     </div>
 
     <script>
+        const LIBRARY_API_URL = 'https://uix.sigmastudioo.com/api/library_data.json';
         let currentPayloads = [];
         let selectedIndex = -1;
 
@@ -294,29 +299,55 @@
         const pasteOverlay = document.getElementById('pasteOverlay');
         const manualPaste = document.getElementById('manualPaste');
         const importBtn = document.getElementById('importBtn');
+        const loadLibraryBtn = document.getElementById('loadLibraryBtn');
 
         function toggleDrawer() { propDrawer.classList.toggle('open'); }
         function showPasteModal() { pasteOverlay.style.display = 'flex'; manualPaste.focus(); }
         function hidePasteModal() { pasteOverlay.style.display = 'none'; manualPaste.value = ''; }
 
-        function processPaste() {
+        async function loadLibraryFromApi() {
+            loadLibraryBtn.disabled = true;
+            loadLibraryBtn.innerText = 'Loading...';
             try {
-                const data = JSON.parse(manualPaste.value);
-                if (data.source === 'UIX_DESIGN_LIBRARY' || (Array.isArray(data) && data[0].source === 'UIX_DESIGN_LIBRARY')) {
-                    renderVariants(data);
-                    hidePasteModal();
-                } else {
-                    alert("Invalid UIX Data format.");
-                }
+                const response = await fetch(LIBRARY_API_URL);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const json = await response.json();
+                if (!json.success || !Array.isArray(json.data)) throw new Error('Invalid library payload');
+                renderVariants(json.data);
             } catch (err) {
-                alert("Failed to parse JSON data.");
+                alert('Unable to load UIX library API. Please verify the endpoint and try again.');
+                console.error(err);
+            } finally {
+                loadLibraryBtn.disabled = false;
+                loadLibraryBtn.innerText = 'Load Library API';
             }
         }
 
-        const renderVariants = (payloads) => {
-            const newPayloads = Array.isArray(payloads) ? payloads : [payloads];
-            currentPayloads = [...currentPayloads, ...newPayloads]; // Append mode
-            
+        function normalizePayloads(payloads) {
+            if (!payloads) return [];
+            if (payloads.success && Array.isArray(payloads.data)) {
+                payloads = payloads.data;
+            }
+
+            if (Array.isArray(payloads) && payloads.length > 0 && payloads[0].variants) {
+                return payloads.flatMap(item => normalizePayloads(item.variants || []));
+            }
+
+            if (payloads && payloads.variants) {
+                return normalizePayloads(payloads.variants);
+            }
+
+            if (Array.isArray(payloads)) {
+                return payloads.filter(p => p && (p.figmaLayers || p.layers || p.source === 'UIX_DESIGN_LIBRARY'));
+            }
+
+            return payloads && (payloads.figmaLayers || payloads.layers || payloads.source === 'UIX_DESIGN_LIBRARY') ? [payloads] : [];
+        }
+
+        function renderVariants(payloads) {
+            const newPayloads = normalizePayloads(payloads);
+            currentPayloads = [...currentPayloads, ...newPayloads];
+
             variantsList.innerHTML = '';
             currentPayloads.forEach((p, index) => {
                 const item = document.createElement('div');
@@ -324,8 +355,8 @@
                 item.innerHTML = `
                     <div class="preview-thumb" style="background: ${p.visualPreview?.color || '#6301E4'}"></div>
                     <div style="flex: 1">
-                        <div style="font-weight: 700; font-size: 12px;">${p.variant}</div>
-                        <div style="font-size: 10px; color: var(--text-muted)">${p.component}</div>
+                        <div style="font-weight: 700; font-size: 12px;">${p.variant || p.name || p.variantId || 'Variant'}</div>
+                        <div style="font-size: 10px; color: var(--text-muted)">${p.component || p.componentName || p.properties?.componentName || p.properties?.componentId || 'Component'}</div>
                     </div>
                 `;
                 item.onclick = () => selectVariant(index);
@@ -334,26 +365,42 @@
 
             if (selectedIndex === -1 && currentPayloads.length > 0) selectVariant(0);
             importBtn.disabled = currentPayloads.length === 0;
-        };
+        }
 
-        const selectVariant = (index) => {
+        function selectVariant(index) {
             selectedIndex = index;
-            const p = currentPayloads[index];
-            
             document.querySelectorAll('.variant-item').forEach((item, i) => {
-                if (i === index) item.classList.add('active');
-                else item.classList.remove('active');
+                item.classList.toggle('active', i === index);
             });
 
+            const p = currentPayloads[index];
             previewFrame.src = p.previewUrl || 'about:blank';
-            activeInfo.innerText = `${p.component.toUpperCase()} / ${p.variant.toUpperCase()}`;
-        };
+            activeInfo.innerText = `${(p.component || p.componentName || p.properties?.componentName || p.properties?.componentId || '').toUpperCase()} / ${(p.variant || p.name || p.variantId || '').toUpperCase()}`;
+        }
+
+        function processPaste() {
+            try {
+                const data = JSON.parse(manualPaste.value);
+                const normalized = normalizePayloads(data);
+                if (normalized.length > 0) {
+                    renderVariants(normalized);
+                    hidePasteModal();
+                } else {
+                    alert('Invalid UIX Data format.');
+                }
+            } catch (err) {
+                alert('Failed to parse JSON data.');
+            }
+        }
 
         importBtn.onclick = () => {
+            const payloads = selectedIndex >= 0 ? [currentPayloads[selectedIndex]] : currentPayloads;
+            if (!payloads.length) return;
+
             parent.postMessage({ 
                 pluginMessage: { 
                     type: 'import-component',
-                    payload: currentPayloads,
+                    payload: payloads,
                     settings: {
                         radius: parseInt(document.getElementById('radius').value),
                         accent: document.getElementById('accent').value,
@@ -363,13 +410,13 @@
             }, '*');
         };
 
-        // Auto-read clipboard
         window.onload = async () => {
             try {
                 const text = await navigator.clipboard.readText();
                 const data = JSON.parse(text);
-                if (data.source === 'UIX_DESIGN_LIBRARY' || (Array.isArray(data) && data[0].source === 'UIX_DESIGN_LIBRARY')) {
-                    renderVariants(data);
+                const normalized = normalizePayloads(data);
+                if (normalized.length > 0) {
+                    renderVariants(normalized);
                 }
             } catch (err) {}
         };

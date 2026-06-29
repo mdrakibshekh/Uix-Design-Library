@@ -32,7 +32,7 @@ import { ScatterChart01, ScatterChartPreview } from "./components/application/ch
 import { DefaultDemo as LoadingDefaultDemo, LineSimpleWithLabelDemo, LineSpinnerWithLabelDemo, DotCircleWithLabelDemo } from "./components/application/loading-indicator/loading-indicator.demo";
 import { HeaderNavigationSimpleDemo, HeaderNavigationDualTierDemo, HeaderNavigationPreview } from "./components/application/app-navigation/header-navigation.demo";
 import { DefaultDemo as FeaturedIconDefaultDemo, LightDemo as FeaturedIconLightDemo, GradientDemo as FeaturedIconGradientDemo } from "./components/foundations/featured-icon/featured-icon.demo";
-import { LucideIconsDemo, TablerIconsDemo, UntitledIconsDemo, IconsPreview } from "./components/foundations/icons/icons.demo";
+import { IconsPreview } from "./components/foundations/icons/icons.demo";
 import { DocumentationIntroDemo, DocumentationDesignDemo } from "./components/foundations/documentation/documentation.demo";
 import { SocialButtonPreview, SocialButtonGroupBrandDemo, SocialButtonGroupColorDemo, SocialButtonGroupGrayDemo, SocialButtonGroupsMD, SocialButtonGroupsLG } from "./components/base/buttons/social-buttons.demo";
 import { MobileAppButtonsPreview, MobileAppButtonsBlackDemo, MobileAppButtonsWhiteDemo, MobileAppButtonsGlassDemo, MobileAppButtonsOutlineDemo } from "./components/application/mobile-app-buttons/mobile-app-buttons.demo";
@@ -51,13 +51,157 @@ import { ProfileDropdownDemo, MegaMenuDemo, SimpleDropdownDemo, DropdownWithIcon
 import { UIXLogo } from "./components/foundations/logo/uix-logo";
 
 
+type VariantItem = {
+  id?: string;
+  label: string;
+  Demo: React.ComponentType<any>;
+  variantGroup?: string;
+  variantType?: string;
+  variantSize?: string;
+  variantModifiers?: string[];
+  variantTags?: string[];
+};
+
+type VariantGroup = {
+  groupLabel: string;
+  groupType?: 'size' | 'type' | 'modifier' | 'theme' | 'state' | 'custom';
+  variants: VariantItem[];
+};
+
 type ComponentPage = {
   id: string;
   title: string;
   description: string;
   category: "Foundations" | "Base" | "Application";
   keyFeatures: string[];
-  demoBlocks: Array<{ label: string; Demo: React.ComponentType<any> }>;
+  demoBlocks?: VariantItem[];
+  variantGroups?: VariantGroup[];
+};
+
+const VARIANT_SIZE_KEYWORDS = [
+  'xs','sm','md','lg','xl','small','medium','large','compact','full','mini','max','nano','tiny'
+];
+const VARIANT_TYPE_KEYWORDS = [
+  'solid','ghost','outline','brand','dark','light','gradient','soft','default','primary','secondary','tertiary','destructive','minimal','modern','glass','colorful'
+];
+const VARIANT_MODIFIER_KEYWORDS = [
+  'disabled','interactive','minimal','compact','card','icon','icons','avatar','selected','active','rounded','filled','simple','classic','modern','glass','colorful','elegant'
+];
+
+const VARIANT_GROUP_TYPE_MAP: Record<string, VariantGroup['groupType']> = {
+  Size: 'size',
+  Variant: 'type',
+  Theme: 'theme',
+  State: 'state',
+  Modifier: 'modifier',
+  Overview: 'custom',
+  Default: 'custom'
+};
+
+const normalizeLabelToId = (label: string) => label.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+
+const inferVariantSize = (label: string) => {
+  const lower = label.toLowerCase();
+  for (const keyword of VARIANT_SIZE_KEYWORDS) {
+    if (lower.includes(keyword)) return keyword;
+  }
+  return undefined;
+};
+
+const inferVariantType = (label: string) => {
+  const lower = label.toLowerCase();
+  for (const keyword of VARIANT_TYPE_KEYWORDS) {
+    if (lower.includes(keyword)) return keyword;
+  }
+  return undefined;
+};
+
+const inferVariantModifiers = (label: string) => {
+  const lower = label.toLowerCase();
+  return VARIANT_MODIFIER_KEYWORDS.filter(keyword => lower.includes(keyword));
+};
+
+const inferVariantGroup = (label: string) => {
+  const lower = label.toLowerCase();
+  if (lower.includes('size') || lower.includes('sizes')) return 'Size';
+  if (lower.includes('variant') || lower.includes('variants')) return 'Variant';
+  if (lower.includes('theme') || lower.includes('dark') || lower.includes('light') || lower.includes('colorful')) return 'Theme';
+  if (lower.includes('state') || lower.includes('disabled') || lower.includes('active') || lower.includes('selected')) return 'State';
+  if (lower.includes('icon') || lower.includes('avatar') || lower.includes('card')) return 'Modifier';
+  return 'Overview';
+};
+
+const inferVariantAttributes = (label: string) => {
+  const variantGroup = inferVariantGroup(label);
+  const variantSize = inferVariantSize(label);
+  const variantType = inferVariantType(label);
+  const variantModifiers = inferVariantModifiers(label).filter((value, index, self) => self.indexOf(value) === index);
+
+  const tags = [variantGroup, variantType, variantSize, ...variantModifiers]
+    .filter(Boolean)
+    .map(String)
+    .filter((value, index, self) => self.indexOf(value) === index);
+
+  return {
+    variantGroup,
+    variantType,
+    variantSize,
+    variantModifiers,
+    variantTags: tags
+  };
+};
+
+const getPageVariantGroups = (page: ComponentPage): VariantGroup[] => {
+  if (page.variantGroups && page.variantGroups.length > 0) {
+    return page.variantGroups.map(group => ({
+      ...group,
+      variants: group.variants.map(variant => ({
+        ...variant,
+        id: variant.id || `${page.id}-${normalizeLabelToId(variant.label)}`,
+        ...inferVariantAttributes(variant.label),
+      }))
+    }));
+  }
+
+  const rawVariants = page.demoBlocks || [];
+  const grouped: Record<string, VariantGroup> = {};
+
+  rawVariants.forEach((item) => {
+    const attrs = inferVariantAttributes(item.label);
+    const groupLabel = attrs.variantGroup || 'Overview';
+    const groupType = VARIANT_GROUP_TYPE_MAP[groupLabel] || 'custom';
+    const enrichedItem: VariantItem = {
+      ...item,
+      id: item.id || `${page.id}-${normalizeLabelToId(item.label)}`,
+      variantGroup: item.variantGroup || attrs.variantGroup,
+      variantType: item.variantType || attrs.variantType,
+      variantSize: item.variantSize || attrs.variantSize,
+      variantModifiers: Array.isArray(item.variantModifiers) && item.variantModifiers.length ? item.variantModifiers : attrs.variantModifiers,
+      variantTags: Array.isArray(item.variantTags) && item.variantTags.length ? item.variantTags : attrs.variantTags,
+    };
+
+    if (!grouped[groupLabel]) {
+      grouped[groupLabel] = {
+        groupLabel,
+        groupType,
+        variants: []
+      };
+    }
+
+    grouped[groupLabel].variants.push(enrichedItem);
+  });
+
+  const sortOrder = ['Size', 'Theme', 'Variant', 'State', 'Modifier', 'Overview'];
+  return Object.values(grouped).sort((a, b) => sortOrder.indexOf(a.groupLabel) - sortOrder.indexOf(b.groupLabel));
+};
+
+const getPageVariants = (page: ComponentPage): VariantItem[] => {
+  return getPageVariantGroups(page).flatMap(group => group.variants);
+};
+
+const getPagePreviewVariant = (page: ComponentPage) => {
+  const pageVariants = getPageVariants(page);
+  return pageVariants[0];
 };
 
 const componentNameMap: Record<string, string> = {
@@ -100,7 +244,7 @@ const componentNameMap: Record<string, string> = {
   modals: "Modal",
 };
 
-const DemoCard = ({ demo, pageId, globalTheme, isSelectionMode = false, isSelected = false, onSelect, onPayloadReady }: { demo: { label: string; Demo: React.ComponentType<any> }; pageId: string, globalTheme: "light" | "dark", isSelectionMode?: boolean, isSelected?: boolean, onSelect?: () => void, onPayloadReady?: (key: string, payload: any) => void }) => {
+const DemoCard = ({ demo, pageId, globalTheme, isSelectionMode = false, isSelected = false, onSelect, onPayloadReady }: { demo: VariantItem; pageId: string, globalTheme: "light" | "dark", isSelectionMode?: boolean, isSelected?: boolean, onSelect?: () => void, onPayloadReady?: (key: string, payload: any) => void }) => {
   const [activeTab, setActiveTab] = useState<string>("React");
   const [themeMode, setThemeMode] = useState<"light" | "dark">(globalTheme);
   const [copied, setCopied] = useState(false);
@@ -169,7 +313,7 @@ const DemoCard = ({ demo, pageId, globalTheme, isSelectionMode = false, isSelect
         bottom: parseInt(styles.paddingBottom) || 0,
         left: parseInt(styles.paddingLeft) || 0
       },
-      children: []
+      children: [] as any[],
     };
 
     Array.from(element.childNodes).forEach(node => {
@@ -206,7 +350,7 @@ const DemoCard = ({ demo, pageId, globalTheme, isSelectionMode = false, isSelect
     return serializeElement(el);
   };
 
-  const buildPayload = (d: any) => {
+  const buildPayload = (d: VariantItem) => {
     const root = componentRef.current;
     const figmaLayers = root ? serializeToFigma(root) : null;
     const rootStyles = root ? window.getComputedStyle(root) : null;
@@ -216,12 +360,22 @@ const DemoCard = ({ demo, pageId, globalTheme, isSelectionMode = false, isSelect
     const backgroundColor = figmaLayers?.backgroundColor || rootStyles?.backgroundColor || (themeMode === 'dark' ? '#0f172a' : '#ffffff');
     const width = root?.offsetWidth || 0;
     const height = root?.offsetHeight || 0;
+    const variantMeta = inferVariantAttributes(d.label);
+    const variantId = d.id || `${pageId}|${normalizeLabelToId(d.label)}`;
 
     return {
       source: 'UIX_DESIGN_LIBRARY',
       version: '1.0',
       component: pageId,
+      componentId: pageId,
+      componentName,
       variant: d.label,
+      variantId,
+      variantGroup: d.variantGroup || variantMeta.variantGroup,
+      variantType: d.variantType || variantMeta.variantType,
+      variantSize: d.variantSize || variantMeta.variantSize,
+      variantModifiers: Array.isArray(d.variantModifiers) ? d.variantModifiers : variantMeta.variantModifiers,
+      variantTags: Array.isArray(d.variantTags) ? d.variantTags : variantMeta.variantTags,
       labelText,
       labelColor,
       backgroundColor,
@@ -242,9 +396,9 @@ const DemoCard = ({ demo, pageId, globalTheme, isSelectionMode = false, isSelect
 
   React.useEffect(() => {
     if (!componentRef.current) return;
-    const key = `${pageId}|${demo.label}`;
+    const key = `${pageId}|${demo.id || demo.label}`;
     onPayloadReady?.(key, buildPayload(demo));
-  }, [pageId, demo.label, themeMode, onPayloadReady]);
+  }, [pageId, demo.id, demo.label, themeMode, onPayloadReady]);
 
   const handleCopyToFigma = async () => {
     try {
@@ -844,16 +998,59 @@ function App() {
   const previewVariant = urlParams.get('variant');
   const isAutomationMode = urlParams.get('automation') === 'true';
 
+  // Simple routing state
+  const [currentRoute, setCurrentRoute] = useState(() => {
+    const path = window.location.pathname;
+    if (path.startsWith('/')) {
+      return path.substring(6); // Remove '/page/' prefix
+    }
+    return null;
+  });
+
+  // Handle browser back/forward navigation
+  React.useEffect(() => {
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      if (path.startsWith('/')) {
+        setCurrentRoute(path.substring(6));
+      } else {
+        setCurrentRoute(null);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  // Navigation function
+  const navigateTo = (route: string | null) => {
+    if (route) {
+      const newPath = `/${route}`;
+      window.history.pushState(null, '', newPath);
+      setCurrentRoute(route);
+    } else {
+      window.history.pushState(null, '', '/');
+      setCurrentRoute(null);
+    }
+  };
+
+  // Calculate total variants for the sync engine
+  if (typeof window !== 'undefined' && isAutomationMode) {
+    const total = componentPages.reduce((acc, p) => acc + getPageVariants(p).length, 0);
+    (window as any).__UIX_TOTAL_VARIANTS__ = total;
+  }
+
   const [globalTheme, setGlobalTheme] = useState<"light" | "dark">(() => {
     if (typeof window !== "undefined") {
       return (localStorage.getItem("uix-theme") as "light" | "dark") || "light";
     }
     return "light";
   });
+  const componentRef = useRef<HTMLDivElement>(null);
 
   if (isPreviewMode) {
     const component = componentPages.find(p => p.id === previewComponentId);
-    const demo = component?.demoBlocks.find(d => d.label === previewVariant);
+    const demo = component ? getPageVariants(component).find(d => d.label === previewVariant || d.id === previewVariant) : undefined;
     
     if (!demo) return <div className="p-10 text-slate-400">Preview not found...</div>;
 
@@ -876,31 +1073,60 @@ function App() {
   const [isSelectionMode, setIsSelectionMode] = useState(false);
   const [selectedDemos, setSelectedDemos] = useState<Set<string>>(new Set());
   const [demoPayloads, setDemoPayloads] = useState<Record<string, any>>({});
+  const automationDataRef = useRef<Record<string, any>>({});
+
   const handlePayloadReady = useCallback((key: string, payload: any) => {
-    setDemoPayloads(prev => {
-      const next = { ...prev, [key]: payload };
-      if (typeof window !== 'undefined') {
-        // STRUCTURED API ENGINE: Group variants by component name
-        const allPayloads = Object.values(next);
-        const grouped: Record<string, any> = {};
-        
-        allPayloads.forEach((item: any) => {
-          const compName = item.componentName || "Other";
-          if (!grouped[compName]) {
-            grouped[compName] = {
-              id: item.componentId || compName.toLowerCase().replace(/\s+/g, '-'),
-              name: compName,
-              variants: []
-            };
-          }
-          grouped[compName].variants.push(item);
+    // SYNC FAST-LANE: Update ref immediately for the crawler
+    automationDataRef.current[key] = payload;
+    
+    if (typeof window !== 'undefined' && isAutomationMode) {
+      const allPayloads = Object.values(automationDataRef.current);
+      const grouped: Record<string, any> = {};
+      
+      allPayloads.forEach((item: any) => {
+        const page = componentPages.find(cp => cp.id === item.component);
+        const compId = page?.id || item.componentId || item.component?.toLowerCase().replace(/\s+/g, '-') || 'other';
+        const compName = page?.title || item.componentName || item.component || 'Other';
+        const compCategory = page?.category || 'Base';
+        const compDescription = page?.description || '';
+
+        if (!grouped[compId]) {
+          grouped[compId] = {
+            id: compId,
+            name: compName,
+            category: compCategory,
+            description: compDescription,
+            variants: []
+          };
+        }
+
+        grouped[compId].variants.push({
+          id: item.variantId || `${compId}-${normalizeLabelToId(item.variant)}`,
+          name: item.variant,
+          properties: {
+            variantId: item.variantId,
+            variantGroup: item.variantGroup,
+            variantType: item.variantType,
+            variantSize: item.variantSize,
+            variantModifiers: item.variantModifiers,
+            variantTags: item.variantTags,
+            theme: item.theme,
+            componentName: item.componentName,
+            componentId: item.componentId,
+          },
+          figmaLayers: item.figmaLayers,
+          preview: item.visualPreview,
+          source: item.source,
         });
-        
-        (window as any).__UIX_LIBRARY_DATA__ = Object.values(grouped);
-      }
-      return next;
-    });
-  }, []);
+      });
+      
+      (window as any).__UIX_LIBRARY_DATA__ = Object.values(grouped);
+      (window as any).__UIX_CURRENT_COUNT__ = allPayloads.length;
+    }
+
+    // React state for the UI
+    setDemoPayloads(prev => ({ ...prev, [key]: payload }));
+  }, [isAutomationMode]);
 
   // Fetch GitHub Stars
   React.useEffect(() => {
@@ -931,7 +1157,7 @@ function App() {
     localStorage.setItem("uix-theme", globalTheme);
   }, [globalTheme]);
 
-  const activePage = componentPages.find((page) => page.id === selectedPage) || null;
+  const activePage = componentPages.find((page) => page.id === currentRoute) || null;
 
   const filteredPages = componentPages.filter(page =>
     page.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -982,9 +1208,17 @@ function App() {
           };
         }
         componentsMap[p.component].variants.push({
-          id: `${p.component}-${p.variant.toLowerCase().replace(/\s+/g, '-')}`,
+          id: p.variantId || `${p.component}-${p.variant.toLowerCase().replace(/\s+/g, '-')}`,
           name: p.variant,
-          properties: { theme: p.theme },
+          properties: {
+            variantId: p.variantId,
+            variantGroup: p.variantGroup,
+            variantType: p.variantType,
+            variantSize: p.variantSize,
+            variantModifiers: p.variantModifiers,
+            variantTags: p.variantTags,
+            theme: p.theme,
+          },
           figmaLayers: p.figmaLayers
         });
       });
@@ -1016,8 +1250,9 @@ function App() {
   const copyActivePageVariants = async () => {
     if (!activePage) return;
 
-    const payloads = activePage.demoBlocks
-      .map((demo) => demoPayloads[`${activePage.id}|${demo.label}`])
+    const pageVariants = getPageVariants(activePage);
+    const payloads = pageVariants
+      .map((demo) => demoPayloads[`${activePage.id}|${demo.id || demo.label}`])
       .filter(Boolean);
 
     if (!payloads.length) {
@@ -1025,9 +1260,9 @@ function App() {
       return;
     }
 
-    const missing = activePage.demoBlocks.length - payloads.length;
+    const missing = pageVariants.length - payloads.length;
     await navigator.clipboard.writeText(JSON.stringify(payloads, null, 2));
-    alert(`Copied ${payloads.length}${missing > 0 ? ` of ${activePage.demoBlocks.length}` : ''} variants. Paste in Figma plugin.`);
+    alert(`Copied ${payloads.length}${missing > 0 ? ` of ${pageVariants.length}` : ''} variants. Paste in Figma plugin.`);
   };
 
   return (
@@ -1049,8 +1284,8 @@ function App() {
 
         <div className="flex-1 overflow-y-auto p-4">
           <button
-            onClick={() => setSelectedPage(null)}
-            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-bold transition ${!selectedPage ? "bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"}`}
+            onClick={() => navigateTo(null)}
+            className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm font-bold transition ${!currentRoute ? "bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"}`}
           >
             <Rocket className="size-4" />
             Overview
@@ -1063,11 +1298,11 @@ function App() {
                 {componentPages.filter(p => p.category === category).map(page => (
                   <button
                     key={page.id}
-                    onClick={() => setSelectedPage(page.id)}
-                    className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-bold transition ${selectedPage === page.id ? "bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"}`}
+                    onClick={() => navigateTo(page.id)}
+                    className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-sm font-bold transition ${currentRoute === page.id ? "bg-brand-50 dark:bg-brand-900/20 text-brand-700 dark:text-brand-400" : "text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white"}`}
                   >
                     {page.title}
-                    {selectedPage === page.id && <ChevronRight className="size-3" />}
+                    {currentRoute === page.id && <ChevronRight className="size-3" />}
                   </button>
                 ))}
               </div>
@@ -1117,13 +1352,7 @@ function App() {
               <div className="w-px h-4 bg-slate-200 dark:bg-white/10 mx-1" />
             </div>
 
-            <button 
-              onClick={syncLibraryToCloud}
-              className="flex items-center gap-2.5 px-6 py-3 bg-violet-600 hover:bg-violet-700 text-white rounded-2xl text-sm font-bold leading-none shadow-xl transition-all active:scale-95 group overflow-hidden relative"
-            >
-              <RotateCcw className="size-5 group-hover:rotate-180 transition-transform duration-500" />
-              <span>Sync All</span>
-            </button>
+          
 
             <button className="flex items-center gap-2.5 px-6 py-3 bg-brand-gradient hover:bg-brand-gradient-hover text-white rounded-2xl text-sm font-bold leading-none shadow-2xl shadow-indigo-950/60 transition-all active:scale-95 group overflow-hidden relative">
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/5 to-white/0 -translate-x-full group-hover:animate-shimmer" />
@@ -1148,15 +1377,15 @@ function App() {
                 {filteredPages.filter(p => p.id !== 'documentation').map(page => (
                   <div
                     key={page.id}
-                    onClick={() => setSelectedPage(page.id)}
-                    onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setSelectedPage(page.id)}
+                    onClick={() => navigateTo(page.id)}
+                    onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && navigateTo(page.id)}
                     role="button"
                     tabIndex={0}
                     className="group cursor-pointer text-left border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-[1.3rem] p-3 hover:border-brand-400 dark:hover:border-brand-500 hover:shadow-2xl hover:shadow-brand-500/10 transition-all duration-300 outline-none focus:ring-2 focus:ring-brand-500/20"
                   >
                     <div className="aspect-[1.4] bg-slate-50 dark:bg-slate-800/50 rounded-[1rem] mb-5 border border-slate-100 dark:border-slate-800 flex items-center justify-center p-8 overflow-hidden group-hover:bg-slate-100 dark:group-hover:bg-slate-800 transition-colors relative">
                       <div className="scale-[0.85] group-hover:scale-100 transition-transform duration-700 ease-out w-full flex justify-center">
-                        {page.demoBlocks[0] && React.createElement(page.demoBlocks[0].Demo, { isCompact: true })}
+                        {getPagePreviewVariant(page) && React.createElement(getPagePreviewVariant(page)!.Demo, { isCompact: true })}
                       </div>
                       <div className="absolute inset-0 bg-gradient-to-t from-white/20 dark:from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
@@ -1176,7 +1405,7 @@ function App() {
           ) : (
             <div className="max-w-6xl mx-auto">
               <nav className="flex items-center gap-2 text-xs font-bold text-slate-400 dark:text-slate-500 mb-8 uppercase tracking-widest">
-                <button onClick={() => setSelectedPage(null)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Components</button>
+                <button onClick={() => navigateTo(null)} className="hover:text-brand-600 dark:hover:text-brand-400 transition-colors">Components</button>
                 <ChevronRight className="size-3" />
                 <span className="text-slate-900 dark:text-white">{activePage.title}</span>
               </nav>
@@ -1194,9 +1423,17 @@ function App() {
               </div>
 
               <div className="space-y-12">
-                {activePage.id === "icons" ? (
+                {activePage.id === "documentation" ? (
                   <div className="space-y-8">
-                    {activePage.demoBlocks.map(demo => (
+                    {activePage.demoBlocks?.map(demo => (
+                      <div key={demo.label} className="font-inter">
+                        <demo.Demo themeMode={globalTheme} />
+                      </div>
+                    ))}
+                  </div>
+                ) : activePage.id === "icons" ? (
+                  <div className="space-y-8">
+                    {activePage.demoBlocks?.map(demo => (
                       <div key={demo.label} className="font-inter">
                         <demo.Demo themeMode={globalTheme} />
                       </div>
@@ -1208,27 +1445,44 @@ function App() {
                       <Eye className="size-5 text-brand-600 dark:text-brand-400" />
                       <h2 className="text-xl font-bold text-slate-900 dark:text-white">Interactive Demos</h2>
                     </div>
-                    <div className="grid gap-8">
-                      {activePage.demoBlocks.map(demo => (
-                        <DemoCard
-                          key={demo.label}
-                          demo={demo}
-                          pageId={activePage.id}
-                          globalTheme={globalTheme}
-                          isSelectionMode={isSelectionMode}
-                          isSelected={selectedDemos.has(`${activePage.id}|${demo.label}`)}
-                          onSelect={() => {
-                            const key = `${activePage.id}|${demo.label}`;
-                            const newSelected = new Set(selectedDemos);
-                            if (newSelected.has(key)) {
-                              newSelected.delete(key);
-                            } else {
-                              newSelected.add(key);
-                            }
-                            setSelectedDemos(newSelected);
-                          }}
-                          onPayloadReady={handlePayloadReady}
-                        />
+                    <div className="space-y-10">
+                      {getPageVariantGroups(activePage).map((group) => (
+                        <div key={group.groupLabel} className="space-y-6">
+                          {group.groupLabel !== 'All Variants' && (
+                            <div className="flex items-center justify-between gap-4 bg-slate-50 dark:bg-white/5 rounded-3xl border border-slate-200 dark:border-white/5 p-4">
+                              <div>
+                                <p className="text-sm font-semibold text-slate-900 dark:text-white">{group.groupLabel}</p>
+                                <p className="text-xs text-slate-500 dark:text-slate-400">{group.variants.length} variant{group.variants.length === 1 ? '' : 's'}</p>
+                              </div>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-brand-600 dark:text-brand-400">{group.groupType || 'Custom'}</span>
+                            </div>
+                          )}
+                          <div className="grid gap-8">
+                            {group.variants.map(demo => {
+                              const demoKey = `${activePage.id}|${demo.id || demo.label}`;
+                              return (
+                                <DemoCard
+                                  key={demoKey}
+                                  demo={demo}
+                                  pageId={activePage.id}
+                                  globalTheme={globalTheme}
+                                  isSelectionMode={isSelectionMode}
+                                  isSelected={selectedDemos.has(demoKey)}
+                                  onSelect={() => {
+                                    const newSelected = new Set(selectedDemos);
+                                    if (newSelected.has(demoKey)) {
+                                      newSelected.delete(demoKey);
+                                    } else {
+                                      newSelected.add(demoKey);
+                                    }
+                                    setSelectedDemos(newSelected);
+                                  }}
+                                  onPayloadReady={handlePayloadReady}
+                                />
+                              );
+                            })}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </section>
@@ -1266,12 +1520,12 @@ function App() {
 
       {/* Hidden Automation Renderer: Silently renders all components for the sync script */}
       {isAutomationMode && (
-        <div className="fixed inset-0 z-[-1] opacity-0 pointer-events-none overflow-hidden h-0 w-0">
+        <div className="fixed inset-0 z-[-1] opacity-0 pointer-events-none overflow-hidden h-[10000px] w-[1920px] bg-white">
           {componentPages.map(page => (
             <div key={page.id}>
-              {page.demoBlocks.map(demo => (
+              {getPageVariants(page).map(demo => (
                 <DemoCard
-                  key={`${page.id}-${demo.label}`}
+                  key={`${page.id}-${demo.id || demo.label}`}
                   demo={demo}
                   pageId={page.id}
                   globalTheme="light"

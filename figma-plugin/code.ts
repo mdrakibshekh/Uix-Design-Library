@@ -29,14 +29,15 @@ figma.ui.onmessage = async (msg) => {
 
     const payloads = Array.isArray(payload) ? payload : [payload];
     const components: ComponentNode[] = [];
+    const componentName = payloads[0]?.componentName || payloads[0]?.component || payloads[0]?.properties?.componentName || payloads[0]?.properties?.componentId || 'Imported Component';
 
     for (const p of payloads) {
       const component = figma.createComponent();
-      component.name = p.variant;
+      component.name = p.variant || p.name || p.properties?.variantId || 'Imported Variant';
       
-      if (p.figmaLayers) {
+      if (p.figmaLayers || p.layers) {
         // RENDERED BRIDGE: Reconstruct native layers
-        reconstructNode(component, p.figmaLayers, settings);
+        reconstructNode(component, p.figmaLayers || p.layers, settings);
       } else {
         // FALLBACK: Simple UI builder
         buildSimpleUI(component, p, settings);
@@ -48,7 +49,7 @@ figma.ui.onmessage = async (msg) => {
     let finalNode: SceneNode;
     if (components.length > 1) {
       const componentSet = figma.combineAsVariants(components, figma.currentPage);
-      componentSet.name = payloads[0].component;
+      componentSet.name = componentName;
       componentSet.layoutMode = "HORIZONTAL";
       componentSet.itemSpacing = 40;
       componentSet.paddingLeft = 40; componentSet.paddingRight = 40;
@@ -167,7 +168,8 @@ function hexToRgb(hex: string): { r: number, g: number, b: number } {
 
 function createSigmaDocShell(targetNode: SceneNode, payload: any) {
   const shell = figma.createFrame();
-  shell.name = `Sigma Studio • ${payload.component}`;
+  const shellName = payload.component || payload.componentName || payload.properties?.componentName || payload.properties?.componentId || 'Imported Component';
+  shell.name = `Sigma Studio • ${shellName}`;
   shell.resize(1200, 800);
   shell.layoutMode = "VERTICAL";
   shell.primaryAxisSizingMode = "HUG";

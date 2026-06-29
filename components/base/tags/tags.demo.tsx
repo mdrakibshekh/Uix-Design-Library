@@ -9,7 +9,7 @@ export const DefaultDemo = ({ isCompact = false }: { isCompact?: boolean }) => {
         <TagGroup label="Tags" size="md">
             <TagList className="flex gap-2">
                 <Tag>Label</Tag>
-                {!isCompact && <Tag avatarSrc="https://flagcdn.com/lAU.svg">Label</Tag>}
+                {!isCompact && <Tag avatarSrc="https://flagcdn.com/au.svg">Label</Tag>}
                 <Tag avatarSrc="https://i.pravatar.cc/150?u=olivia">Label</Tag>
                 {!isCompact && <Tag dot={true}>Label</Tag>}
             </TagList>
@@ -20,7 +20,7 @@ export const DefaultDemo = ({ isCompact = false }: { isCompact?: boolean }) => {
 export const CloseXDemo = () => {
     const [tags, setTags] = useState<TagItem[]>([
         { id: "tag-01", label: "Label" },
-        { id: "tag-02", label: "Label", avatarSrc: "https://flagcdn.com/lAU.svg", avatarContrastBorder: false },
+        { id: "tag-02", label: "Label", avatarSrc: "https://flagcdn.com/au.svg", avatarContrastBorder: false },
         { id: "tag-03", label: "Label", avatarSrc: "https://i.pravatar.cc/150?u=olivia" },
         { id: "tag-04", label: "Label", dot: true },
     ]);
@@ -45,7 +45,7 @@ export const CountDemo = () => {
         <TagGroup label="Tags" size="md">
             <TagList className="flex flex-col items-start gap-4 md:flex-row">
                 <Tag count={5}>Label</Tag>
-                <Tag avatarSrc="https://flagcdn.com/lAU.svg" count={5}>
+                <Tag avatarSrc="https://flagcdn.com/au.svg" count={5}>
                     Label
                 </Tag>
                 <Tag avatarSrc="https://i.pravatar.cc/150?u=olivia" count={5}>
@@ -66,7 +66,7 @@ export const CheckboxDemo = () => {
         <TagGroup label="Tags" size="md" selectionMode="multiple" selectedKeys={selectedTags} onSelectionChange={setSelectedTags}>
             <TagList className="flex flex-col items-start gap-4 md:flex-row">
                 <Tag id="tag-01">Label</Tag>
-                <Tag id="tag-02" avatarSrc="https://flagcdn.com/lAU.svg">
+                <Tag id="tag-02" avatarSrc="https://flagcdn.com/au.svg">
                     Label
                 </Tag>
                 <Tag id="tag-03" avatarSrc="https://i.pravatar.cc/150?u=olivia">
@@ -84,7 +84,7 @@ export const CheckboxCloseXDemo = () => {
     const [selectedTags, setSelectedTags] = useState<Selection>(new Set(["tag-01", "tag-02"]));
     const [tags, setTags] = useState<TagItem[]>([
         { id: "tag-01", label: "Label" },
-        { id: "tag-02", label: "Label", avatarSrc: "https://flagcdn.com/lAU.svg", avatarContrastBorder: false },
+        { id: "tag-02", label: "Label", avatarSrc: "https://flagcdn.com/au.svg", avatarContrastBorder: false },
         { id: "tag-03", label: "Label", avatarSrc: "https://i.pravatar.cc/150?u=olivia" },
         { id: "tag-04", label: "Label", dot: true },
     ]);
@@ -116,7 +116,7 @@ export const CheckboxCountDemo = () => {
                 <Tag id="tag-01" count={5}>
                     Label
                 </Tag>
-                <Tag id="tag-02" avatarSrc="https://flagcdn.com/lAU.svg" count={5}>
+                <Tag id="tag-02" avatarSrc="https://flagcdn.com/au.svg" count={5}>
                     Label
                 </Tag>
                 <Tag id="tag-03" avatarSrc="https://i.pravatar.cc/150?u=olivia" count={5}>
@@ -137,7 +137,7 @@ export const SizesDemo = () => {
             <TagGroup label="Tags" size="sm">
                 <TagList className="flex gap-4">
                     <Tag>Label</Tag>
-                    <Tag avatarSrc="https://flagcdn.com/lAU.svg">Label</Tag>
+                    <Tag avatarSrc="https://flagcdn.com/au.svg">Label</Tag>
                     <Tag avatarSrc="https://i.pravatar.cc/150?u=olivia">Label</Tag>
                     <Tag dot={true}>Label</Tag>
                 </TagList>
@@ -147,7 +147,7 @@ export const SizesDemo = () => {
             <TagGroup label="Tags" size="md">
                 <TagList className="flex gap-4">
                     <Tag>Label</Tag>
-                    <Tag avatarSrc="https://flagcdn.com/lAU.svg">Label</Tag>
+                    <Tag avatarSrc="https://flagcdn.com/au.svg">Label</Tag>
                     <Tag avatarSrc="https://i.pravatar.cc/150?u=olivia">Label</Tag>
                     <Tag dot={true}>Label</Tag>
                 </TagList>
@@ -157,7 +157,7 @@ export const SizesDemo = () => {
             <TagGroup label="Tags" size="lg">
                 <TagList className="flex gap-4">
                     <Tag>Label</Tag>
-                    <Tag avatarSrc="https://flagcdn.com/lAU.svg">Label</Tag>
+                    <Tag avatarSrc="https://flagcdn.com/au.svg">Label</Tag>
                     <Tag avatarSrc="https://i.pravatar.cc/150?u=olivia">Label</Tag>
                     <Tag dot={true}>Label</Tag>
                 </TagList>
@@ -228,7 +228,7 @@ export const Default = () => {
 export const CloseX = () => {
     const tags: TagItem[] = [
         { id: "tag-01", label: "Label", onClose: () => {} },
-        { id: "tag-02", label: "Label", onClose: () => {}, avatarSrc: "https://flagcdn.com/lAU.svg", avatarContrastBorder: false },
+        { id: "tag-02", label: "Label", onClose: () => {}, avatarSrc: "https://flagcdn.com/au.svg", avatarContrastBorder: false },
         { id: "tag-03", label: "Label", onClose: () => {}, avatarSrc: "https://i.pravatar.cc/150?u=olivia" },
         { id: "tag-04", label: "Label", onClose: () => {}, dot: true },
     ];
@@ -257,7 +257,7 @@ export const CloseX = () => {
 export const Count = () => {
     const tags: TagItem[] = [
         { id: "tag-01", label: "Label", count: 5 },
-        { id: "tag-02", label: "Label", count: 5, avatarSrc: "https://flagcdn.com/lAU.svg", avatarContrastBorder: false },
+        { id: "tag-02", label: "Label", count: 5, avatarSrc: "https://flagcdn.com/au.svg", avatarContrastBorder: false },
         { id: "tag-03", label: "Label", count: 5, avatarSrc: "https://i.pravatar.cc/150?u=olivia" },
         { id: "tag-04", label: "Label", count: 5, dot: true },
     ];
@@ -286,7 +286,7 @@ export const Count = () => {
 export const CheckboxDefault = () => {
     const tags: TagItem[] = [
         { id: "tag-01", label: "Label" },
-        { id: "tag-02", label: "Label", avatarSrc: "https://flagcdn.com/lAU.svg", avatarContrastBorder: false },
+        { id: "tag-02", label: "Label", avatarSrc: "https://flagcdn.com/au.svg", avatarContrastBorder: false },
         { id: "tag-03", label: "Label", avatarSrc: "https://i.pravatar.cc/150?u=olivia" },
         { id: "tag-04", label: "Label", dot: true },
     ];
@@ -315,7 +315,7 @@ export const CheckboxDefault = () => {
 export const CheckboxCloseX = () => {
     const tags: TagItem[] = [
         { id: "tag-01", label: "Label", onClose: () => {} },
-        { id: "tag-02", label: "Label", onClose: () => {}, avatarSrc: "https://flagcdn.com/lAU.svg", avatarContrastBorder: false },
+        { id: "tag-02", label: "Label", onClose: () => {}, avatarSrc: "https://flagcdn.com/au.svg", avatarContrastBorder: false },
         { id: "tag-03", label: "Label", onClose: () => {}, avatarSrc: "https://i.pravatar.cc/150?u=olivia" },
         { id: "tag-04", label: "Label", onClose: () => {}, dot: true },
     ];
@@ -344,7 +344,7 @@ export const CheckboxCloseX = () => {
 export const CheckboxCount = () => {
     const tags: TagItem[] = [
         { id: "tag-01", label: "Label", count: 5 },
-        { id: "tag-02", label: "Label", count: 5, avatarSrc: "https://flagcdn.com/lAU.svg", avatarContrastBorder: false },
+        { id: "tag-02", label: "Label", count: 5, avatarSrc: "https://flagcdn.com/au.svg", avatarContrastBorder: false },
         { id: "tag-03", label: "Label", count: 5, avatarSrc: "https://i.pravatar.cc/150?u=olivia" },
         { id: "tag-04", label: "Label", count: 5, dot: true },
     ];

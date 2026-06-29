@@ -3,7 +3,7 @@ import type { SVGProps } from "react";
 export const UIXLogoMinimal = (props: SVGProps<SVGSVGElement>) => (
     <svg 
         width="210" 
-        height="212" 
+        height="21" 
         viewBox="0 0 210 212" 
         fill="none" 
         xmlns="http://www.w3.org/2000/svg"

@@ -55,12 +55,12 @@ export const DropdownWithIconsDemo = () => {
 };
 
 export const DropdownWithSelectionDemo = () => {
-    const [selected, setSelected] = React.useState<string>("option1");
+    const [selected, setSelected] = React.useState<any>(new Set(["option1"]));
     return (
         <Dropdown.Root>
             <Button color="secondary" size="md">Select Option</Button>
             <Dropdown.Popover>
-                <Dropdown.Menu selectionMode="single" selectedKeys={[selected]} onSelectionChange={(keys) => setSelected(keys as any)}>
+                <Dropdown.Menu selectionMode="single" selectedKeys={selected} onSelectionChange={setSelected}>
                     <Dropdown.Item id="option1" label="Option 1" />
                     <Dropdown.Item id="option2" label="Option 2" />
                     <Dropdown.Item id="option3" label="Option 3" />

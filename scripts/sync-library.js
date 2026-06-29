@@ -22,26 +22,89 @@ async function sync() {
     console.log('🌐 Connecting to local library...');
     await page.goto('http://localhost:3333/?automation=true', { waitUntil: 'networkidle2' });
 
-    // Wait up to 10 seconds for data to appear
-    console.log('⏳ Waiting for components to serialize...');
-    await page.waitForFunction(() => 
-      window.__UIX_LIBRARY_DATA__ && window.__UIX_LIBRARY_DATA__.length > 0,
-      { timeout: 10000 }
-    ).catch(() => console.log('⚠️ Timeout waiting for data, proceeding anyway...'));
-
-    // The logic to extract all payloads
-    console.log('📦 Extracting component data...');
-    const libraryData = await page.evaluate(() => {
-      return window.__UIX_LIBRARY_DATA__ || []; 
+    // Wait for ALL components to serialize
+    console.log('⏳ Waiting for full library serialization...');
+    await page.waitForFunction(() => {
+      const current = window.__UIX_CURRENT_COUNT__ || 0;
+      const total = window.__UIX_TOTAL_VARIANTS__ || 999;
+      return current >= total;
+    }, { timeout: 60000 }).catch(async () => {
+      const current = await page.evaluate(() => window.__UIX_CURRENT_COUNT__ || 0);
+      const total = await page.evaluate(() => window.__UIX_TOTAL_VARIANTS__ || 0);
+      console.log(`⚠️ Timeout reached. Proceeding with ${current}/${total} variants...`);
     });
 
-    console.log(`📊 Found ${libraryData.length} component variants.`);
+    // Extract and group component data
+    console.log('📦 Extracting component data...');
+    const libraryData = await page.evaluate(() => {
+      const rawData = window.__UIX_LIBRARY_DATA__ || [];
+      
+      // Normalize: flatten if grouped, otherwise use as-is
+      if (Array.isArray(rawData) && rawData.length > 0 && rawData[0].variants) {
+        // Already grouped
+        return rawData;
+      } else if (Array.isArray(rawData)) {
+        // Individual payloads - group them by component
+        const grouped = {};
+        rawData.forEach((item) => {
+          const compName = item.componentName || item.component || 'Other';
+          const compId = item.componentId || item.component?.toLowerCase().replace(/\\s+/g, '-') || 'other';
+          if (!grouped[compId]) {
+            grouped[compId] = {
+              id: compId,
+              name: compName,
+              category: item.category || 'Base',
+              description: item.description || '',
+              variants: []
+            };
+          }
+          grouped[compId].variants.push({
+            id: item.variantId || `${compId}-${(item.variant || 'variant').toLowerCase().replace(/\s+/g, '-')}`,
+            name: item.variant,
+            properties: {
+              variantId: item.variantId,
+              variantGroup: item.variantGroup,
+              variantType: item.variantType,
+              variantSize: item.variantSize,
+              variantModifiers: item.variantModifiers,
+              variantTags: item.variantTags,
+              theme: item.theme,
+            },
+            figmaLayers: item.figmaLayers,
+            preview: item.visualPreview,
+          });
+        });
+        return Object.values(grouped);
+      }
+      return [];
+    });
+
+    const totalVariants = await page.evaluate(() => window.__UIX_CURRENT_COUNT__ || 0);
+    console.log(`📊 Found ${libraryData.length} Component Categories with ${totalVariants} total variants.`);
 
     if (libraryData.length > 0) {
+      // Build the export payload with statistics
+      const exportData = {
+        success: true,
+        data: libraryData,
+        stats: {
+          totalComponents: libraryData.length,
+          totalVariants: totalVariants,
+          byCategory: libraryData.reduce((acc, group) => {
+            const category = group.category || 'Base';
+            acc[category] = (acc[category] || 0) + 1;
+            return acc;
+          }, {})
+        },
+        updatedAt: new Date().toISOString()
+      };
+
       const outputPath = path.join(__dirname, '../public/api/library_data.json');
       fs.mkdirSync(path.dirname(outputPath), { recursive: true });
-      fs.writeFileSync(outputPath, JSON.stringify({ success: true, data: libraryData, updatedAt: new Date().toISOString() }, null, 2));
+      fs.writeFileSync(outputPath, JSON.stringify(exportData, null, 2));
       console.log('✅ Library data generated successfully!');
+      console.log(`   📁 Output: ${outputPath}`);
+      console.log(`   📈 Stats: ${exportData.stats.totalComponents} components, ${exportData.stats.totalVariants} variants`);
     } else {
       console.warn('⚠️ No library data found. Make sure the app exposes window.__UIX_LIBRARY_DATA__');
     }
